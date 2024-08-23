@@ -1,0 +1,5 @@
+## requirements.txt
+
+markdown==3.3.7
+pytest==7.3.1
+markdown-pdf==1.3
