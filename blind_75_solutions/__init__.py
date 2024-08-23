@@ -9,6 +9,8 @@ organized by problem category.
 
 from typing import Callable, List
 import inspect
+import textwrap
+
 
 class Solution:
     """
@@ -31,7 +33,7 @@ class Solution:
         optimized_solution: Callable,
         time_complexity: str,
         space_complexity: str,
-        similar_questions: List[str]
+        similar_questions: List[str],
     ) -> None:
         """
         Initialize a Solution object.
@@ -62,9 +64,9 @@ class Solution:
         markdown = f"# {self.question}\n\n"
         markdown += f"{self.problem_statement()}\n\n"
         markdown += "## Easy Solution\n"
-        markdown += f"```python\n{inspect.getsource(self.easy_solution)}\n```\n\n"
+        markdown += f"```python\n{textwrap.dedent(inspect.getsource(self.easy_solution))}\n```\n\n"
         markdown += "## Optimized Solution\n"
-        markdown += f"```python\n{inspect.getsource(self.optimized_solution)}\n```\n\n"
+        markdown += f"```python\n{textwrap.dedent(inspect.getsource(self.optimized_solution))}\n```\n\n"
         markdown += f"Time Complexity: {self.time_complexity}\n"
         markdown += f"Space Complexity: {self.space_complexity}\n\n"
         markdown += "## Similar Questions\n"

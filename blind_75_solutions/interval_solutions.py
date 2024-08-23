@@ -17,8 +17,9 @@ class IntervalSolutions:
         Returns:
             Solution: A Solution object containing details of the Insert Interval problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given an array of non-overlapping intervals intervals where intervals[i] = [starti, endi] represent the start and the end of the ith interval and intervals is sorted in ascending order by starti. You are also given an interval newInterval = [start, end] that represents the start and end of another interval.
+            return """You are given an array of non-overlapping intervals intervals where intervals[i] = [starti, endi] represent the start and the end of the ith interval and intervals is sorted in ascending order by starti. You are also given an interval newInterval = [start, end] that represents the start and end of another interval.
 
 Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
 
@@ -45,9 +46,11 @@ Constraints:
     0 <= start <= end <= 105
 
 https://leetcode.com/problems/insert-interval/description/
-'''
+"""
 
-        def easy_solution(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        def easy_solution(
+            intervals: List[List[int]], newInterval: List[int]
+        ) -> List[List[int]]:
             # Easy solution: Iterate through intervals, merge if overlapping, otherwise append directly
             result = []
             i = 0
@@ -73,7 +76,9 @@ https://leetcode.com/problems/insert-interval/description/
 
             return result
 
-        def optimized_solution(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        def optimized_solution(
+            intervals: List[List[int]], newInterval: List[int]
+        ) -> List[List[int]]:
             # Optimized solution: Iterate through intervals and merge on the go
             result = []
             for interval in intervals:
@@ -95,7 +100,7 @@ https://leetcode.com/problems/insert-interval/description/
             time_complexity="O(n)",
             space_complexity="O(n)",
             similar_questions=["Merge Intervals", "Range Module"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -106,8 +111,9 @@ https://leetcode.com/problems/insert-interval/description/
         Returns:
             Solution: A Solution object containing details of the Merge Intervals problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+            return """Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
 
 Example 1:
 
@@ -128,7 +134,7 @@ Constraints:
     0 <= starti <= endi <= 104
 
 https://leetcode.com/problems/merge-intervals/description/
-'''
+"""
 
         def easy_solution(intervals: List[List[int]]) -> List[List[int]]:
             # Easy solution: Sort intervals and merge sequentially
@@ -168,8 +174,17 @@ https://leetcode.com/problems/merge-intervals/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n log n)",
             space_complexity="O(n)",
-            similar_questions=["Insert Interval", "Meeting Rooms", "Meeting Rooms II", "Teemo Attacking", "Add Bold Tag in String", "Range Module", "Employee Free Time", "Partition Labels"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Insert Interval",
+                "Meeting Rooms",
+                "Meeting Rooms II",
+                "Teemo Attacking",
+                "Add Bold Tag in String",
+                "Range Module",
+                "Employee Free Time",
+                "Partition Labels",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -180,8 +195,9 @@ https://leetcode.com/problems/merge-intervals/description/
         Returns:
             Solution: A Solution object containing details of the Non-overlapping Intervals problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an array of intervals intervals where intervals[i] = [starti, endi], return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+            return """Given an array of intervals intervals where intervals[i] = [starti, endi], return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
 
 Example 1:
 
@@ -208,7 +224,7 @@ Constraints:
     -5 * 104 <= starti < endi <= 5 * 104
 
 https://leetcode.com/problems/non-overlapping-intervals/description/
-'''
+"""
 
         def easy_solution(intervals: List[List[int]]) -> int:
             # Easy solution: Sort by end time and count overlaps
@@ -217,7 +233,7 @@ https://leetcode.com/problems/non-overlapping-intervals/description/
 
             intervals.sort(key=lambda x: x[1])
             count = 0
-            end = float('-inf')
+            end = float("-inf")
 
             for interval in intervals:
                 if interval[0] >= end:
@@ -251,7 +267,7 @@ https://leetcode.com/problems/non-overlapping-intervals/description/
             time_complexity="O(n log n)",
             space_complexity="O(1)",
             similar_questions=["Minimum Number of Arrows to Burst Balloons"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -262,8 +278,9 @@ https://leetcode.com/problems/non-overlapping-intervals/description/
         Returns:
             Solution: A Solution object containing details of the Meeting Rooms problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an array of meeting time intervals where intervals[i] = [starti, endi], determine if a person could attend all meetings.
+            return """Given an array of meeting time intervals where intervals[i] = [starti, endi], determine if a person could attend all meetings.
 
 Example 1:
 
@@ -282,14 +299,14 @@ Constraints:
     0 <= starti < endi <= 106
 
 https://leetcode.com/problems/meeting-rooms/description/
-'''
+"""
 
         def easy_solution(intervals: List[List[int]]) -> bool:
             # Easy solution: Sort intervals by start time and check for overlaps
             intervals.sort(key=lambda x: x[0])
 
             for i in range(1, len(intervals)):
-                if intervals[i][0] < intervals[i-1][1]:
+                if intervals[i][0] < intervals[i - 1][1]:
                     return False
 
             return True
@@ -300,7 +317,7 @@ https://leetcode.com/problems/meeting-rooms/description/
             end_times = sorted(interval[1] for interval in intervals)
 
             for i in range(1, len(intervals)):
-                if start_times[i] < end_times[i-1]:
+                if start_times[i] < end_times[i - 1]:
                     return False
 
             return True
@@ -312,7 +329,7 @@ https://leetcode.com/problems/meeting-rooms/description/
             time_complexity="O(n log n)",
             space_complexity="O(n)",
             similar_questions=["Merge Intervals", "Meeting Rooms II"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -323,8 +340,9 @@ https://leetcode.com/problems/meeting-rooms/description/
         Returns:
             Solution: A Solution object containing details of the Meeting Rooms II problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.
+            return """Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.
 
 Example 1:
 
@@ -343,7 +361,7 @@ Constraints:
     0 <= starti < endi <= 106
 
 https://leetcode.com/problems/meeting-rooms-ii/description/
-'''
+"""
 
         def easy_solution(intervals: List[List[int]]) -> int:
             # Easy solution: Sort start and end times and use two pointers
@@ -385,6 +403,11 @@ https://leetcode.com/problems/meeting-rooms-ii/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n log n)",
             space_complexity="O(n)",
-            similar_questions=["Merge Intervals", "Meeting Rooms", "Minimum Number of Arrows to Burst Balloons", "Car Pooling"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Merge Intervals",
+                "Meeting Rooms",
+                "Minimum Number of Arrows to Burst Balloons",
+                "Car Pooling",
+            ],
+            problem_statement=problem_statement,
         )

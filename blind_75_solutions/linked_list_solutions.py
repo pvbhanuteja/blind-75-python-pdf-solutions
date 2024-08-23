@@ -10,7 +10,8 @@ from blind_75_solutions import Solution
 
 class ListNode:
     """Definition for singly-linked list."""
-    def __init__(self, val: int = 0, next: Optional['ListNode'] = None):
+
+    def __init__(self, val: int = 0, next: Optional["ListNode"] = None):
         self.val = val
         self.next = next
 
@@ -26,8 +27,9 @@ class LinkedListSolutions:
         Returns:
             Solution: A Solution object containing details of the Reverse Linked List problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the head of a singly linked list, reverse the list, and return the reversed list.
+            return """Given the head of a singly linked list, reverse the list, and return the reversed list.
 
 Example 1:
 
@@ -50,7 +52,7 @@ Constraints:
     -5000 <= Node.val <= 5000
 
 https://leetcode.com/problems/reverse-linked-list/description/
-'''
+"""
 
         def easy_solution(head: Optional[ListNode]) -> Optional[ListNode]:
             # Iterative approach: Reverse the list by changing the next pointers
@@ -73,8 +75,12 @@ https://leetcode.com/problems/reverse-linked-list/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(1)",
-            similar_questions=["Reverse Linked List II", "Binary Tree Upside Down", "Palindrome Linked List"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Reverse Linked List II",
+                "Binary Tree Upside Down",
+                "Palindrome Linked List",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -85,8 +91,9 @@ https://leetcode.com/problems/reverse-linked-list/description/
         Returns:
             Solution: A Solution object containing details of the Linked List Cycle problem.
         """
+
         def problem_statement() -> str:
-            return '''Given head, the head of a linked list, determine if the linked list has a cycle in it.
+            return """Given head, the head of a linked list, determine if the linked list has a cycle in it.
 
 There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
 
@@ -117,7 +124,7 @@ Constraints:
     pos is -1 or a valid index in the linked list.
 
 https://leetcode.com/problems/linked-list-cycle/description/
-'''
+"""
 
         def easy_solution(head: Optional[ListNode]) -> bool:
             # Brute-force solution: Use a set to track visited nodes
@@ -150,7 +157,7 @@ https://leetcode.com/problems/linked-list-cycle/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Linked List Cycle II", "Happy Number"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -161,8 +168,9 @@ https://leetcode.com/problems/linked-list-cycle/description/
         Returns:
             Solution: A Solution object containing details of the Merge Two Sorted Lists problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given the heads of two sorted linked lists list1 and list2.
+            return """You are given the heads of two sorted linked lists list1 and list2.
 
 Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
 
@@ -190,9 +198,11 @@ Constraints:
     Both list1 and list2 are sorted in non-decreasing order.
 
 https://leetcode.com/problems/merge-two-sorted-lists/description/
-'''
+"""
 
-        def easy_solution(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        def easy_solution(
+            l1: Optional[ListNode], l2: Optional[ListNode]
+        ) -> Optional[ListNode]:
             # Iterative approach: Merge two sorted lists
             dummy = ListNode(0)
             current = dummy
@@ -207,7 +217,9 @@ https://leetcode.com/problems/merge-two-sorted-lists/description/
             current.next = l1 if l1 else l2
             return dummy.next
 
-        def optimized_solution(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        def optimized_solution(
+            l1: Optional[ListNode], l2: Optional[ListNode]
+        ) -> Optional[ListNode]:
             # The easy solution is already optimal for this problem
             return easy_solution(l1, l2)
 
@@ -217,8 +229,13 @@ https://leetcode.com/problems/merge-two-sorted-lists/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n + m)",
             space_complexity="O(1)",
-            similar_questions=["Merge k Sorted Lists", "Merge Sorted Array", "Sort List", "Shortest Word Distance II"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Merge k Sorted Lists",
+                "Merge Sorted Array",
+                "Sort List",
+                "Shortest Word Distance II",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -229,8 +246,9 @@ https://leetcode.com/problems/merge-two-sorted-lists/description/
         Returns:
             Solution: A Solution object containing details of the Remove Nth Node From End of List problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the head of a linked list, remove the nth node from the end of the list and return its head.
+            return """Given the head of a linked list, remove the nth node from the end of the list and return its head.
 
 Example 1:
 
@@ -255,7 +273,7 @@ Constraints:
     1 <= n <= sz
 
 https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
-'''
+"""
 
         def easy_solution(head: Optional[ListNode], n: int) -> Optional[ListNode]:
             # Two-pointer approach: Remove the nth node from the end
@@ -281,8 +299,11 @@ https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
             optimized_solution=optimized_solution,
             time_complexity="O(L)",
             space_complexity="O(1)",
-            similar_questions=["Swapping Nodes in a Linked List", "Delete N Nodes After M Nodes of a Linked List"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Swapping Nodes in a Linked List",
+                "Delete N Nodes After M Nodes of a Linked List",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -293,8 +314,9 @@ https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
         Returns:
             Solution: A Solution object containing details of the Reorder List problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given the head of a singly linked-list. The list can be represented as:
+            return """You are given the head of a singly linked-list. The list can be represented as:
 
 L0 → L1 → … → Ln - 1 → Ln
 
@@ -320,7 +342,7 @@ Constraints:
     1 <= Node.val <= 1000
 
 https://leetcode.com/problems/reorder-list/description/
-'''
+"""
 
         def easy_solution(head: Optional[ListNode]) -> None:
             # Optimal approach: Find middle, reverse second half, and merge
@@ -365,7 +387,7 @@ https://leetcode.com/problems/reorder-list/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Palindrome Linked List"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -376,8 +398,9 @@ https://leetcode.com/problems/reorder-list/description/
         Returns:
             Solution: A Solution object containing details of the Intersection of Two Linked Lists problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
+            return """Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
 
 For example, the following two linked lists begin to intersect at node c1:
 
@@ -413,7 +436,7 @@ Constraints:
     intersectVal == listA[skipA] == listB[skipB] if listA and listB intersect.
 
 https://leetcode.com/problems/intersection-of-two-linked-lists/description/
-'''
+"""
 
         def easy_solution(headA: ListNode, headB: ListNode) -> Optional[ListNode]:
             # Two-pointer approach: Find intersection node
@@ -440,5 +463,5 @@ https://leetcode.com/problems/intersection-of-two-linked-lists/description/
             time_complexity="O(n + m)",
             space_complexity="O(1)",
             similar_questions=["Minimum Index Sum of Two Lists"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )

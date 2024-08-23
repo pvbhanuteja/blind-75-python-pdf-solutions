@@ -18,8 +18,9 @@ class HeapSolutions:
         Returns:
             Solution: A Solution object containing details of the Find Median from Data Stream problem.
         """
+
         def problem_statement() -> str:
-            return '''The MedianFinder class has two methods:
+            return """The MedianFinder class has two methods:
 
 void addNum(int num) - Adds the integer num from the data stream to the data structure.
 double findMedian() - Returns the median of all elements so far. Answers within 10-5 of the actual answer will be accepted.
@@ -52,7 +53,7 @@ Constraints:
     At most 5 * 104 calls will be made to addNum and findMedian.
     
 https://leetcode.com/problems/find-median-from-data-stream/description/
-'''
+"""
 
         class MedianFinder:
             def __init__(self):
@@ -86,8 +87,11 @@ https://leetcode.com/problems/find-median-from-data-stream/description/
             optimized_solution=optimized_solution,
             time_complexity="O(log n) for addNum, O(1) for findMedian",
             space_complexity="O(n)",
-            similar_questions=["Sliding Window Median", "Find Median from Data Stream II"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Sliding Window Median",
+                "Find Median from Data Stream II",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -98,8 +102,9 @@ https://leetcode.com/problems/find-median-from-data-stream/description/
         Returns:
             Solution: A Solution object containing details of the Top K Frequent Elements problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+            return """Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
 
 Example 1:
 
@@ -119,26 +124,26 @@ Constraints:
     It is guaranteed that the answer is unique.
 
 https://leetcode.com/problems/top-k-frequent-elements/description/
-'''
+"""
 
         def easy_solution(nums: List[int], k: int) -> List[int]:
             # Brute-force solution: Use a heap to find the k most frequent elements
             count = {}
             for num in nums:
                 count[num] = count.get(num, 0) + 1
-            
+
             return heapq.nlargest(k, count.keys(), key=count.get)
 
         def optimized_solution(nums: List[int], k: int) -> List[int]:
             # Optimized solution: Use bucket sort to find the k most frequent elements
             count = {}
             freq = [[] for _ in range(len(nums) + 1)]
-            
+
             for num in nums:
                 count[num] = count.get(num, 0) + 1
             for num, c in count.items():
                 freq[c].append(num)
-            
+
             res = []
             for i in range(len(freq) - 1, 0, -1):
                 for num in freq[i]:
@@ -153,7 +158,7 @@ https://leetcode.com/problems/top-k-frequent-elements/description/
             time_complexity="O(n)",
             space_complexity="O(n)",
             similar_questions=["Top K Frequent Words", "Sort Characters By Frequency"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -164,8 +169,9 @@ https://leetcode.com/problems/top-k-frequent-elements/description/
         Returns:
             Solution: A Solution object containing details of the Merge k Sorted Lists problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+            return """You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
 
 Merge all the linked-lists into one sorted linked-list and return it.
 
@@ -202,10 +208,10 @@ Constraints:
     The sum of lists[i].length will not exceed 104.
 
 https://leetcode.com/problems/merge-k-sorted-lists/description/
-'''
+"""
 
         class ListNode:
-            def __init__(self, val: int = 0, next: 'ListNode' = None):
+            def __init__(self, val: int = 0, next: "ListNode" = None):
                 self.val = val
                 self.next = next
 
@@ -228,7 +234,7 @@ https://leetcode.com/problems/merge-k-sorted-lists/description/
             for i, l in enumerate(lists):
                 if l:
                     heapq.heappush(heap, (l.val, i, l))
-            
+
             dummy = ListNode(0)
             curr = dummy
             while heap:
@@ -237,7 +243,7 @@ https://leetcode.com/problems/merge-k-sorted-lists/description/
                 curr = curr.next
                 if node.next:
                     heapq.heappush(heap, (node.next.val, i, node.next))
-            
+
             return dummy.next
 
         return Solution(
@@ -247,5 +253,5 @@ https://leetcode.com/problems/merge-k-sorted-lists/description/
             time_complexity="O(N log k)",
             space_complexity="O(k)",
             similar_questions=["Merge Two Sorted Lists", "Ugly Number II"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )

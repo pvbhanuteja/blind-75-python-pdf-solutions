@@ -17,8 +17,9 @@ class StringSolutions:
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given a string s, find the length of the longest substring without repeating characters.
+            return """Given a string s, find the length of the longest substring without repeating characters.
 
 Example 1:
 Input: s = "abcabcbb"
@@ -41,7 +42,7 @@ Constraints:
     s consists of English letters, digits, symbols and spaces.
 
 https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
-'''
+"""
 
         def easy_solution(s: str) -> int:
             # Brute-force solution: Check all substrings
@@ -73,8 +74,11 @@ https://leetcode.com/problems/longest-substring-without-repeating-characters/des
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(min(m, n))",
-            similar_questions=["Longest Substring with At Most Two Distinct Characters", "Longest Substring with At Most K Distinct Characters"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Longest Substring with At Most Two Distinct Characters",
+                "Longest Substring with At Most K Distinct Characters",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -85,8 +89,9 @@ https://leetcode.com/problems/longest-substring-without-repeating-characters/des
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given a string s and an integer k. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most k times.
+            return """You are given a string s and an integer k. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most k times.
 
 Return the length of the longest substring containing the same letter you can get after performing the above operations.
 
@@ -106,14 +111,14 @@ Constraints:
     0 <= k <= s.length
 
 https://leetcode.com/problems/longest-repeating-character-replacement/description/
-'''
+"""
 
         def easy_solution(s: str, k: int) -> int:
             # Brute-force solution: Check all substrings
             max_length = 0
             for i in range(len(s)):
                 for j in range(i, len(s)):
-                    substring = s[i:j+1]
+                    substring = s[i : j + 1]
                     most_common = max(substring.count(c) for c in set(substring))
                     if len(substring) - most_common <= k:
                         max_length = max(max_length, len(substring))
@@ -138,8 +143,11 @@ https://leetcode.com/problems/longest-repeating-character-replacement/descriptio
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(1)",
-            similar_questions=["Longest Substring with At Most K Distinct Characters", "Max Consecutive Ones III"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Longest Substring with At Most K Distinct Characters",
+                "Max Consecutive Ones III",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -150,8 +158,9 @@ https://leetcode.com/problems/longest-repeating-character-replacement/descriptio
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+            return """Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
 
 The testcases will be generated such that the answer is unique.
 
@@ -180,7 +189,7 @@ Constraints:
 Follow up: Could you find an algorithm that runs in O(m + n) time?
 
 https://leetcode.com/problems/minimum-window-substring/description/
-'''
+"""
 
         def easy_solution(s: str, t: str) -> str:
             # Brute-force solution: Check all substrings
@@ -188,10 +197,10 @@ https://leetcode.com/problems/minimum-window-substring/description/
                 return all(window.count(c) >= target.count(c) for c in set(target))
 
             min_window = ""
-            min_length = float('inf')
+            min_length = float("inf")
             for i in range(len(s)):
                 for j in range(i, len(s)):
-                    window = s[i:j+1]
+                    window = s[i : j + 1]
                     if contains_all(window, t) and len(window) < min_length:
                         min_window = window
                         min_length = len(window)
@@ -216,7 +225,10 @@ https://leetcode.com/problems/minimum-window-substring/description/
                 character = s[right]
                 window_counts[character] = window_counts.get(character, 0) + 1
 
-                if character in dict_t and window_counts[character] == dict_t[character]:
+                if (
+                    character in dict_t
+                    and window_counts[character] == dict_t[character]
+                ):
                     formed += 1
 
                 while left <= right and formed == required:
@@ -226,12 +238,15 @@ https://leetcode.com/problems/minimum-window-substring/description/
                         ans = (right - left + 1, left, right)
 
                     window_counts[character] -= 1
-                    if character in dict_t and window_counts[character] < dict_t[character]:
+                    if (
+                        character in dict_t
+                        and window_counts[character] < dict_t[character]
+                    ):
                         formed -= 1
 
-                    left += 1    
+                    left += 1
 
-                right += 1    
+                right += 1
 
             return "" if ans[0] == float("inf") else s[ans[1] : ans[2] + 1]
 
@@ -241,8 +256,12 @@ https://leetcode.com/problems/minimum-window-substring/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(k)",
-            similar_questions=["Substring with Concatenation of All Words", "Minimum Size Subarray Sum", "Sliding Window Maximum"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Substring with Concatenation of All Words",
+                "Minimum Size Subarray Sum",
+                "Sliding Window Maximum",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -253,8 +272,9 @@ https://leetcode.com/problems/minimum-window-substring/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+            return """Given two strings s and t, return true if t is an anagram of s, and false otherwise.
 
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
 
@@ -273,7 +293,7 @@ Constraints:
 Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
 
 https://leetcode.com/problems/valid-anagram/description/
-'''
+"""
 
         def easy_solution(s: str, t: str) -> bool:
             # Brute-force solution: Sort and compare
@@ -301,7 +321,7 @@ https://leetcode.com/problems/valid-anagram/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Group Anagrams", "Palindrome Permutation"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -312,8 +332,9 @@ https://leetcode.com/problems/valid-anagram/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+            return """Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
 
@@ -335,13 +356,13 @@ Constraints:
     strs[i] consists of lowercase English letters.
 
 https://leetcode.com/problems/group-anagrams/description/
-'''
+"""
 
         def easy_solution(strs: List[str]) -> List[List[str]]:
             # Brute-force solution: Sort strings and group
             anagram_groups = {}
             for s in strs:
-                sorted_s = ''.join(sorted(s))
+                sorted_s = "".join(sorted(s))
                 if sorted_s in anagram_groups:
                     anagram_groups[sorted_s].append(s)
                 else:
@@ -354,7 +375,7 @@ https://leetcode.com/problems/group-anagrams/description/
             for s in strs:
                 count = [0] * 26
                 for c in s:
-                    count[ord(c) - ord('a')] += 1
+                    count[ord(c) - ord("a")] += 1
                 key = tuple(count)
                 if key in anagram_groups:
                     anagram_groups[key].append(s)
@@ -369,7 +390,7 @@ https://leetcode.com/problems/group-anagrams/description/
             time_complexity="O(n * k)",
             space_complexity="O(n * k)",
             similar_questions=["Valid Anagram", "Group Shifted Strings"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -380,8 +401,9 @@ https://leetcode.com/problems/group-anagrams/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+            return """Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
 An input string is valid if:
     Open brackets must be closed by the same type of brackets.
@@ -405,7 +427,8 @@ Constraints:
     s consists of parentheses only '()[]{}'.
 
 https://leetcode.com/problems/valid-parentheses/description/
-'''
+"""
+
         def easy_solution(s: str) -> bool:
             # Brute-force solution: Use stack to check validity
             stack = []
@@ -430,7 +453,7 @@ https://leetcode.com/problems/valid-parentheses/description/
             mapping = {")": "(", "}": "{", "]": "["}
             for char in s:
                 if char in mapping:
-                    top_element = stack.pop() if stack else '#'
+                    top_element = stack.pop() if stack else "#"
                     if mapping[char] != top_element:
                         return False
                 else:
@@ -443,8 +466,12 @@ https://leetcode.com/problems/valid-parentheses/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(n)",
-            similar_questions=["Generate Parentheses", "Longest Valid Parentheses", "Remove Invalid Parentheses"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Generate Parentheses",
+                "Longest Valid Parentheses",
+                "Remove Invalid Parentheses",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -455,8 +482,9 @@ https://leetcode.com/problems/valid-parentheses/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+            return """A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
 
 Given a string s, return true if it is a palindrome, or false otherwise.
 
@@ -475,11 +503,11 @@ Constraints:
     s consists only of printable ASCII characters.
 
 https://leetcode.com/problems/valid-palindrome/description/
-'''
+"""
 
         def easy_solution(s: str) -> bool:
             # Brute-force solution: Clean string and check palindrome
-            cleaned = ''.join(c.lower() for c in s if c.isalnum())
+            cleaned = "".join(c.lower() for c in s if c.isalnum())
             return cleaned == cleaned[::-1]
 
         def optimized_solution(s: str) -> bool:
@@ -503,7 +531,7 @@ https://leetcode.com/problems/valid-palindrome/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Palindrome Linked List", "Valid Palindrome II"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -514,8 +542,9 @@ https://leetcode.com/problems/valid-palindrome/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given a string s, return the longest palindromic substring in s.
+            return """Given a string s, return the longest palindromic substring in s.
 
 Example 1:
 Input: s = "babad"
@@ -539,7 +568,8 @@ Constraints:
     s consist of only digits and English letters.
 
 https://leetcode.com/problems/longest-palindromic-substring/description/
-'''
+"""
+
         def easy_solution(s: str) -> str:
             # Brute-force solution: Check all substrings
             def is_palindrome(sub: str) -> bool:
@@ -548,7 +578,7 @@ https://leetcode.com/problems/longest-palindromic-substring/description/
             longest = ""
             for i in range(len(s)):
                 for j in range(i, len(s)):
-                    substring = s[i:j+1]
+                    substring = s[i : j + 1]
                     if is_palindrome(substring) and len(substring) > len(longest):
                         longest = substring
             return longest
@@ -559,7 +589,7 @@ https://leetcode.com/problems/longest-palindromic-substring/description/
                 while left >= 0 and right < len(s) and s[left] == s[right]:
                     left -= 1
                     right += 1
-                return s[left+1:right]
+                return s[left + 1 : right]
 
             if len(s) < 2:
                 return s
@@ -567,7 +597,7 @@ https://leetcode.com/problems/longest-palindromic-substring/description/
             longest = ""
             for i in range(len(s)):
                 palindrome1 = expand_around_center(i, i)
-                palindrome2 = expand_around_center(i, i+1)
+                palindrome2 = expand_around_center(i, i + 1)
                 longest = max(longest, palindrome1, palindrome2, key=len)
             return longest
 
@@ -577,8 +607,12 @@ https://leetcode.com/problems/longest-palindromic-substring/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n^2)",
             space_complexity="O(1)",
-            similar_questions=["Shortest Palindrome", "Palindrome Permutation", "Palindrome Pairs"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Shortest Palindrome",
+                "Palindrome Permutation",
+                "Palindrome Pairs",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -589,8 +623,9 @@ https://leetcode.com/problems/longest-palindromic-substring/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given a string s, return the number of palindromic substrings in it.
+            return """Given a string s, return the number of palindromic substrings in it.
 
 A string is a palindrome when it reads the same backward as forward.
 
@@ -611,7 +646,7 @@ Constraints:
     s consists of lowercase English letters.
 
 https://leetcode.com/problems/palindromic-substrings/description/
-'''
+"""
 
         def easy_solution(s: str) -> int:
             # Brute-force solution: Check all substrings
@@ -621,7 +656,7 @@ https://leetcode.com/problems/palindromic-substrings/description/
             count = 0
             for i in range(len(s)):
                 for j in range(i, len(s)):
-                    if is_palindrome(s[i:j+1]):
+                    if is_palindrome(s[i : j + 1]):
                         count += 1
             return count
 
@@ -638,7 +673,7 @@ https://leetcode.com/problems/palindromic-substrings/description/
             total_count = 0
             for i in range(len(s)):
                 total_count += count_palindromes(i, i)  # Odd length palindromes
-                total_count += count_palindromes(i, i+1)  # Even length palindromes
+                total_count += count_palindromes(i, i + 1)  # Even length palindromes
             return total_count
 
         return Solution(
@@ -647,8 +682,11 @@ https://leetcode.com/problems/palindromic-substrings/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n^2)",
             space_complexity="O(1)",
-            similar_questions=["Longest Palindromic Substring", "Longest Palindromic Subsequence"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Longest Palindromic Substring",
+                "Longest Palindromic Subsequence",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -659,8 +697,9 @@ https://leetcode.com/problems/palindromic-substrings/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings.
+            return """Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings.
 
 Implement the encode and decode methods.
 
@@ -673,20 +712,20 @@ Note:
 2. Do not use class member/global/static variables to store states. Your encode and decode algorithms should be stateless.
 
 https://leetcode.com/problems/encode-and-decode-strings/description/
-'''
+"""
 
         class Codec:
             def encode(self, strs: List[str]) -> str:
                 # Encode by prefixing each string with its length and a special character
-                return ''.join(f"{len(s)}#{s}" for s in strs)
+                return "".join(f"{len(s)}#{s}" for s in strs)
 
             def decode(self, s: str) -> List[str]:
                 # Decode by parsing the length and extracting the string
                 result, i = [], 0
                 while i < len(s):
-                    j = s.index('#', i)
+                    j = s.index("#", i)
                     length = int(s[i:j])
-                    result.append(s[j+1:j+1+length])
+                    result.append(s[j + 1 : j + 1 + length])
                     i = j + 1 + length
                 return result
 
@@ -706,7 +745,9 @@ https://leetcode.com/problems/encode-and-decode-strings/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(n)",
-            similar_questions=["Count and Say", "Serialize and Deserialize Binary Tree"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Count and Say",
+                "Serialize and Deserialize Binary Tree",
+            ],
+            problem_statement=problem_statement,
         )
-

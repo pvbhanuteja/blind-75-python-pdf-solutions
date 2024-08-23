@@ -21,7 +21,7 @@ class ArraySolutions:
         """
 
         def problem_statement() -> str:
-            return '''Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+            return """Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
@@ -55,7 +55,7 @@ Constraints:
     Only one valid answer exists.
 
 https://leetcode.com/problems/two-sum/description/
-'''
+"""
 
         def easy_solution(nums: List[int], target: int) -> List[int]:
             # Brute-force solution: Check every pair of numbers
@@ -82,7 +82,7 @@ https://leetcode.com/problems/two-sum/description/
             time_complexity="O(n)",
             space_complexity="O(n)",
             similar_questions=["3Sum", "4Sum", "Two Sum II - Input array is sorted"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -95,7 +95,7 @@ https://leetcode.com/problems/two-sum/description/
         """
 
         def problem_statement() -> str:
-            return '''You are given an array prices where prices[i] is the price of a given stock on the ith day.
+            return """You are given an array prices where prices[i] is the price of a given stock on the ith day.
 
 You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
 
@@ -124,7 +124,7 @@ Constraints:
     0 <= prices[i] <= 104
 
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
-'''
+"""
 
         def easy_solution(prices: List[int]) -> int:
             # Brute-force solution: Check every pair of days
@@ -141,7 +141,7 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
             if not prices:
                 return 0
             max_profit = 0
-            min_price = float('inf')
+            min_price = float("inf")
             for price in prices:
                 if price < min_price:
                     min_price = price
@@ -155,8 +155,11 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(1)",
-            similar_questions=["Best Time to Buy and Sell Stock II", "Best Time to Buy and Sell Stock III"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Best Time to Buy and Sell Stock II",
+                "Best Time to Buy and Sell Stock III",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -169,7 +172,7 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
         """
 
         def problem_statement() -> str:
-            return '''Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+            return """Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
  
@@ -197,7 +200,8 @@ Constraints:
     -109 <= nums[i] <= 109
     
 https://leetcode.com/problems/contains-duplicate/description/
-'''
+"""
+
         def easy_solution(nums: List[int]) -> bool:
             # Brute-force solution: Check every pair of numbers
             for i in range(len(nums)):
@@ -217,7 +221,7 @@ https://leetcode.com/problems/contains-duplicate/description/
             time_complexity="O(n)",
             space_complexity="O(n)",
             similar_questions=["Contains Duplicate II", "Contains Duplicate III"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -228,8 +232,9 @@ https://leetcode.com/problems/contains-duplicate/description/
         Returns:
             Solution: A Solution object containing details of the Product of Array Except Self problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+            return """Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
 
 The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 
@@ -260,7 +265,7 @@ Constraints:
 Follow up: Can you solve the problem in O(1) extra space complexity? (The output array does not count as extra space for space complexity analysis.)
 
 https://leetcode.com/problems/product-of-array-except-self/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> List[int]:
             # Brute-force solution: Calculate product for each index
@@ -292,7 +297,7 @@ https://leetcode.com/problems/product-of-array-except-self/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Trapping Rain Water", "Maximum Product Subarray"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -303,8 +308,9 @@ https://leetcode.com/problems/product-of-array-except-self/description/
         Returns:
             Solution: A Solution object containing details of the Maximum Subarray problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an integer array nums, find the subarray with the largest sum, and return its sum.
+            return """Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
 A subarray is a contiguous part of an array.
 
@@ -334,11 +340,11 @@ Constraints:
     -104 <= nums[i] <= 104
 
 https://leetcode.com/problems/maximum-subarray/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> int:
             # Brute-force solution: Check all subarrays
-            max_sum = float('-inf')
+            max_sum = float("-inf")
             for i in range(len(nums)):
                 current_sum = 0
                 for j in range(i, len(nums)):
@@ -360,8 +366,11 @@ https://leetcode.com/problems/maximum-subarray/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(1)",
-            similar_questions=["Best Time to Buy and Sell Stock", "Maximum Product Subarray"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Best Time to Buy and Sell Stock",
+                "Maximum Product Subarray",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -372,8 +381,9 @@ https://leetcode.com/problems/maximum-subarray/description/
         Returns:
             Solution: A Solution object containing details of the Maximum Product Subarray problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
+            return """Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
 
  
 
@@ -398,11 +408,11 @@ Constraints:
     The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 
 https://leetcode.com/problems/maximum-product-subarray/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> int:
             # Brute-force solution: Check all subarrays
-            max_product = float('-inf')
+            max_product = float("-inf")
             for i in range(len(nums)):
                 current_product = 1
                 for j in range(i, len(nums)):
@@ -427,7 +437,7 @@ https://leetcode.com/problems/maximum-product-subarray/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Maximum Subarray", "House Robber"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -438,8 +448,9 @@ https://leetcode.com/problems/maximum-product-subarray/description/
         Returns:
             Solution: A Solution object containing details of the Find Minimum in Rotated Sorted Array problem.
         """
+
         def problem_statement() -> str:
-            return '''Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:
+            return """Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:
 
 [4,5,6,7,0,1,2] if it was rotated 4 times.
 [0,1,2,4,5,6,7] if it was rotated 7 times.
@@ -481,7 +492,7 @@ Constraints:
     nums is guaranteed to be rotated at some pivot.
 
 https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> int:
             # Brute-force solution: Use built-in min function
@@ -504,8 +515,11 @@ https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
             optimized_solution=optimized_solution,
             time_complexity="O(log n)",
             space_complexity="O(1)",
-            similar_questions=["Search in Rotated Sorted Array", "Find Minimum in Rotated Sorted Array II"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Search in Rotated Sorted Array",
+                "Find Minimum in Rotated Sorted Array II",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -516,8 +530,9 @@ https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
         Returns:
             Solution: A Solution object containing details of the Search in Rotated Sorted Array problem.
         """
+
         def problem_statement() -> str:
-            return '''There is an integer array nums sorted in ascending order (with distinct values).
+            return """There is an integer array nums sorted in ascending order (with distinct values).
 
 Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2].
 
@@ -553,7 +568,7 @@ Constraints:
     -104 <= target <= 104
 
 https://leetcode.com/problems/search-in-rotated-sorted-array/description/
-'''
+"""
 
         def easy_solution(nums: List[int], target: int) -> int:
             # Brute-force solution: Use built-in index function
@@ -584,8 +599,11 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/description/
             optimized_solution=optimized_solution,
             time_complexity="O(log n)",
             space_complexity="O(1)",
-            similar_questions=["Search in Rotated Sorted Array II", "Find Minimum in Rotated Sorted Array"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Search in Rotated Sorted Array II",
+                "Find Minimum in Rotated Sorted Array",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -596,8 +614,9 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/description/
         Returns:
             Solution: A Solution object containing details of the 3Sum problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+            return """Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 
 Notice that the solution set must not contain duplicate triplets.
 
@@ -626,7 +645,7 @@ Constraints:
     -105 <= nums[i] <= 105
 
 https://leetcode.com/problems/3sum/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> List[List[int]]:
             # Brute-force solution: Check all triplets
@@ -676,7 +695,7 @@ https://leetcode.com/problems/3sum/description/
             time_complexity="O(n^2)",
             space_complexity="O(1)",
             similar_questions=["Two Sum", "3Sum Closest", "4Sum"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -687,8 +706,9 @@ https://leetcode.com/problems/3sum/description/
         Returns:
             Solution: A Solution object containing details of the Container With Most Water problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+            return """You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
 
 Find two lines that together with the x-axis form a container, such that the container contains the most water.
 
@@ -718,7 +738,7 @@ Constraints:
     0 <= height[i] <= 104
 
 https://leetcode.com/problems/container-with-most-water/description/
-'''
+"""
 
         def easy_solution(height: List[int]) -> int:
             # Brute-force solution: Check all pairs of lines
@@ -749,5 +769,5 @@ https://leetcode.com/problems/container-with-most-water/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Trapping Rain Water"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )

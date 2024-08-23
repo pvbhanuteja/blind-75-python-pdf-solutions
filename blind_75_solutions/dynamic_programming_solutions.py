@@ -6,7 +6,6 @@ from typing import List, Optional
 from blind_75_solutions import Solution
 
 
-
 class DynamicProgrammingSolutions:
     """Class containing dynamic programming-related solutions for Blind 75 LeetCode questions."""
 
@@ -18,8 +17,9 @@ class DynamicProgrammingSolutions:
         Returns:
             Solution: A Solution object containing details of the Climbing Stairs problem.
         """
+
         def problem_statement() -> str:
-            return '''You are climbing a staircase. It takes n steps to reach the top.
+            return """You are climbing a staircase. It takes n steps to reach the top.
 
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
@@ -49,7 +49,7 @@ Constraints:
     1 <= n <= 45
 
 https://leetcode.com/problems/climbing-stairs/description/
-'''
+"""
 
         def easy_solution(n: int) -> int:
             # Dynamic programming solution with O(n) space complexity
@@ -77,8 +77,12 @@ https://leetcode.com/problems/climbing-stairs/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(1)",
-            similar_questions=["Min Cost Climbing Stairs", "Fibonacci Number", "N-th Tribonacci Number"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Min Cost Climbing Stairs",
+                "Fibonacci Number",
+                "N-th Tribonacci Number",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -89,8 +93,9 @@ https://leetcode.com/problems/climbing-stairs/description/
         Returns:
             Solution: A Solution object containing details of the Coin Change problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+            return """You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
 
 Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
 
@@ -123,24 +128,26 @@ Constraints:
     0 <= amount <= 104
 
 https://leetcode.com/problems/coin-change/description/
-'''
+"""
 
         def easy_solution(coins: List[int], amount: int) -> int:
             # Dynamic programming solution with O(amount * len(coins)) time complexity
-            dp = [float('inf')] * (amount + 1)
+            dp = [float("inf")] * (amount + 1)
             dp[0] = 0
             for coin in coins:
                 for x in range(coin, amount + 1):
                     dp[x] = min(dp[x], dp[x - coin] + 1)
-            return dp[amount] if dp[amount] != float('inf') else -1
+            return dp[amount] if dp[amount] != float("inf") else -1
 
         def optimized_solution(coins: List[int], amount: int) -> int:
             # Optimized dynamic programming solution
-            dp = [float('inf')] * (amount + 1)
+            dp = [float("inf")] * (amount + 1)
             dp[0] = 0
             for i in range(1, amount + 1):
-                dp[i] = min(dp[i - c] if i - c >= 0 else float('inf') for c in coins) + 1
-            return dp[amount] if dp[amount] != float('inf') else -1
+                dp[i] = (
+                    min(dp[i - c] if i - c >= 0 else float("inf") for c in coins) + 1
+                )
+            return dp[amount] if dp[amount] != float("inf") else -1
 
         return Solution(
             question="Coin Change",
@@ -149,7 +156,7 @@ https://leetcode.com/problems/coin-change/description/
             time_complexity="O(amount * len(coins))",
             space_complexity="O(amount)",
             similar_questions=["Minimum Cost For Tickets"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -160,8 +167,9 @@ https://leetcode.com/problems/coin-change/description/
         Returns:
             Solution: A Solution object containing details of the Longest Increasing Subsequence problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an integer array nums, return the length of the longest strictly increasing subsequence.
+            return """Given an integer array nums, return the length of the longest strictly increasing subsequence.
 
  
 
@@ -193,7 +201,7 @@ Constraints:
 Follow up: Can you come up with an algorithm that runs in O(n log(n)) time complexity?
 
 https://leetcode.com/problems/longest-increasing-subsequence/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> int:
             # Dynamic programming solution with O(n^2) time complexity
@@ -228,8 +236,12 @@ https://leetcode.com/problems/longest-increasing-subsequence/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n log n)",
             space_complexity="O(n)",
-            similar_questions=["Increasing Triplet Subsequence", "Russian Doll Envelopes", "Maximum Length of Pair Chain"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Increasing Triplet Subsequence",
+                "Russian Doll Envelopes",
+                "Maximum Length of Pair Chain",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -240,8 +252,9 @@ https://leetcode.com/problems/longest-increasing-subsequence/description/
         Returns:
             Solution: A Solution object containing details of the Word Break problem.
         """
+
         def problem_statement() -> str:
-            return '''Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
+            return """Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
 
 Note that the same word in the dictionary may be reused multiple times in the segmentation.
 
@@ -276,7 +289,7 @@ Constraints:
     All the strings of wordDict are unique.
 
 https://leetcode.com/problems/word-break/description/
-'''
+"""
 
         def easy_solution(s: str, wordDict: List[str]) -> bool:
             # Dynamic programming solution with O(n^2) time complexity
@@ -308,7 +321,7 @@ https://leetcode.com/problems/word-break/description/
             time_complexity="O(n^2)",
             space_complexity="O(n)",
             similar_questions=["Word Break II"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -319,8 +332,9 @@ https://leetcode.com/problems/word-break/description/
         Returns:
             Solution: A Solution object containing details of the Combination Sum problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+            return """Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
 
 The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
 
@@ -357,7 +371,7 @@ Constraints:
     1 <= target <= 40
 
 https://leetcode.com/problems/combination-sum/description/
-'''
+"""
 
         def easy_solution(candidates: List[int], target: int) -> List[List[int]]:
             # Backtracking solution
@@ -381,11 +395,11 @@ https://leetcode.com/problems/combination-sum/description/
             # Dynamic programming solution
             dp: List[List[List[int]]] = [[] for _ in range(target + 1)]
             dp[0] = [[]]
-            
+
             for c in candidates:
                 for i in range(c, target + 1):
                     dp[i].extend([comb + [c] for comb in dp[i - c]])
-            
+
             return dp[target]
 
         return Solution(
@@ -394,8 +408,15 @@ https://leetcode.com/problems/combination-sum/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n * target)",
             space_complexity="O(target)",
-            similar_questions=["Letter Combinations of a Phone Number", "Combination Sum II", "Combinations", "Combination Sum III", "Factor Combinations", "Combination Sum IV"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Letter Combinations of a Phone Number",
+                "Combination Sum II",
+                "Combinations",
+                "Combination Sum III",
+                "Factor Combinations",
+                "Combination Sum IV",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -406,8 +427,9 @@ https://leetcode.com/problems/combination-sum/description/
         Returns:
             Solution: A Solution object containing details of the House Robber problem.
         """
+
         def problem_statement() -> str:
-            return '''You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+            return """You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
 
 Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 
@@ -435,7 +457,7 @@ Constraints:
     0 <= nums[i] <= 400
 
 https://leetcode.com/problems/house-robber/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> int:
             # Dynamic programming solution with O(n) space complexity
@@ -447,7 +469,7 @@ https://leetcode.com/problems/house-robber/description/
             dp[0] = nums[0]
             dp[1] = max(nums[0], nums[1])
             for i in range(2, len(nums)):
-                dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+                dp[i] = max(dp[i - 1], dp[i - 2] + nums[i])
             return dp[-1]
 
         def optimized_solution(nums: List[int]) -> int:
@@ -465,8 +487,14 @@ https://leetcode.com/problems/house-robber/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(1)",
-            similar_questions=["Maximum Product Subarray", "House Robber II", "Paint House", "Paint Fence", "House Robber III"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Maximum Product Subarray",
+                "House Robber II",
+                "Paint House",
+                "Paint Fence",
+                "House Robber III",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -477,8 +505,9 @@ https://leetcode.com/problems/house-robber/description/
         Returns:
             Solution: A Solution object containing details of the House Robber II problem.
         """
+
         def problem_statement() -> str:
-            return '''You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.
+            return """You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.
 
 Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 
@@ -510,7 +539,7 @@ Constraints:
     0 <= nums[i] <= 1000
 
 https://leetcode.com/problems/house-robber-ii/description/
-'''
+"""
 
         def rob(nums: List[int]) -> int:
             def simple_rob(nums: List[int]) -> int:
@@ -535,10 +564,15 @@ https://leetcode.com/problems/house-robber-ii/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(1)",
-            similar_questions=["House Robber", "Paint House", "Paint Fence", "House Robber III", "Non-negative Integers without Consecutive Ones"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "House Robber",
+                "Paint House",
+                "Paint Fence",
+                "House Robber III",
+                "Non-negative Integers without Consecutive Ones",
+            ],
+            problem_statement=problem_statement,
         )
-
 
     @staticmethod
     def decode_ways() -> Solution:
@@ -548,8 +582,9 @@ https://leetcode.com/problems/house-robber-ii/description/
         Returns:
             Solution: A Solution object containing details of the Decode Ways problem.
         """
+
         def problem_statement() -> str:
-            return '''A message containing letters from A-Z can be encoded into numbers using the following mapping:
+            return """A message containing letters from A-Z can be encoded into numbers using the following mapping:
 
 'A' -> "1"
 'B' -> "2"
@@ -597,32 +632,32 @@ Constraints:
     s contains only digits and may contain leading zero(s).
 
 https://leetcode.com/problems/decode-ways/description/
-'''
+"""
 
         def easy_solution(s: str) -> int:
             # Dynamic programming solution with O(n) space complexity
-            if not s or s[0] == '0':
+            if not s or s[0] == "0":
                 return 0
             dp = [0] * (len(s) + 1)
             dp[0] = 1
             dp[1] = 1
             for i in range(2, len(s) + 1):
-                if s[i-1] != '0':
-                    dp[i] += dp[i-1]
-                if s[i-2] == '1' or (s[i-2] == '2' and s[i-1] <= '6'):
-                    dp[i] += dp[i-2]
+                if s[i - 1] != "0":
+                    dp[i] += dp[i - 1]
+                if s[i - 2] == "1" or (s[i - 2] == "2" and s[i - 1] <= "6"):
+                    dp[i] += dp[i - 2]
             return dp[-1]
 
         def optimized_solution(s: str) -> int:
             # Optimized solution with O(1) space complexity
-            if not s or s[0] == '0':
+            if not s or s[0] == "0":
                 return 0
             prev, curr = 1, 1
             for i in range(1, len(s)):
                 temp = 0
-                if s[i] != '0':
+                if s[i] != "0":
                     temp = curr
-                if s[i-1] == '1' or (s[i-1] == '2' and s[i] <= '6'):
+                if s[i - 1] == "1" or (s[i - 1] == "2" and s[i] <= "6"):
                     temp += prev
                 prev, curr = curr, temp
             return curr
@@ -634,7 +669,7 @@ https://leetcode.com/problems/decode-ways/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Decode Ways II"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -645,8 +680,9 @@ https://leetcode.com/problems/decode-ways/description/
         Returns:
             Solution: A Solution object containing details of the Unique Paths problem.
         """
+
         def problem_statement() -> str:
-            return '''There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m-1][n-1]). The robot can only move either down or right at any point in time.
+            return """There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m-1][n-1]). The robot can only move either down or right at any point in time.
 
 Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
 
@@ -675,22 +711,22 @@ Constraints:
     1 <= m, n <= 100
 
 https://leetcode.com/problems/unique-paths/description/
-'''
+"""
 
         def easy_solution(m: int, n: int) -> int:
             # Dynamic programming solution with O(m * n) space complexity
             dp = [[1] * n for _ in range(m)]
             for i in range(1, m):
                 for j in range(1, n):
-                    dp[i][j] = dp[i-1][j] + dp[i][j-1]
-            return dp[m-1][n-1]
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+            return dp[m - 1][n - 1]
 
         def optimized_solution(m: int, n: int) -> int:
             # Optimized solution with O(n) space complexity
             row = [1] * n
             for _ in range(1, m):
                 for j in range(1, n):
-                    row[j] += row[j-1]
+                    row[j] += row[j - 1]
             return row[-1]
 
         return Solution(
@@ -700,7 +736,7 @@ https://leetcode.com/problems/unique-paths/description/
             time_complexity="O(m * n)",
             space_complexity="O(n)",
             similar_questions=["Unique Paths II", "Minimum Path Sum", "Dungeon Game"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -711,8 +747,9 @@ https://leetcode.com/problems/unique-paths/description/
         Returns:
             Solution: A Solution object containing details of the Jump Game problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given an integer array nums. You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position.
+            return """You are given an integer array nums. You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position.
 
 Return true if you can reach the last index, or false otherwise.
 
@@ -738,7 +775,7 @@ Constraints:
     0 <= nums[i] <= 105
 
 https://leetcode.com/problems/jump-game/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> bool:
             # Greedy solution with O(n) time complexity
@@ -764,5 +801,5 @@ https://leetcode.com/problems/jump-game/description/
             time_complexity="O(n)",
             space_complexity="O(1)",
             similar_questions=["Jump Game II"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )

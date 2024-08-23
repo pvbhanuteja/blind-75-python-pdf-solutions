@@ -1,6 +1,3 @@
-Here's the implementation of the `tests/test_solutions.py` file based on the given context and requirements:
-
-```python
 """
 Unit tests for Blind 75 LeetCode solutions.
 """
@@ -45,7 +42,9 @@ class TestArraySolutions(unittest.TestCase):
     def test_maximum_subarray(self):
         solution = self.array_solutions.maximum_subarray()
         self.assertEqual(solution.easy_solution([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6)
-        self.assertEqual(solution.optimized_solution([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6)
+        self.assertEqual(
+            solution.optimized_solution([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6
+        )
 
     def test_maximum_product_subarray(self):
         solution = self.array_solutions.maximum_product_subarray()
@@ -64,8 +63,13 @@ class TestArraySolutions(unittest.TestCase):
 
     def test_3sum(self):
         solution = self.array_solutions.three_sum()
-        self.assertEqual(solution.easy_solution([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]])
-        self.assertEqual(solution.optimized_solution([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]])
+        self.assertEqual(
+            solution.easy_solution([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]]
+        )
+        self.assertEqual(
+            solution.optimized_solution([-1, 0, 1, 2, -1, -4]),
+            [[-1, -1, 2], [-1, 0, 1]],
+        )
 
     def test_container_with_most_water(self):
         solution = self.array_solutions.container_with_most_water()
@@ -78,7 +82,9 @@ class TestStringSolutions(unittest.TestCase):
         self.string_solutions = StringSolutions()
 
     def test_longest_substring_without_repeating_characters(self):
-        solution = self.string_solutions.longest_substring_without_repeating_characters()
+        solution = (
+            self.string_solutions.longest_substring_without_repeating_characters()
+        )
         self.assertEqual(solution.easy_solution("abcabcbb"), 3)
         self.assertEqual(solution.optimized_solution("abcabcbb"), 3)
 
@@ -99,10 +105,14 @@ class TestStringSolutions(unittest.TestCase):
 
     def test_group_anagrams(self):
         solution = self.string_solutions.group_anagrams()
-        self.assertEqual(solution.easy_solution(["eat", "tea", "tan", "ate", "nat", "bat"]),
-                         [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]])
-        self.assertEqual(solution.optimized_solution(["eat", "tea", "tan", "ate", "nat", "bat"]),
-                         [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]])
+        self.assertEqual(
+            solution.easy_solution(["eat", "tea", "tan", "ate", "nat", "bat"]),
+            [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]],
+        )
+        self.assertEqual(
+            solution.optimized_solution(["eat", "tea", "tan", "ate", "nat", "bat"]),
+            [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]],
+        )
 
     def test_valid_parentheses(self):
         solution = self.string_solutions.valid_parentheses()

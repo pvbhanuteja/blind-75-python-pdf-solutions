@@ -38,13 +38,13 @@ def get_all_solutions() -> List[Solution]:
         GraphSolutions(),
         IntervalSolutions(),
         MatrixSolutions(),
-        HeapSolutions()
+        HeapSolutions(),
     ]
 
     all_solutions = []
     for solution_class in solution_classes:
         for method_name in reversed(dir(solution_class)):
-            if not method_name.startswith('__'):
+            if not method_name.startswith("__"):
                 method = getattr(solution_class, method_name)
                 if callable(method):
                     all_solutions.append(method())
@@ -72,10 +72,13 @@ def main() -> None:
 
     # Generate PDF file
     pdf_generator = PdfGenerator(all_solutions)
-    output_pdf_file = os.path.join(output_dir, "blind_75_solutions.pdf")
-    pdf_generator.generate_full_pdf(output_pdf_file)
+    # output_pdf_file = os.path.join(output_dir, "blind_75_solutions_old.pdf")
+    # pdf_generator.generate_full_pdf(output_pdf_file)
+    fpdf_output_file = os.path.join(output_dir, "blind_75_solutions.pdf")
+    pdf_generator.generate_full_pdf_fpdf(fpdf_output_file)
 
-    print(f"PDF file generated successfully: {output_pdf_file}")
+    print(f"PDF file generated successfully: {fpdf_output_file}")
+
 
 if __name__ == "__main__":
     main()

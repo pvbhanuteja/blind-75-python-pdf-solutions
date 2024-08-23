@@ -10,7 +10,13 @@ from blind_75_solutions import Solution
 
 class TreeNode:
     """Definition for a binary tree node."""
-    def __init__(self, val: int = 0, left: Optional['TreeNode'] = None, right: Optional['TreeNode'] = None):
+
+    def __init__(
+        self,
+        val: int = 0,
+        left: Optional["TreeNode"] = None,
+        right: Optional["TreeNode"] = None,
+    ):
         self.val = val
         self.left = left
         self.right = right
@@ -27,8 +33,9 @@ class TreeSolutions:
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the root of a binary tree, return its maximum depth.
+            return """Given the root of a binary tree, return its maximum depth.
 
 A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
@@ -45,7 +52,7 @@ Constraints:
     -100 <= Node.val <= 100
 
 https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
-'''
+"""
 
         class TreeNode:
             def __init__(self, val=0, left=None, right=None):
@@ -63,19 +70,19 @@ https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
             # Iterative solution: Use depth-first search with stack
             if not root:
                 return 0
-            
+
             stack = [(root, 1)]
             max_depth = 0
-            
+
             while stack:
                 node, depth = stack.pop()
                 max_depth = max(max_depth, depth)
-                
+
                 if node.right:
                     stack.append((node.right, depth + 1))
                 if node.left:
                     stack.append((node.left, depth + 1))
-            
+
             return max_depth
 
         return Solution(
@@ -85,7 +92,7 @@ https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
             time_complexity="O(n)",
             space_complexity="O(h)",
             similar_questions=["Balanced Binary Tree", "Minimum Depth of Binary Tree"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -96,8 +103,9 @@ https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+            return """Given the roots of two binary trees p and q, write a function to check if they are the same or not.
 
 Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
 
@@ -118,7 +126,7 @@ Constraints:
     -104 <= Node.val <= 104
 
 https://leetcode.com/problems/same-tree/description/
-'''
+"""
 
         class TreeNode:
             def __init__(self, val=0, left=None, right=None):
@@ -132,9 +140,11 @@ https://leetcode.com/problems/same-tree/description/
                 return True
             if not p or not q:
                 return False
-            return (p.val == q.val and 
-                    easy_solution(p.left, q.left) and 
-                    easy_solution(p.right, q.right))
+            return (
+                p.val == q.val
+                and easy_solution(p.left, q.left)
+                and easy_solution(p.right, q.right)
+            )
 
         def optimized_solution(p: TreeNode, q: TreeNode) -> bool:
             # Iterative solution: Use stack to compare nodes
@@ -158,7 +168,7 @@ https://leetcode.com/problems/same-tree/description/
             time_complexity="O(min(n, m))",
             space_complexity="O(min(h1, h2))",
             similar_questions=["Symmetric Tree", "Subtree of Another Tree"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -169,8 +179,9 @@ https://leetcode.com/problems/same-tree/description/
         Returns:
             Solution: A Solution object containing details of the problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the root of a binary tree, invert the tree, and return its root.
+            return """Given the root of a binary tree, invert the tree, and return its root.
 
 Example 1:
 Input: root = [4,2,7,1,3,6,9]
@@ -189,7 +200,7 @@ Constraints:
     -100 <= Node.val <= 100
 
 https://leetcode.com/problems/invert-binary-tree/description/
-'''
+"""
 
         class TreeNode:
             def __init__(self, val=0, left=None, right=None):
@@ -208,17 +219,17 @@ https://leetcode.com/problems/invert-binary-tree/description/
             # Iterative solution: Use queue to invert the tree
             if not root:
                 return None
-            
+
             queue = [root]
             while queue:
                 node = queue.pop(0)
                 node.left, node.right = node.right, node.left
-                
+
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            
+
             return root
 
         return Solution(
@@ -228,8 +239,9 @@ https://leetcode.com/problems/invert-binary-tree/description/
             time_complexity="O(n)",
             space_complexity="O(h)",
             similar_questions=["Reverse Odd Levels of Binary Tree"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
+
     @staticmethod
     def binary_tree_maximum_path_sum() -> Solution:
         """
@@ -238,8 +250,9 @@ https://leetcode.com/problems/invert-binary-tree/description/
         Returns:
             Solution: A Solution object containing details of the Binary Tree Maximum Path Sum problem.
         """
+
         def problem_statement() -> str:
-            return '''A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.
+            return """A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.
 
 The path sum of a path is the sum of the node's values in the path.
 
@@ -261,7 +274,7 @@ Constraints:
     -1000 <= Node.val <= 1000
 
 https://leetcode.com/problems/binary-tree-maximum-path-sum/
-'''
+"""
 
         def easy_solution(root: Optional[TreeNode]) -> int:
             # Helper function to calculate the maximum gain from each node
@@ -275,7 +288,7 @@ https://leetcode.com/problems/binary-tree-maximum-path-sum/
                 max_sum = max(max_sum, path_sum)
                 return node.val + max(left_gain, right_gain)
 
-            max_sum = float('-inf')
+            max_sum = float("-inf")
             max_gain(root)
             return max_sum
 
@@ -290,7 +303,7 @@ https://leetcode.com/problems/binary-tree-maximum-path-sum/
             time_complexity="O(n)",
             space_complexity="O(h)",
             similar_questions=["Path Sum", "Sum Root to Leaf Numbers"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -301,8 +314,9 @@ https://leetcode.com/problems/binary-tree-maximum-path-sum/
         Returns:
             Solution: A Solution object containing details of the Binary Tree Level Order Traversal problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+            return """Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
 
 Example 1:
 
@@ -325,7 +339,7 @@ Constraints:
     -1000 <= Node.val <= 1000
 
 https://leetcode.com/problems/binary-tree-level-order-traversal/
-'''
+"""
 
         def easy_solution(root: Optional[TreeNode]) -> List[List[int]]:
             # Iterative solution: Use a queue to traverse each level
@@ -354,7 +368,12 @@ https://leetcode.com/problems/binary-tree-level-order-traversal/
             level = [root]
             while level:
                 result.append([node.val for node in level])
-                level = [child for node in level for child in (node.left, node.right) if child]
+                level = [
+                    child
+                    for node in level
+                    for child in (node.left, node.right)
+                    if child
+                ]
             return result
 
         return Solution(
@@ -363,8 +382,13 @@ https://leetcode.com/problems/binary-tree-level-order-traversal/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(n)",
-            similar_questions=["Binary Tree Zigzag Level Order Traversal", "Binary Tree Level Order Traversal II", "Minimum Depth of Binary Tree", "Binary Tree Vertical Order Traversal"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Binary Tree Zigzag Level Order Traversal",
+                "Binary Tree Level Order Traversal II",
+                "Minimum Depth of Binary Tree",
+                "Binary Tree Vertical Order Traversal",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -375,8 +399,9 @@ https://leetcode.com/problems/binary-tree-level-order-traversal/
         Returns:
             Solution: A Solution object containing details of the Serialize and Deserialize Binary Tree problem.
         """
+
         def problem_statement() -> str:
-            return '''Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.
+            return """Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.
 
 Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.
 
@@ -398,7 +423,7 @@ Constraints:
     -1000 <= Node.val <= 1000
 
 https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
-'''
+"""
 
         class Codec:
             def serialize(self, root: Optional[TreeNode]) -> str:
@@ -409,6 +434,7 @@ https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
 
             def deserialize(self, data: str) -> Optional[TreeNode]:
                 """Deserializes your encoded data to tree."""
+
                 def dfs() -> Optional[TreeNode]:
                     val = next(values)
                     if val == "null":
@@ -437,8 +463,13 @@ https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(n)",
-            similar_questions=["Encode and Decode Strings", "Serialize and Deserialize BST", "Find Duplicate Subtrees", "Serialize and Deserialize N-ary Tree"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Encode and Decode Strings",
+                "Serialize and Deserialize BST",
+                "Find Duplicate Subtrees",
+                "Serialize and Deserialize N-ary Tree",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -449,8 +480,9 @@ https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
         Returns:
             Solution: A Solution object containing details of the Subtree of Another Tree problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the roots of two binary trees root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise.
+            return """Given the roots of two binary trees root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise.
 
 A subtree of a binary tree tree is a tree that consists of a node in tree and all of this node's descendants. The tree tree could also be considered as a subtree of itself.
 
@@ -472,7 +504,7 @@ Constraints:
     -104 <= subRoot.val <= 104
 
 https://leetcode.com/problems/subtree-of-another-tree/
-'''
+"""
 
         def is_same_tree(s: Optional[TreeNode], t: Optional[TreeNode]) -> bool:
             # Helper function to check if two trees are the same
@@ -480,19 +512,27 @@ https://leetcode.com/problems/subtree-of-another-tree/
                 return True
             if not s or not t:
                 return False
-            return (s.val == t.val and
-                    is_same_tree(s.left, t.left) and
-                    is_same_tree(s.right, t.right))
+            return (
+                s.val == t.val
+                and is_same_tree(s.left, t.left)
+                and is_same_tree(s.right, t.right)
+            )
 
-        def easy_solution(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        def easy_solution(
+            root: Optional[TreeNode], subRoot: Optional[TreeNode]
+        ) -> bool:
             # Recursive solution: Check each subtree
             if not root:
                 return False
             if is_same_tree(root, subRoot):
                 return True
-            return easy_solution(root.left, subRoot) or easy_solution(root.right, subRoot)
+            return easy_solution(root.left, subRoot) or easy_solution(
+                root.right, subRoot
+            )
 
-        def optimized_solution(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        def optimized_solution(
+            root: Optional[TreeNode], subRoot: Optional[TreeNode]
+        ) -> bool:
             # Optimized solution: Serialize trees and use KMP algorithm to find substring
             def serialize(node: Optional[TreeNode]) -> str:
                 if not node:
@@ -539,9 +579,8 @@ https://leetcode.com/problems/subtree-of-another-tree/
             time_complexity="O(m + n)",
             space_complexity="O(m + n)",
             similar_questions=["Count Univalue Subtrees", "Most Frequent Subtree Sum"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
-
 
     @staticmethod
     def construct_binary_tree_from_preorder_and_inorder_traversal() -> Solution:
@@ -551,8 +590,9 @@ https://leetcode.com/problems/subtree-of-another-tree/
         Returns:
             Solution: A Solution object containing details of the Construct Binary Tree from Preorder and Inorder Traversal problem.
         """
+
         def problem_statement() -> str:
-            return '''Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
+            return """Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
 
 Example 1:
 
@@ -575,19 +615,23 @@ Constraints:
     inorder is guaranteed to be the inorder traversal of the tree.
 
 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
-'''
+"""
 
-        def easy_solution(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        def easy_solution(
+            preorder: List[int], inorder: List[int]
+        ) -> Optional[TreeNode]:
             # Recursive solution: Use preorder and inorder to build the tree
             if not preorder or not inorder:
                 return None
             root = TreeNode(preorder[0])
             mid = inorder.index(preorder[0])
-            root.left = easy_solution(preorder[1:mid+1], inorder[:mid])
-            root.right = easy_solution(preorder[mid+1:], inorder[mid+1:])
+            root.left = easy_solution(preorder[1 : mid + 1], inorder[:mid])
+            root.right = easy_solution(preorder[mid + 1 :], inorder[mid + 1 :])
             return root
 
-        def optimized_solution(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        def optimized_solution(
+            preorder: List[int], inorder: List[int]
+        ) -> Optional[TreeNode]:
             # Optimized solution: Use a hashmap to quickly find the root in inorder
             def build(start: int, end: int) -> Optional[TreeNode]:
                 nonlocal pre_idx
@@ -610,8 +654,10 @@ https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-tr
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(n)",
-            similar_questions=["Construct Binary Tree from Inorder and Postorder Traversal"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Construct Binary Tree from Inorder and Postorder Traversal"
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -622,8 +668,9 @@ https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-tr
         Returns:
             Solution: A Solution object containing details of the Validate Binary Search Tree problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+            return """Given the root of a binary tree, determine if it is a valid binary search tree (BST).
 
 A valid BST is defined as follows:
 
@@ -648,23 +695,26 @@ Constraints:
     -231 <= Node.val <= 231 - 1
 
 https://leetcode.com/problems/validate-binary-search-tree/
-'''
+"""
 
         def easy_solution(root: Optional[TreeNode]) -> bool:
             # Recursive solution: Check each node's value within valid range
-            def is_valid_bst(node: Optional[TreeNode], min_val: float, max_val: float) -> bool:
+            def is_valid_bst(
+                node: Optional[TreeNode], min_val: float, max_val: float
+            ) -> bool:
                 if not node:
                     return True
                 if node.val <= min_val or node.val >= max_val:
                     return False
-                return (is_valid_bst(node.left, min_val, node.val) and
-                        is_valid_bst(node.right, node.val, max_val))
+                return is_valid_bst(node.left, min_val, node.val) and is_valid_bst(
+                    node.right, node.val, max_val
+                )
 
-            return is_valid_bst(root, float('-inf'), float('inf'))
+            return is_valid_bst(root, float("-inf"), float("inf"))
 
         def optimized_solution(root: Optional[TreeNode]) -> bool:
             # Iterative solution: Use a stack to check nodes
-            stack = [(root, float('-inf'), float('inf'))]
+            stack = [(root, float("-inf"), float("inf"))]
             while stack:
                 node, min_val, max_val = stack.pop()
                 if not node:
@@ -681,8 +731,11 @@ https://leetcode.com/problems/validate-binary-search-tree/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(h)",
-            similar_questions=["Binary Tree Inorder Traversal", "Find Mode in Binary Search Tree"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Binary Tree Inorder Traversal",
+                "Find Mode in Binary Search Tree",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -693,8 +746,9 @@ https://leetcode.com/problems/validate-binary-search-tree/
         Returns:
             Solution: A Solution object containing details of the Kth Smallest Element in a BST problem.
         """
+
         def problem_statement() -> str:
-            return '''Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
+            return """Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
 
 Example 1:
 
@@ -713,7 +767,7 @@ Constraints:
     0 <= Node.val <= 104
 
 https://leetcode.com/problems/kth-smallest-element-in-a-bst/
-'''
+"""
 
         def easy_solution(root: Optional[TreeNode], k: int) -> int:
             # Recursive solution: Inorder traversal to find kth smallest
@@ -741,12 +795,12 @@ https://leetcode.com/problems/kth-smallest-element-in-a-bst/
                 while current:
                     stack.append(current)
                     current = current.left
-                
+
                 current = stack.pop()
                 k -= 1
                 if k == 0:
                     return current.val
-                
+
                 current = current.right
 
         return Solution(
@@ -755,8 +809,11 @@ https://leetcode.com/problems/kth-smallest-element-in-a-bst/
             optimized_solution=optimized_solution,
             time_complexity="O(H + k)",
             space_complexity="O(H)",
-            similar_questions=["Binary Tree Inorder Traversal", "Second Minimum Node In a Binary Tree"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Binary Tree Inorder Traversal",
+                "Second Minimum Node In a Binary Tree",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -767,8 +824,9 @@ https://leetcode.com/problems/kth-smallest-element-in-a-bst/
         Returns:
             Solution: A Solution object containing details of the Lowest Common Ancestor of a Binary Search Tree problem.
         """
+
         def problem_statement() -> str:
-            return '''Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.
+            return """Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.
 
 According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
 
@@ -798,9 +856,11 @@ Constraints:
     p and q will exist in the BST.
 
 https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
-'''
+"""
 
-        def easy_solution(root: Optional[TreeNode], p: TreeNode, q: TreeNode) -> Optional[TreeNode]:
+        def easy_solution(
+            root: Optional[TreeNode], p: TreeNode, q: TreeNode
+        ) -> Optional[TreeNode]:
             # Recursive solution: Traverse the tree to find LCA
             if not root:
                 return None
@@ -810,7 +870,9 @@ https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
                 return easy_solution(root.right, p, q)
             return root
 
-        def optimized_solution(root: Optional[TreeNode], p: TreeNode, q: TreeNode) -> Optional[TreeNode]:
+        def optimized_solution(
+            root: Optional[TreeNode], p: TreeNode, q: TreeNode
+        ) -> Optional[TreeNode]:
             # Iterative solution: Traverse the tree to find LCA
             current = root
             while current:
@@ -827,8 +889,11 @@ https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
             optimized_solution=optimized_solution,
             time_complexity="O(H)",
             space_complexity="O(1)",
-            similar_questions=["Lowest Common Ancestor of a Binary Tree", "Smallest Common Region"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Lowest Common Ancestor of a Binary Tree",
+                "Smallest Common Region",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -839,8 +904,9 @@ https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
         Returns:
             Solution: A Solution object containing details of the Implement Trie (Prefix Tree) problem.
         """
+
         def problem_statement() -> str:
-            return '''A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
+            return """A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
 
 Implement the Trie class:
 
@@ -873,7 +939,7 @@ Constraints:
     At most 3 * 104 calls in total will be made to insert, search, and startsWith.
 
 https://leetcode.com/problems/implement-trie-prefix-tree/
-'''
+"""
 
         class TrieNode:
             def __init__(self):
@@ -922,6 +988,11 @@ https://leetcode.com/problems/implement-trie-prefix-tree/
             optimized_solution=optimized_solution,
             time_complexity="O(m)",
             space_complexity="O(m)",
-            similar_questions=["Design Add and Search Words Data Structure", "Design Search Autocomplete System", "Replace Words", "Implement Magic Dictionary"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Design Add and Search Words Data Structure",
+                "Design Search Autocomplete System",
+                "Replace Words",
+                "Implement Magic Dictionary",
+            ],
+            problem_statement=problem_statement,
         )

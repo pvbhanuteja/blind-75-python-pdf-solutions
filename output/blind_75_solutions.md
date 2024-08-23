@@ -116,27 +116,27 @@ https://leetcode.com/problems/two-sum/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int], target: int) -> List[int]:
-            # Brute-force solution: Check every pair of numbers
-            for i in range(len(nums)):
-                for j in range(i + 1, len(nums)):
-                    if nums[i] + nums[j] == target:
-                        return [i, j]
-            return []
+def easy_solution(nums: List[int], target: int) -> List[int]:
+    # Brute-force solution: Check every pair of numbers
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return []
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int], target: int) -> List[int]:
-            # Optimized solution: Use a dictionary to track numbers and their indices
-            num_dict = {}
-            for i, num in enumerate(nums):
-                complement = target - num
-                if complement in num_dict:
-                    return [num_dict[complement], i]
-                num_dict[num] = i
-            return []
+def optimized_solution(nums: List[int], target: int) -> List[int]:
+    # Optimized solution: Use a dictionary to track numbers and their indices
+    num_dict = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_dict:
+            return [num_dict[complement], i]
+        num_dict[num] = i
+    return []
 
 ```
 
@@ -185,50 +185,50 @@ https://leetcode.com/problems/3sum/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> List[List[int]]:
-            # Brute-force solution: Check all triplets
-            result = []
-            nums.sort()
-            for i in range(len(nums) - 2):
-                if i > 0 and nums[i] == nums[i - 1]:
+def easy_solution(nums: List[int]) -> List[List[int]]:
+    # Brute-force solution: Check all triplets
+    result = []
+    nums.sort()
+    for i in range(len(nums) - 2):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        for j in range(i + 1, len(nums) - 1):
+            if j > i + 1 and nums[j] == nums[j - 1]:
+                continue
+            for k in range(j + 1, len(nums)):
+                if k > j + 1 and nums[k] == nums[k - 1]:
                     continue
-                for j in range(i + 1, len(nums) - 1):
-                    if j > i + 1 and nums[j] == nums[j - 1]:
-                        continue
-                    for k in range(j + 1, len(nums)):
-                        if k > j + 1 and nums[k] == nums[k - 1]:
-                            continue
-                        if nums[i] + nums[j] + nums[k] == 0:
-                            result.append([nums[i], nums[j], nums[k]])
-            return result
+                if nums[i] + nums[j] + nums[k] == 0:
+                    result.append([nums[i], nums[j], nums[k]])
+    return result
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> List[List[int]]:
-            # Optimized solution: Use two pointers
-            result = []
-            nums.sort()
-            for i in range(len(nums) - 2):
-                if i > 0 and nums[i] == nums[i - 1]:
-                    continue
-                left, right = i + 1, len(nums) - 1
-                while left < right:
-                    total = nums[i] + nums[left] + nums[right]
-                    if total == 0:
-                        result.append([nums[i], nums[left], nums[right]])
-                        while left < right and nums[left] == nums[left + 1]:
-                            left += 1
-                        while left < right and nums[right] == nums[right - 1]:
-                            right -= 1
-                        left += 1
-                        right -= 1
-                    elif total < 0:
-                        left += 1
-                    else:
-                        right -= 1
-            return result
+def optimized_solution(nums: List[int]) -> List[List[int]]:
+    # Optimized solution: Use two pointers
+    result = []
+    nums.sort()
+    for i in range(len(nums) - 2):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        left, right = i + 1, len(nums) - 1
+        while left < right:
+            total = nums[i] + nums[left] + nums[right]
+            if total == 0:
+                result.append([nums[i], nums[left], nums[right]])
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+                left += 1
+                right -= 1
+            elif total < 0:
+                left += 1
+            else:
+                right -= 1
+    return result
 
 ```
 
@@ -284,32 +284,32 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int], target: int) -> int:
-            # Brute-force solution: Use built-in index function
-            return nums.index(target) if target in nums else -1
+def easy_solution(nums: List[int], target: int) -> int:
+    # Brute-force solution: Use built-in index function
+    return nums.index(target) if target in nums else -1
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int], target: int) -> int:
-            # Optimized solution: Use binary search
-            left, right = 0, len(nums) - 1
-            while left <= right:
-                mid = left + (right - left) // 2
-                if nums[mid] == target:
-                    return mid
-                if nums[left] <= nums[mid]:
-                    if nums[left] <= target < nums[mid]:
-                        right = mid - 1
-                    else:
-                        left = mid + 1
-                else:
-                    if nums[mid] < target <= nums[right]:
-                        left = mid + 1
-                    else:
-                        right = mid - 1
-            return -1
+def optimized_solution(nums: List[int], target: int) -> int:
+    # Optimized solution: Use binary search
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if nums[mid] == target:
+            return mid
+        if nums[left] <= nums[mid]:
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        else:
+            if nums[mid] < target <= nums[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+    return -1
 
 ```
 
@@ -359,32 +359,32 @@ https://leetcode.com/problems/product-of-array-except-self/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> List[int]:
-            # Brute-force solution: Calculate product for each index
-            n = len(nums)
-            result = [1] * n
-            for i in range(n):
-                for j in range(n):
-                    if i != j:
-                        result[i] *= nums[j]
-            return result
+def easy_solution(nums: List[int]) -> List[int]:
+    # Brute-force solution: Calculate product for each index
+    n = len(nums)
+    result = [1] * n
+    for i in range(n):
+        for j in range(n):
+            if i != j:
+                result[i] *= nums[j]
+    return result
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> List[int]:
-            # Optimized solution: Use left and right product arrays
-            n = len(nums)
-            result = [1] * n
-            left_product = 1
-            right_product = 1
-            for i in range(n):
-                result[i] *= left_product
-                left_product *= nums[i]
-                result[n - 1 - i] *= right_product
-                right_product *= nums[n - 1 - i]
-            return result
+def optimized_solution(nums: List[int]) -> List[int]:
+    # Optimized solution: Use left and right product arrays
+    n = len(nums)
+    result = [1] * n
+    left_product = 1
+    right_product = 1
+    for i in range(n):
+        result[i] *= left_product
+        left_product *= nums[i]
+        result[n - 1 - i] *= right_product
+        right_product *= nums[n - 1 - i]
+    return result
 
 ```
 
@@ -433,27 +433,27 @@ https://leetcode.com/problems/maximum-subarray/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> int:
-            # Brute-force solution: Check all subarrays
-            max_sum = float('-inf')
-            for i in range(len(nums)):
-                current_sum = 0
-                for j in range(i, len(nums)):
-                    current_sum += nums[j]
-                    max_sum = max(max_sum, current_sum)
-            return max_sum
+def easy_solution(nums: List[int]) -> int:
+    # Brute-force solution: Check all subarrays
+    max_sum = float('-inf')
+    for i in range(len(nums)):
+        current_sum = 0
+        for j in range(i, len(nums)):
+            current_sum += nums[j]
+            max_sum = max(max_sum, current_sum)
+    return max_sum
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> int:
-            # Optimized solution: Use Kadane's algorithm
-            max_sum = current_sum = nums[0]
-            for num in nums[1:]:
-                current_sum = max(num, current_sum + num)
-                max_sum = max(max_sum, current_sum)
-            return max_sum
+def optimized_solution(nums: List[int]) -> int:
+    # Optimized solution: Use Kadane's algorithm
+    max_sum = current_sum = nums[0]
+    for num in nums[1:]:
+        current_sum = max(num, current_sum + num)
+        max_sum = max(max_sum, current_sum)
+    return max_sum
 
 ```
 
@@ -497,29 +497,29 @@ https://leetcode.com/problems/maximum-product-subarray/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> int:
-            # Brute-force solution: Check all subarrays
-            max_product = float('-inf')
-            for i in range(len(nums)):
-                current_product = 1
-                for j in range(i, len(nums)):
-                    current_product *= nums[j]
-                    max_product = max(max_product, current_product)
-            return max_product
+def easy_solution(nums: List[int]) -> int:
+    # Brute-force solution: Check all subarrays
+    max_product = float('-inf')
+    for i in range(len(nums)):
+        current_product = 1
+        for j in range(i, len(nums)):
+            current_product *= nums[j]
+            max_product = max(max_product, current_product)
+    return max_product
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> int:
-            # Optimized solution: Track max and min products
-            max_so_far = min_so_far = result = nums[0]
-            for i in range(1, len(nums)):
-                temp_max = max(nums[i], max_so_far * nums[i], min_so_far * nums[i])
-                min_so_far = min(nums[i], max_so_far * nums[i], min_so_far * nums[i])
-                max_so_far = temp_max
-                result = max(result, max_so_far)
-            return result
+def optimized_solution(nums: List[int]) -> int:
+    # Optimized solution: Track max and min products
+    max_so_far = min_so_far = result = nums[0]
+    for i in range(1, len(nums)):
+        temp_max = max(nums[i], max_so_far * nums[i], min_so_far * nums[i])
+        min_so_far = min(nums[i], max_so_far * nums[i], min_so_far * nums[i])
+        max_so_far = temp_max
+        result = max(result, max_so_far)
+    return result
 
 ```
 
@@ -580,24 +580,24 @@ https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> int:
-            # Brute-force solution: Use built-in min function
-            return min(nums)
+def easy_solution(nums: List[int]) -> int:
+    # Brute-force solution: Use built-in min function
+    return min(nums)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> int:
-            # Optimized solution: Use binary search
-            left, right = 0, len(nums) - 1
-            while left < right:
-                mid = left + (right - left) // 2
-                if nums[mid] > nums[right]:
-                    left = mid + 1
-                else:
-                    right = mid
-            return nums[left]
+def optimized_solution(nums: List[int]) -> int:
+    # Optimized solution: Use binary search
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = left + (right - left) // 2
+        if nums[mid] > nums[right]:
+            left = mid + 1
+        else:
+            right = mid
+    return nums[left]
 
 ```
 
@@ -644,21 +644,21 @@ https://leetcode.com/problems/contains-duplicate/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> bool:
-            # Brute-force solution: Check every pair of numbers
-            for i in range(len(nums)):
-                for j in range(i + 1, len(nums)):
-                    if nums[i] == nums[j]:
-                        return True
-            return False
+def easy_solution(nums: List[int]) -> bool:
+    # Brute-force solution: Check every pair of numbers
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            if nums[i] == nums[j]:
+                return True
+    return False
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> bool:
-            # Optimized solution: Use a set to track seen numbers
-            return len(nums) != len(set(nums))
+def optimized_solution(nums: List[int]) -> bool:
+    # Optimized solution: Use a set to track seen numbers
+    return len(nums) != len(set(nums))
 
 ```
 
@@ -707,31 +707,31 @@ https://leetcode.com/problems/container-with-most-water/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(height: List[int]) -> int:
-            # Brute-force solution: Check all pairs of lines
-            max_area = 0
-            for i in range(len(height)):
-                for j in range(i + 1, len(height)):
-                    area = min(height[i], height[j]) * (j - i)
-                    max_area = max(max_area, area)
-            return max_area
+def easy_solution(height: List[int]) -> int:
+    # Brute-force solution: Check all pairs of lines
+    max_area = 0
+    for i in range(len(height)):
+        for j in range(i + 1, len(height)):
+            area = min(height[i], height[j]) * (j - i)
+            max_area = max(max_area, area)
+    return max_area
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(height: List[int]) -> int:
-            # Optimized solution: Use two pointers
-            max_area = 0
-            left, right = 0, len(height) - 1
-            while left < right:
-                area = min(height[left], height[right]) * (right - left)
-                max_area = max(max_area, area)
-                if height[left] < height[right]:
-                    left += 1
-                else:
-                    right -= 1
-            return max_area
+def optimized_solution(height: List[int]) -> int:
+    # Optimized solution: Use two pointers
+    max_area = 0
+    left, right = 0, len(height) - 1
+    while left < right:
+        area = min(height[left], height[right]) * (right - left)
+        max_area = max(max_area, area)
+        if height[left] < height[right]:
+            left += 1
+        else:
+            right -= 1
+    return max_area
 
 ```
 
@@ -778,32 +778,32 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(prices: List[int]) -> int:
-            # Brute-force solution: Check every pair of days
-            max_profit = 0
-            for i in range(len(prices)):
-                for j in range(i + 1, len(prices)):
-                    profit = prices[j] - prices[i]
-                    if profit > max_profit:
-                        max_profit = profit
-            return max_profit
+def easy_solution(prices: List[int]) -> int:
+    # Brute-force solution: Check every pair of days
+    max_profit = 0
+    for i in range(len(prices)):
+        for j in range(i + 1, len(prices)):
+            profit = prices[j] - prices[i]
+            if profit > max_profit:
+                max_profit = profit
+    return max_profit
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(prices: List[int]) -> int:
-            # Optimized solution: Track the minimum price and maximum profit
-            if not prices:
-                return 0
-            max_profit = 0
-            min_price = float('inf')
-            for price in prices:
-                if price < min_price:
-                    min_price = price
-                else:
-                    max_profit = max(max_profit, price - min_price)
-            return max_profit
+def optimized_solution(prices: List[int]) -> int:
+    # Optimized solution: Track the minimum price and maximum profit
+    if not prices:
+        return 0
+    max_profit = 0
+    min_price = float('inf')
+    for price in prices:
+        if price < min_price:
+            min_price = price
+        else:
+            max_profit = max(max_profit, price - min_price)
+    return max_profit
 
 ```
 
@@ -846,40 +846,40 @@ https://leetcode.com/problems/valid-parentheses/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str) -> bool:
-            # Brute-force solution: Use stack to check validity
-            stack = []
-            for char in s:
-                if char in "({[":
-                    stack.append(char)
-                elif char in ")}]":
-                    if not stack:
-                        return False
-                    if char == ")" and stack[-1] != "(":
-                        return False
-                    if char == "}" and stack[-1] != "{":
-                        return False
-                    if char == "]" and stack[-1] != "[":
-                        return False
-                    stack.pop()
-            return len(stack) == 0
+def easy_solution(s: str) -> bool:
+    # Brute-force solution: Use stack to check validity
+    stack = []
+    for char in s:
+        if char in "({[":
+            stack.append(char)
+        elif char in ")}]":
+            if not stack:
+                return False
+            if char == ")" and stack[-1] != "(":
+                return False
+            if char == "}" and stack[-1] != "{":
+                return False
+            if char == "]" and stack[-1] != "[":
+                return False
+            stack.pop()
+    return len(stack) == 0
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str) -> bool:
-            # Optimized solution: Use hashmap for mapping and stack
-            stack = []
-            mapping = {")": "(", "}": "{", "]": "["}
-            for char in s:
-                if char in mapping:
-                    top_element = stack.pop() if stack else '#'
-                    if mapping[char] != top_element:
-                        return False
-                else:
-                    stack.append(char)
-            return not stack
+def optimized_solution(s: str) -> bool:
+    # Optimized solution: Use hashmap for mapping and stack
+    stack = []
+    mapping = {")": "(", "}": "{", "]": "["}
+    for char in s:
+        if char in mapping:
+            top_element = stack.pop() if stack else '#'
+            if mapping[char] != top_element:
+                return False
+        else:
+            stack.append(char)
+    return not stack
 
 ```
 
@@ -918,28 +918,28 @@ https://leetcode.com/problems/valid-palindrome/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str) -> bool:
-            # Brute-force solution: Clean string and check palindrome
-            cleaned = ''.join(c.lower() for c in s if c.isalnum())
-            return cleaned == cleaned[::-1]
+def easy_solution(s: str) -> bool:
+    # Brute-force solution: Clean string and check palindrome
+    cleaned = ''.join(c.lower() for c in s if c.isalnum())
+    return cleaned == cleaned[::-1]
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str) -> bool:
-            # Optimized solution: Use two pointers
-            left, right = 0, len(s) - 1
-            while left < right:
-                while left < right and not s[left].isalnum():
-                    left += 1
-                while left < right and not s[right].isalnum():
-                    right -= 1
-                if s[left].lower() != s[right].lower():
-                    return False
-                left += 1
-                right -= 1
-            return True
+def optimized_solution(s: str) -> bool:
+    # Optimized solution: Use two pointers
+    left, right = 0, len(s) - 1
+    while left < right:
+        while left < right and not s[left].isalnum():
+            left += 1
+        while left < right and not s[right].isalnum():
+            right -= 1
+        if s[left].lower() != s[right].lower():
+            return False
+        left += 1
+        right -= 1
+    return True
 
 ```
 
@@ -977,28 +977,28 @@ https://leetcode.com/problems/valid-anagram/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str, t: str) -> bool:
-            # Brute-force solution: Sort and compare
-            return sorted(s) == sorted(t)
+def easy_solution(s: str, t: str) -> bool:
+    # Brute-force solution: Sort and compare
+    return sorted(s) == sorted(t)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str, t: str) -> bool:
-            # Optimized solution: Use hashmap to count characters
-            if len(s) != len(t):
-                return False
-            char_count = {}
-            for c in s:
-                char_count[c] = char_count.get(c, 0) + 1
-            for c in t:
-                if c not in char_count:
-                    return False
-                char_count[c] -= 1
-                if char_count[c] == 0:
-                    del char_count[c]
-            return len(char_count) == 0
+def optimized_solution(s: str, t: str) -> bool:
+    # Optimized solution: Use hashmap to count characters
+    if len(s) != len(t):
+        return False
+    char_count = {}
+    for c in s:
+        char_count[c] = char_count.get(c, 0) + 1
+    for c in t:
+        if c not in char_count:
+            return False
+        char_count[c] -= 1
+        if char_count[c] == 0:
+            del char_count[c]
+    return len(char_count) == 0
 
 ```
 
@@ -1038,37 +1038,37 @@ https://leetcode.com/problems/palindromic-substrings/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str) -> int:
-            # Brute-force solution: Check all substrings
-            def is_palindrome(sub: str) -> bool:
-                return sub == sub[::-1]
+def easy_solution(s: str) -> int:
+    # Brute-force solution: Check all substrings
+    def is_palindrome(sub: str) -> bool:
+        return sub == sub[::-1]
 
-            count = 0
-            for i in range(len(s)):
-                for j in range(i, len(s)):
-                    if is_palindrome(s[i:j+1]):
-                        count += 1
-            return count
+    count = 0
+    for i in range(len(s)):
+        for j in range(i, len(s)):
+            if is_palindrome(s[i:j+1]):
+                count += 1
+    return count
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str) -> int:
-            # Optimized solution: Expand around center
-            def count_palindromes(left: int, right: int) -> int:
-                count = 0
-                while left >= 0 and right < len(s) and s[left] == s[right]:
-                    count += 1
-                    left -= 1
-                    right += 1
-                return count
+def optimized_solution(s: str) -> int:
+    # Optimized solution: Expand around center
+    def count_palindromes(left: int, right: int) -> int:
+        count = 0
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            count += 1
+            left -= 1
+            right += 1
+        return count
 
-            total_count = 0
-            for i in range(len(s)):
-                total_count += count_palindromes(i, i)  # Odd length palindromes
-                total_count += count_palindromes(i, i+1)  # Even length palindromes
-            return total_count
+    total_count = 0
+    for i in range(len(s)):
+        total_count += count_palindromes(i, i)  # Odd length palindromes
+        total_count += count_palindromes(i, i+1)  # Even length palindromes
+    return total_count
 
 ```
 
@@ -1116,62 +1116,62 @@ https://leetcode.com/problems/minimum-window-substring/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str, t: str) -> str:
-            # Brute-force solution: Check all substrings
-            def contains_all(window: str, target: str) -> bool:
-                return all(window.count(c) >= target.count(c) for c in set(target))
+def easy_solution(s: str, t: str) -> str:
+    # Brute-force solution: Check all substrings
+    def contains_all(window: str, target: str) -> bool:
+        return all(window.count(c) >= target.count(c) for c in set(target))
 
-            min_window = ""
-            min_length = float('inf')
-            for i in range(len(s)):
-                for j in range(i, len(s)):
-                    window = s[i:j+1]
-                    if contains_all(window, t) and len(window) < min_length:
-                        min_window = window
-                        min_length = len(window)
-            return min_window
+    min_window = ""
+    min_length = float('inf')
+    for i in range(len(s)):
+        for j in range(i, len(s)):
+            window = s[i:j+1]
+            if contains_all(window, t) and len(window) < min_length:
+                min_window = window
+                min_length = len(window)
+    return min_window
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str, t: str) -> str:
-            # Optimized solution: Use sliding window and hashmap
-            if not t or not s:
-                return ""
+def optimized_solution(s: str, t: str) -> str:
+    # Optimized solution: Use sliding window and hashmap
+    if not t or not s:
+        return ""
 
-            dict_t = {}
-            for c in t:
-                dict_t[c] = dict_t.get(c, 0) + 1
+    dict_t = {}
+    for c in t:
+        dict_t[c] = dict_t.get(c, 0) + 1
 
-            required = len(dict_t)
-            left = right = 0
-            formed = 0
-            window_counts = {}
-            ans = float("inf"), None, None
+    required = len(dict_t)
+    left = right = 0
+    formed = 0
+    window_counts = {}
+    ans = float("inf"), None, None
 
-            while right < len(s):
-                character = s[right]
-                window_counts[character] = window_counts.get(character, 0) + 1
+    while right < len(s):
+        character = s[right]
+        window_counts[character] = window_counts.get(character, 0) + 1
 
-                if character in dict_t and window_counts[character] == dict_t[character]:
-                    formed += 1
+        if character in dict_t and window_counts[character] == dict_t[character]:
+            formed += 1
 
-                while left <= right and formed == required:
-                    character = s[left]
+        while left <= right and formed == required:
+            character = s[left]
 
-                    if right - left + 1 < ans[0]:
-                        ans = (right - left + 1, left, right)
+            if right - left + 1 < ans[0]:
+                ans = (right - left + 1, left, right)
 
-                    window_counts[character] -= 1
-                    if character in dict_t and window_counts[character] < dict_t[character]:
-                        formed -= 1
+            window_counts[character] -= 1
+            if character in dict_t and window_counts[character] < dict_t[character]:
+                formed -= 1
 
-                    left += 1    
+            left += 1    
 
-                right += 1    
+        right += 1    
 
-            return "" if ans[0] == float("inf") else s[ans[1] : ans[2] + 1]
+    return "" if ans[0] == float("inf") else s[ans[1] : ans[2] + 1]
 
 ```
 
@@ -1214,33 +1214,33 @@ https://leetcode.com/problems/longest-substring-without-repeating-characters/des
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str) -> int:
-            # Brute-force solution: Check all substrings
-            max_length = 0
-            for i in range(len(s)):
-                seen = set()
-                for j in range(i, len(s)):
-                    if s[j] in seen:
-                        break
-                    seen.add(s[j])
-                max_length = max(max_length, len(seen))
-            return max_length
+def easy_solution(s: str) -> int:
+    # Brute-force solution: Check all substrings
+    max_length = 0
+    for i in range(len(s)):
+        seen = set()
+        for j in range(i, len(s)):
+            if s[j] in seen:
+                break
+            seen.add(s[j])
+        max_length = max(max_length, len(seen))
+    return max_length
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str) -> int:
-            # Optimized solution: Use sliding window and hashmap
-            char_index = {}
-            max_length = start = 0
-            for i, char in enumerate(s):
-                if char in char_index and start <= char_index[char]:
-                    start = char_index[char] + 1
-                else:
-                    max_length = max(max_length, i - start + 1)
-                char_index[char] = i
-            return max_length
+def optimized_solution(s: str) -> int:
+    # Optimized solution: Use sliding window and hashmap
+    char_index = {}
+    max_length = start = 0
+    for i, char in enumerate(s):
+        if char in char_index and start <= char_index[char]:
+            start = char_index[char] + 1
+        else:
+            max_length = max(max_length, i - start + 1)
+        char_index[char] = i
+    return max_length
 
 ```
 
@@ -1279,33 +1279,33 @@ https://leetcode.com/problems/longest-repeating-character-replacement/descriptio
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str, k: int) -> int:
-            # Brute-force solution: Check all substrings
-            max_length = 0
-            for i in range(len(s)):
-                for j in range(i, len(s)):
-                    substring = s[i:j+1]
-                    most_common = max(substring.count(c) for c in set(substring))
-                    if len(substring) - most_common <= k:
-                        max_length = max(max_length, len(substring))
-            return max_length
+def easy_solution(s: str, k: int) -> int:
+    # Brute-force solution: Check all substrings
+    max_length = 0
+    for i in range(len(s)):
+        for j in range(i, len(s)):
+            substring = s[i:j+1]
+            most_common = max(substring.count(c) for c in set(substring))
+            if len(substring) - most_common <= k:
+                max_length = max(max_length, len(substring))
+    return max_length
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str, k: int) -> int:
-            # Optimized solution: Use sliding window and hashmap
-            char_count = {}
-            max_length = max_count = start = 0
-            for end, char in enumerate(s):
-                char_count[char] = char_count.get(char, 0) + 1
-                max_count = max(max_count, char_count[char])
-                if end - start + 1 - max_count > k:
-                    char_count[s[start]] -= 1
-                    start += 1
-                max_length = max(max_length, end - start + 1)
-            return max_length
+def optimized_solution(s: str, k: int) -> int:
+    # Optimized solution: Use sliding window and hashmap
+    char_count = {}
+    max_length = max_count = start = 0
+    for end, char in enumerate(s):
+        char_count[char] = char_count.get(char, 0) + 1
+        max_count = max(max_count, char_count[char])
+        if end - start + 1 - max_count > k:
+            char_count[s[start]] -= 1
+            start += 1
+        max_length = max(max_length, end - start + 1)
+    return max_length
 
 ```
 
@@ -1348,40 +1348,40 @@ https://leetcode.com/problems/longest-palindromic-substring/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str) -> str:
-            # Brute-force solution: Check all substrings
-            def is_palindrome(sub: str) -> bool:
-                return sub == sub[::-1]
+def easy_solution(s: str) -> str:
+    # Brute-force solution: Check all substrings
+    def is_palindrome(sub: str) -> bool:
+        return sub == sub[::-1]
 
-            longest = ""
-            for i in range(len(s)):
-                for j in range(i, len(s)):
-                    substring = s[i:j+1]
-                    if is_palindrome(substring) and len(substring) > len(longest):
-                        longest = substring
-            return longest
+    longest = ""
+    for i in range(len(s)):
+        for j in range(i, len(s)):
+            substring = s[i:j+1]
+            if is_palindrome(substring) and len(substring) > len(longest):
+                longest = substring
+    return longest
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str) -> str:
-            # Optimized solution: Expand around center
-            def expand_around_center(left: int, right: int) -> str:
-                while left >= 0 and right < len(s) and s[left] == s[right]:
-                    left -= 1
-                    right += 1
-                return s[left+1:right]
+def optimized_solution(s: str) -> str:
+    # Optimized solution: Expand around center
+    def expand_around_center(left: int, right: int) -> str:
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return s[left+1:right]
 
-            if len(s) < 2:
-                return s
+    if len(s) < 2:
+        return s
 
-            longest = ""
-            for i in range(len(s)):
-                palindrome1 = expand_around_center(i, i)
-                palindrome2 = expand_around_center(i, i+1)
-                longest = max(longest, palindrome1, palindrome2, key=len)
-            return longest
+    longest = ""
+    for i in range(len(s)):
+        palindrome1 = expand_around_center(i, i)
+        palindrome2 = expand_around_center(i, i+1)
+        longest = max(longest, palindrome1, palindrome2, key=len)
+    return longest
 
 ```
 
@@ -1423,34 +1423,34 @@ https://leetcode.com/problems/group-anagrams/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(strs: List[str]) -> List[List[str]]:
-            # Brute-force solution: Sort strings and group
-            anagram_groups = {}
-            for s in strs:
-                sorted_s = ''.join(sorted(s))
-                if sorted_s in anagram_groups:
-                    anagram_groups[sorted_s].append(s)
-                else:
-                    anagram_groups[sorted_s] = [s]
-            return list(anagram_groups.values())
+def easy_solution(strs: List[str]) -> List[List[str]]:
+    # Brute-force solution: Sort strings and group
+    anagram_groups = {}
+    for s in strs:
+        sorted_s = ''.join(sorted(s))
+        if sorted_s in anagram_groups:
+            anagram_groups[sorted_s].append(s)
+        else:
+            anagram_groups[sorted_s] = [s]
+    return list(anagram_groups.values())
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(strs: List[str]) -> List[List[str]]:
-            # Optimized solution: Use character count as key
-            anagram_groups: Dict[str, List[str]] = {}
-            for s in strs:
-                count = [0] * 26
-                for c in s:
-                    count[ord(c) - ord('a')] += 1
-                key = tuple(count)
-                if key in anagram_groups:
-                    anagram_groups[key].append(s)
-                else:
-                    anagram_groups[key] = [s]
-            return list(anagram_groups.values())
+def optimized_solution(strs: List[str]) -> List[List[str]]:
+    # Optimized solution: Use character count as key
+    anagram_groups: Dict[str, List[str]] = {}
+    for s in strs:
+        count = [0] * 26
+        for c in s:
+            count[ord(c) - ord('a')] += 1
+        key = tuple(count)
+        if key in anagram_groups:
+            anagram_groups[key].append(s)
+        else:
+            anagram_groups[key] = [s]
+    return list(anagram_groups.values())
 
 ```
 
@@ -1482,19 +1482,19 @@ https://leetcode.com/problems/encode-and-decode-strings/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(strs: List[str]) -> List[str]:
-            # Utilize the Codec class for encoding and decoding
-            codec = Codec()
-            encoded = codec.encode(strs)
-            return codec.decode(encoded)
+def easy_solution(strs: List[str]) -> List[str]:
+    # Utilize the Codec class for encoding and decoding
+    codec = Codec()
+    encoded = codec.encode(strs)
+    return codec.decode(encoded)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(strs: List[str]) -> List[str]:
-            # The easy solution is already optimal
-            return easy_solution(strs)
+def optimized_solution(strs: List[str]) -> List[str]:
+    # The easy solution is already optimal
+    return easy_solution(strs)
 
 ```
 
@@ -1530,21 +1530,21 @@ https://leetcode.com/problems/sum-of-two-integers/
 
 ## Easy Solution
 ```python
-        def easy_solution(a: int, b: int) -> int:
-            # Iterative solution: Use bit manipulation to add without + or -
-            while b != 0:
-                carry = a & b
-                a = a ^ b
-                b = carry << 1
-            return a
+def easy_solution(a: int, b: int) -> int:
+    # Iterative solution: Use bit manipulation to add without + or -
+    while b != 0:
+        carry = a & b
+        a = a ^ b
+        b = carry << 1
+    return a
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(a: int, b: int) -> int:
-            # The easy solution is already optimal for this problem
-            return easy_solution(a, b)
+def optimized_solution(a: int, b: int) -> int:
+    # The easy solution is already optimal for this problem
+    return easy_solution(a, b)
 
 ```
 
@@ -1586,22 +1586,22 @@ https://leetcode.com/problems/reverse-bits/
 
 ## Easy Solution
 ```python
-        def easy_solution(n: int) -> int:
-            # Iterative solution: Reverse bits by shifting
-            result = 0
-            for i in range(32):
-                result <<= 1
-                result |= n & 1
-                n >>= 1
-            return result
+def easy_solution(n: int) -> int:
+    # Iterative solution: Reverse bits by shifting
+    result = 0
+    for i in range(32):
+        result <<= 1
+        result |= n & 1
+        n >>= 1
+    return result
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(n: int) -> int:
-            # The easy solution is already optimal for this problem
-            return easy_solution(n)
+def optimized_solution(n: int) -> int:
+    # The easy solution is already optimal for this problem
+    return easy_solution(n)
 
 ```
 
@@ -1644,25 +1644,25 @@ https://leetcode.com/problems/number-of-1-bits/
 
 ## Easy Solution
 ```python
-        def easy_solution(n: int) -> int:
-            # Iterative solution: Count bits by shifting
-            count = 0
-            while n:
-                count += n & 1
-                n >>= 1
-            return count
+def easy_solution(n: int) -> int:
+    # Iterative solution: Count bits by shifting
+    count = 0
+    while n:
+        count += n & 1
+        n >>= 1
+    return count
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(n: int) -> int:
-            # Optimized solution: Use n & (n-1) to count bits
-            count = 0
-            while n:
-                n &= n - 1
-                count += 1
-            return count
+def optimized_solution(n: int) -> int:
+    # Optimized solution: Use n & (n-1) to count bits
+    count = 0
+    while n:
+        n &= n - 1
+        count += 1
+    return count
 
 ```
 
@@ -1709,22 +1709,22 @@ https://leetcode.com/problems/missing-number/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> int:
-            # Iterative solution: Use summation formula
-            n = len(nums)
-            total_sum = n * (n + 1) // 2
-            return total_sum - sum(nums)
+def easy_solution(nums: List[int]) -> int:
+    # Iterative solution: Use summation formula
+    n = len(nums)
+    total_sum = n * (n + 1) // 2
+    return total_sum - sum(nums)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> int:
-            # Optimized solution: Use XOR
-            missing = len(nums)
-            for i, num in enumerate(nums):
-                missing ^= i ^ num
-            return missing
+def optimized_solution(nums: List[int]) -> int:
+    # Optimized solution: Use XOR
+    missing = len(nums)
+    for i, num in enumerate(nums):
+        missing ^= i ^ num
+    return missing
 
 ```
 
@@ -1771,27 +1771,27 @@ https://leetcode.com/problems/counting-bits/
 
 ## Easy Solution
 ```python
-        def easy_solution(n: int) -> List[int]:
-            # Iterative solution: Count bits for each number
-            def count_bits(x: int) -> int:
-                count = 0
-                while x:
-                    count += x & 1
-                    x >>= 1
-                return count
-            
-            return [count_bits(i) for i in range(n + 1)]
+def easy_solution(n: int) -> List[int]:
+    # Iterative solution: Count bits for each number
+    def count_bits(x: int) -> int:
+        count = 0
+        while x:
+            count += x & 1
+            x >>= 1
+        return count
+
+    return [count_bits(i) for i in range(n + 1)]
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(n: int) -> List[int]:
-            # Optimized solution: Use dynamic programming
-            dp = [0] * (n + 1)
-            for i in range(1, n + 1):
-                dp[i] = dp[i >> 1] + (i & 1)
-            return dp
+def optimized_solution(n: int) -> List[int]:
+    # Optimized solution: Use dynamic programming
+    dp = [0] * (n + 1)
+    for i in range(1, n + 1):
+        dp[i] = dp[i >> 1] + (i & 1)
+    return dp
 
 ```
 
@@ -1833,24 +1833,24 @@ https://leetcode.com/problems/reverse-linked-list/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(head: Optional[ListNode]) -> Optional[ListNode]:
-            # Iterative approach: Reverse the list by changing the next pointers
-            prev = None
-            current = head
-            while current:
-                next_node = current.next
-                current.next = prev
-                prev = current
-                current = next_node
-            return prev
+def easy_solution(head: Optional[ListNode]) -> Optional[ListNode]:
+    # Iterative approach: Reverse the list by changing the next pointers
+    prev = None
+    current = head
+    while current:
+        next_node = current.next
+        current.next = prev
+        prev = current
+        current = next_node
+    return prev
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(head: Optional[ListNode]) -> Optional[ListNode]:
-            # The easy solution is already optimal for this problem
-            return easy_solution(head)
+def optimized_solution(head: Optional[ListNode]) -> Optional[ListNode]:
+    # The easy solution is already optimal for this problem
+    return easy_solution(head)
 
 ```
 
@@ -1896,45 +1896,45 @@ https://leetcode.com/problems/reorder-list/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(head: Optional[ListNode]) -> None:
-            # Optimal approach: Find middle, reverse second half, and merge
-            if not head or not head.next:
-                return
+def easy_solution(head: Optional[ListNode]) -> None:
+    # Optimal approach: Find middle, reverse second half, and merge
+    if not head or not head.next:
+        return
 
-            # Find the middle of the list
-            slow = fast = head
-            while fast.next and fast.next.next:
-                slow = slow.next
-                fast = fast.next.next
+    # Find the middle of the list
+    slow = fast = head
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
 
-            # Reverse the second half of the list
-            second = slow.next
-            slow.next = None
-            prev = None
-            while second:
-                next_node = second.next
-                second.next = prev
-                prev = second
-                second = next_node
+    # Reverse the second half of the list
+    second = slow.next
+    slow.next = None
+    prev = None
+    while second:
+        next_node = second.next
+        second.next = prev
+        prev = second
+        second = next_node
 
-            # Merge the two halves
-            first = head
-            second = prev
-            while second:
-                next_first = first.next
-                next_second = second.next
-                first.next = second
-                second.next = next_first
-                first = next_first
-                second = next_second
+    # Merge the two halves
+    first = head
+    second = prev
+    while second:
+        next_first = first.next
+        next_second = second.next
+        first.next = second
+        second.next = next_first
+        first = next_first
+        second = next_second
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(head: Optional[ListNode]) -> None:
-            # The easy solution is already optimal for this problem
-            easy_solution(head)
+def optimized_solution(head: Optional[ListNode]) -> None:
+    # The easy solution is already optimal for this problem
+    easy_solution(head)
 
 ```
 
@@ -1977,27 +1977,27 @@ https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(head: Optional[ListNode], n: int) -> Optional[ListNode]:
-            # Two-pointer approach: Remove the nth node from the end
-            dummy = ListNode(0)
-            dummy.next = head
-            first = dummy
-            second = dummy
-            for _ in range(n + 1):
-                first = first.next
-            while first:
-                first = first.next
-                second = second.next
-            second.next = second.next.next
-            return dummy.next
+def easy_solution(head: Optional[ListNode], n: int) -> Optional[ListNode]:
+    # Two-pointer approach: Remove the nth node from the end
+    dummy = ListNode(0)
+    dummy.next = head
+    first = dummy
+    second = dummy
+    for _ in range(n + 1):
+        first = first.next
+    while first:
+        first = first.next
+        second = second.next
+    second.next = second.next.next
+    return dummy.next
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(head: Optional[ListNode], n: int) -> Optional[ListNode]:
-            # The easy solution is already optimal for this problem
-            return easy_solution(head, n)
+def optimized_solution(head: Optional[ListNode], n: int) -> Optional[ListNode]:
+    # The easy solution is already optimal for this problem
+    return easy_solution(head, n)
 
 ```
 
@@ -2044,28 +2044,28 @@ https://leetcode.com/problems/merge-two-sorted-lists/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-            # Iterative approach: Merge two sorted lists
-            dummy = ListNode(0)
-            current = dummy
-            while l1 and l2:
-                if l1.val <= l2.val:
-                    current.next = l1
-                    l1 = l1.next
-                else:
-                    current.next = l2
-                    l2 = l2.next
-                current = current.next
-            current.next = l1 if l1 else l2
-            return dummy.next
+def easy_solution(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    # Iterative approach: Merge two sorted lists
+    dummy = ListNode(0)
+    current = dummy
+    while l1 and l2:
+        if l1.val <= l2.val:
+            current.next = l1
+            l1 = l1.next
+        else:
+            current.next = l2
+            l2 = l2.next
+        current = current.next
+    current.next = l1 if l1 else l2
+    return dummy.next
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-            # The easy solution is already optimal for this problem
-            return easy_solution(l1, l2)
+def optimized_solution(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    # The easy solution is already optimal for this problem
+    return easy_solution(l1, l2)
 
 ```
 
@@ -2117,33 +2117,33 @@ https://leetcode.com/problems/linked-list-cycle/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(head: Optional[ListNode]) -> bool:
-            # Brute-force solution: Use a set to track visited nodes
-            seen = set()
-            current = head
-            while current:
-                if current in seen:
-                    return True
-                seen.add(current)
-                current = current.next
-            return False
+def easy_solution(head: Optional[ListNode]) -> bool:
+    # Brute-force solution: Use a set to track visited nodes
+    seen = set()
+    current = head
+    while current:
+        if current in seen:
+            return True
+        seen.add(current)
+        current = current.next
+    return False
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(head: Optional[ListNode]) -> bool:
-            # Optimized solution: Use two pointers (Floyd's Tortoise and Hare)
-            if not head or not head.next:
-                return False
-            slow = head
-            fast = head.next
-            while slow != fast:
-                if not fast or not fast.next:
-                    return False
-                slow = slow.next
-                fast = fast.next.next
-            return True
+def optimized_solution(head: Optional[ListNode]) -> bool:
+    # Optimized solution: Use two pointers (Floyd's Tortoise and Hare)
+    if not head or not head.next:
+        return False
+    slow = head
+    fast = head.next
+    while slow != fast:
+        if not fast or not fast.next:
+            return False
+        slow = slow.next
+        fast = fast.next.next
+    return True
 
 ```
 
@@ -2198,27 +2198,27 @@ https://leetcode.com/problems/intersection-of-two-linked-lists/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-            # Two-pointer approach: Find intersection node
-            if not headA or not headB:
-                return None
+def easy_solution(headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+    # Two-pointer approach: Find intersection node
+    if not headA or not headB:
+        return None
 
-            nodeA = headA
-            nodeB = headB
+    nodeA = headA
+    nodeB = headB
 
-            while nodeA != nodeB:
-                nodeA = nodeA.next if nodeA else headB
-                nodeB = nodeB.next if nodeB else headA
+    while nodeA != nodeB:
+        nodeA = nodeA.next if nodeA else headB
+        nodeB = nodeB.next if nodeB else headA
 
-            return nodeA
+    return nodeA
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-            # The easy solution is already optimal for this problem
-            return easy_solution(headA, headB)
+def optimized_solution(headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+    # The easy solution is already optimal for this problem
+    return easy_solution(headA, headB)
 
 ```
 
@@ -2261,34 +2261,34 @@ https://leetcode.com/problems/validate-binary-search-tree/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: Optional[TreeNode]) -> bool:
-            # Recursive solution: Check each node's value within valid range
-            def is_valid_bst(node: Optional[TreeNode], min_val: float, max_val: float) -> bool:
-                if not node:
-                    return True
-                if node.val <= min_val or node.val >= max_val:
-                    return False
-                return (is_valid_bst(node.left, min_val, node.val) and
-                        is_valid_bst(node.right, node.val, max_val))
+def easy_solution(root: Optional[TreeNode]) -> bool:
+    # Recursive solution: Check each node's value within valid range
+    def is_valid_bst(node: Optional[TreeNode], min_val: float, max_val: float) -> bool:
+        if not node:
+            return True
+        if node.val <= min_val or node.val >= max_val:
+            return False
+        return (is_valid_bst(node.left, min_val, node.val) and
+                is_valid_bst(node.right, node.val, max_val))
 
-            return is_valid_bst(root, float('-inf'), float('inf'))
+    return is_valid_bst(root, float('-inf'), float('inf'))
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: Optional[TreeNode]) -> bool:
-            # Iterative solution: Use a stack to check nodes
-            stack = [(root, float('-inf'), float('inf'))]
-            while stack:
-                node, min_val, max_val = stack.pop()
-                if not node:
-                    continue
-                if node.val <= min_val or node.val >= max_val:
-                    return False
-                stack.append((node.right, node.val, max_val))
-                stack.append((node.left, min_val, node.val))
-            return True
+def optimized_solution(root: Optional[TreeNode]) -> bool:
+    # Iterative solution: Use a stack to check nodes
+    stack = [(root, float('-inf'), float('inf'))]
+    while stack:
+        node, min_val, max_val = stack.pop()
+        if not node:
+            continue
+        if node.val <= min_val or node.val >= max_val:
+            return False
+        stack.append((node.right, node.val, max_val))
+        stack.append((node.left, min_val, node.val))
+    return True
 
 ```
 
@@ -2329,57 +2329,57 @@ https://leetcode.com/problems/subtree-of-another-tree/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-            # Recursive solution: Check each subtree
-            if not root:
-                return False
-            if is_same_tree(root, subRoot):
-                return True
-            return easy_solution(root.left, subRoot) or easy_solution(root.right, subRoot)
+def easy_solution(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+    # Recursive solution: Check each subtree
+    if not root:
+        return False
+    if is_same_tree(root, subRoot):
+        return True
+    return easy_solution(root.left, subRoot) or easy_solution(root.right, subRoot)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-            # Optimized solution: Serialize trees and use KMP algorithm to find substring
-            def serialize(node: Optional[TreeNode]) -> str:
-                if not node:
-                    return "#"
-                return f"{node.val},{serialize(node.left)},{serialize(node.right)}"
+def optimized_solution(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+    # Optimized solution: Serialize trees and use KMP algorithm to find substring
+    def serialize(node: Optional[TreeNode]) -> str:
+        if not node:
+            return "#"
+        return f"{node.val},{serialize(node.left)},{serialize(node.right)}"
 
-            def kmp_search(text: str, pattern: str) -> bool:
-                if not pattern:
-                    return True
-                lps = [0] * len(pattern)
-                length = 0
-                i = 1
-                while i < len(pattern):
-                    if pattern[i] == pattern[length]:
-                        length += 1
-                        lps[i] = length
-                        i += 1
-                    elif length != 0:
-                        length = lps[length - 1]
-                    else:
-                        lps[i] = 0
-                        i += 1
+    def kmp_search(text: str, pattern: str) -> bool:
+        if not pattern:
+            return True
+        lps = [0] * len(pattern)
+        length = 0
+        i = 1
+        while i < len(pattern):
+            if pattern[i] == pattern[length]:
+                length += 1
+                lps[i] = length
+                i += 1
+            elif length != 0:
+                length = lps[length - 1]
+            else:
+                lps[i] = 0
+                i += 1
 
-                i = j = 0
-                while i < len(text):
-                    if pattern[j] == text[i]:
-                        i += 1
-                        j += 1
-                    if j == len(pattern):
-                        return True
-                    elif i < len(text) and pattern[j] != text[i]:
-                        if j != 0:
-                            j = lps[j - 1]
-                        else:
-                            i += 1
-                return False
+        i = j = 0
+        while i < len(text):
+            if pattern[j] == text[i]:
+                i += 1
+                j += 1
+            if j == len(pattern):
+                return True
+            elif i < len(text) and pattern[j] != text[i]:
+                if j != 0:
+                    j = lps[j - 1]
+                else:
+                    i += 1
+        return False
 
-            return kmp_search(serialize(root), serialize(subRoot))
+    return kmp_search(serialize(root), serialize(subRoot))
 
 ```
 
@@ -2420,19 +2420,19 @@ https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: Optional[TreeNode]) -> Optional[TreeNode]:
-            # Use Codec class to serialize and deserialize
-            codec = Codec()
-            serialized = codec.serialize(root)
-            return codec.deserialize(serialized)
+def easy_solution(root: Optional[TreeNode]) -> Optional[TreeNode]:
+    # Use Codec class to serialize and deserialize
+    codec = Codec()
+    serialized = codec.serialize(root)
+    return codec.deserialize(serialized)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: Optional[TreeNode]) -> Optional[TreeNode]:
-            # The easy solution is already optimal for this problem
-            return easy_solution(root)
+def optimized_solution(root: Optional[TreeNode]) -> Optional[TreeNode]:
+    # The easy solution is already optimal for this problem
+    return easy_solution(root)
 
 ```
 
@@ -2474,34 +2474,34 @@ https://leetcode.com/problems/same-tree/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(p: TreeNode, q: TreeNode) -> bool:
-            # Recursive solution: Check each node
-            if not p and not q:
-                return True
-            if not p or not q:
-                return False
-            return (p.val == q.val and 
-                    easy_solution(p.left, q.left) and 
-                    easy_solution(p.right, q.right))
+def easy_solution(p: TreeNode, q: TreeNode) -> bool:
+    # Recursive solution: Check each node
+    if not p and not q:
+        return True
+    if not p or not q:
+        return False
+    return (p.val == q.val and 
+            easy_solution(p.left, q.left) and 
+            easy_solution(p.right, q.right))
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(p: TreeNode, q: TreeNode) -> bool:
-            # Iterative solution: Use stack to compare nodes
-            stack = [(p, q)]
-            while stack:
-                node1, node2 = stack.pop()
-                if not node1 and not node2:
-                    continue
-                if not node1 or not node2:
-                    return False
-                if node1.val != node2.val:
-                    return False
-                stack.append((node1.right, node2.right))
-                stack.append((node1.left, node2.left))
-            return True
+def optimized_solution(p: TreeNode, q: TreeNode) -> bool:
+    # Iterative solution: Use stack to compare nodes
+    stack = [(p, q)]
+    while stack:
+        node1, node2 = stack.pop()
+        if not node1 and not node2:
+            continue
+        if not node1 or not node2:
+            return False
+        if node1.val != node2.val:
+            return False
+        stack.append((node1.right, node2.right))
+        stack.append((node1.left, node2.left))
+    return True
 
 ```
 
@@ -2537,34 +2537,34 @@ https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: TreeNode) -> int:
-            # Recursive solution: Calculate depth for each subtree
-            if not root:
-                return 0
-            return 1 + max(easy_solution(root.left), easy_solution(root.right))
+def easy_solution(root: TreeNode) -> int:
+    # Recursive solution: Calculate depth for each subtree
+    if not root:
+        return 0
+    return 1 + max(easy_solution(root.left), easy_solution(root.right))
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: TreeNode) -> int:
-            # Iterative solution: Use depth-first search with stack
-            if not root:
-                return 0
-            
-            stack = [(root, 1)]
-            max_depth = 0
-            
-            while stack:
-                node, depth = stack.pop()
-                max_depth = max(max_depth, depth)
-                
-                if node.right:
-                    stack.append((node.right, depth + 1))
-                if node.left:
-                    stack.append((node.left, depth + 1))
-            
-            return max_depth
+def optimized_solution(root: TreeNode) -> int:
+    # Iterative solution: Use depth-first search with stack
+    if not root:
+        return 0
+
+    stack = [(root, 1)]
+    max_depth = 0
+
+    while stack:
+        node, depth = stack.pop()
+        max_depth = max(max_depth, depth)
+
+        if node.right:
+            stack.append((node.right, depth + 1))
+        if node.left:
+            stack.append((node.left, depth + 1))
+
+    return max_depth
 
 ```
 
@@ -2613,30 +2613,30 @@ https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: Optional[TreeNode], p: TreeNode, q: TreeNode) -> Optional[TreeNode]:
-            # Recursive solution: Traverse the tree to find LCA
-            if not root:
-                return None
-            if p.val < root.val and q.val < root.val:
-                return easy_solution(root.left, p, q)
-            if p.val > root.val and q.val > root.val:
-                return easy_solution(root.right, p, q)
-            return root
+def easy_solution(root: Optional[TreeNode], p: TreeNode, q: TreeNode) -> Optional[TreeNode]:
+    # Recursive solution: Traverse the tree to find LCA
+    if not root:
+        return None
+    if p.val < root.val and q.val < root.val:
+        return easy_solution(root.left, p, q)
+    if p.val > root.val and q.val > root.val:
+        return easy_solution(root.right, p, q)
+    return root
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: Optional[TreeNode], p: TreeNode, q: TreeNode) -> Optional[TreeNode]:
-            # Iterative solution: Traverse the tree to find LCA
-            current = root
-            while current:
-                if p.val < current.val and q.val < current.val:
-                    current = current.left
-                elif p.val > current.val and q.val > current.val:
-                    current = current.right
-                else:
-                    return current
+def optimized_solution(root: Optional[TreeNode], p: TreeNode, q: TreeNode) -> Optional[TreeNode]:
+    # Iterative solution: Traverse the tree to find LCA
+    current = root
+    while current:
+        if p.val < current.val and q.val < current.val:
+            current = current.left
+        elif p.val > current.val and q.val > current.val:
+            current = current.right
+        else:
+            return current
 
 ```
 
@@ -2674,43 +2674,43 @@ https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: Optional[TreeNode], k: int) -> int:
-            # Recursive solution: Inorder traversal to find kth smallest
-            def inorder(node: Optional[TreeNode]) -> None:
-                nonlocal k, result
-                if not node:
-                    return
-                inorder(node.left)
-                k -= 1
-                if k == 0:
-                    result = node.val
-                    return
-                inorder(node.right)
+def easy_solution(root: Optional[TreeNode], k: int) -> int:
+    # Recursive solution: Inorder traversal to find kth smallest
+    def inorder(node: Optional[TreeNode]) -> None:
+        nonlocal k, result
+        if not node:
+            return
+        inorder(node.left)
+        k -= 1
+        if k == 0:
+            result = node.val
+            return
+        inorder(node.right)
 
-            result = None
-            inorder(root)
-            return result
+    result = None
+    inorder(root)
+    return result
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: Optional[TreeNode], k: int) -> int:
-            # Iterative solution: Inorder traversal using stack
-            stack = []
-            current = root
+def optimized_solution(root: Optional[TreeNode], k: int) -> int:
+    # Iterative solution: Inorder traversal using stack
+    stack = []
+    current = root
 
-            while current or stack:
-                while current:
-                    stack.append(current)
-                    current = current.left
-                
-                current = stack.pop()
-                k -= 1
-                if k == 0:
-                    return current.val
-                
-                current = current.right
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+
+        current = stack.pop()
+        k -= 1
+        if k == 0:
+            return current.val
+
+        current = current.right
 
 ```
 
@@ -2748,33 +2748,33 @@ https://leetcode.com/problems/invert-binary-tree/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: TreeNode) -> TreeNode:
-            # Recursive solution: Swap left and right subtrees
-            if not root:
-                return None
-            root.left, root.right = easy_solution(root.right), easy_solution(root.left)
-            return root
+def easy_solution(root: TreeNode) -> TreeNode:
+    # Recursive solution: Swap left and right subtrees
+    if not root:
+        return None
+    root.left, root.right = easy_solution(root.right), easy_solution(root.left)
+    return root
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: TreeNode) -> TreeNode:
-            # Iterative solution: Use queue to invert the tree
-            if not root:
-                return None
-            
-            queue = [root]
-            while queue:
-                node = queue.pop(0)
-                node.left, node.right = node.right, node.left
-                
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-            
-            return root
+def optimized_solution(root: TreeNode) -> TreeNode:
+    # Iterative solution: Use queue to invert the tree
+    if not root:
+        return None
+
+    queue = [root]
+    while queue:
+        node = queue.pop(0)
+        node.left, node.right = node.right, node.left
+
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+
+    return root
 
 ```
 
@@ -2825,17 +2825,17 @@ https://leetcode.com/problems/implement-trie-prefix-tree/
 
 ## Easy Solution
 ```python
-        def easy_solution():
-            # Use the Trie class to perform operations
-            return Trie()
+def easy_solution():
+    # Use the Trie class to perform operations
+    return Trie()
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution():
-            # The easy solution is already optimal for this problem
-            return Trie()
+def optimized_solution():
+    # The easy solution is already optimal for this problem
+    return Trie()
 
 ```
 
@@ -2879,36 +2879,36 @@ https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-tr
 
 ## Easy Solution
 ```python
-        def easy_solution(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-            # Recursive solution: Use preorder and inorder to build the tree
-            if not preorder or not inorder:
-                return None
-            root = TreeNode(preorder[0])
-            mid = inorder.index(preorder[0])
-            root.left = easy_solution(preorder[1:mid+1], inorder[:mid])
-            root.right = easy_solution(preorder[mid+1:], inorder[mid+1:])
-            return root
+def easy_solution(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+    # Recursive solution: Use preorder and inorder to build the tree
+    if not preorder or not inorder:
+        return None
+    root = TreeNode(preorder[0])
+    mid = inorder.index(preorder[0])
+    root.left = easy_solution(preorder[1:mid+1], inorder[:mid])
+    root.right = easy_solution(preorder[mid+1:], inorder[mid+1:])
+    return root
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-            # Optimized solution: Use a hashmap to quickly find the root in inorder
-            def build(start: int, end: int) -> Optional[TreeNode]:
-                nonlocal pre_idx
-                if start > end:
-                    return None
-                root = TreeNode(preorder[pre_idx])
-                pre_idx += 1
-                mid = inorder_map[root.val]
-                root.left = build(start, mid - 1)
-                root.right = build(mid + 1, end)
-                return root
+def optimized_solution(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+    # Optimized solution: Use a hashmap to quickly find the root in inorder
+    def build(start: int, end: int) -> Optional[TreeNode]:
+        nonlocal pre_idx
+        if start > end:
+            return None
+        root = TreeNode(preorder[pre_idx])
+        pre_idx += 1
+        mid = inorder_map[root.val]
+        root.left = build(start, mid - 1)
+        root.right = build(mid + 1, end)
+        return root
 
-            pre_idx = 0
-            inorder_map = {val: idx for idx, val in enumerate(inorder)}
-            return build(0, len(inorder) - 1)
+    pre_idx = 0
+    inorder_map = {val: idx for idx, val in enumerate(inorder)}
+    return build(0, len(inorder) - 1)
 
 ```
 
@@ -2948,29 +2948,29 @@ https://leetcode.com/problems/binary-tree-maximum-path-sum/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: Optional[TreeNode]) -> int:
-            # Helper function to calculate the maximum gain from each node
-            def max_gain(node: Optional[TreeNode]) -> int:
-                nonlocal max_sum
-                if not node:
-                    return 0
-                left_gain = max(max_gain(node.left), 0)
-                right_gain = max(max_gain(node.right), 0)
-                path_sum = node.val + left_gain + right_gain
-                max_sum = max(max_sum, path_sum)
-                return node.val + max(left_gain, right_gain)
+def easy_solution(root: Optional[TreeNode]) -> int:
+    # Helper function to calculate the maximum gain from each node
+    def max_gain(node: Optional[TreeNode]) -> int:
+        nonlocal max_sum
+        if not node:
+            return 0
+        left_gain = max(max_gain(node.left), 0)
+        right_gain = max(max_gain(node.right), 0)
+        path_sum = node.val + left_gain + right_gain
+        max_sum = max(max_sum, path_sum)
+        return node.val + max(left_gain, right_gain)
 
-            max_sum = float('-inf')
-            max_gain(root)
-            return max_sum
+    max_sum = float('-inf')
+    max_gain(root)
+    return max_sum
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: Optional[TreeNode]) -> int:
-            # The easy solution is already optimal for this problem
-            return easy_solution(root)
+def optimized_solution(root: Optional[TreeNode]) -> int:
+    # The easy solution is already optimal for this problem
+    return easy_solution(root)
 
 ```
 
@@ -3012,39 +3012,39 @@ https://leetcode.com/problems/binary-tree-level-order-traversal/
 
 ## Easy Solution
 ```python
-        def easy_solution(root: Optional[TreeNode]) -> List[List[int]]:
-            # Iterative solution: Use a queue to traverse each level
-            if not root:
-                return []
-            result = []
-            queue = [root]
-            while queue:
-                level_size = len(queue)
-                level = []
-                for _ in range(level_size):
-                    node = queue.pop(0)
-                    level.append(node.val)
-                    if node.left:
-                        queue.append(node.left)
-                    if node.right:
-                        queue.append(node.right)
-                result.append(level)
-            return result
+def easy_solution(root: Optional[TreeNode]) -> List[List[int]]:
+    # Iterative solution: Use a queue to traverse each level
+    if not root:
+        return []
+    result = []
+    queue = [root]
+    while queue:
+        level_size = len(queue)
+        level = []
+        for _ in range(level_size):
+            node = queue.pop(0)
+            level.append(node.val)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        result.append(level)
+    return result
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(root: Optional[TreeNode]) -> List[List[int]]:
-            # More optimized iterative solution: Use a queue to traverse each level
-            if not root:
-                return []
-            result = []
-            level = [root]
-            while level:
-                result.append([node.val for node in level])
-                level = [child for node in level for child in (node.left, node.right) if child]
-            return result
+def optimized_solution(root: Optional[TreeNode]) -> List[List[int]]:
+    # More optimized iterative solution: Use a queue to traverse each level
+    if not root:
+        return []
+    result = []
+    level = [root]
+    while level:
+        result.append([node.val for node in level])
+        level = [child for node in level for child in (node.left, node.right) if child]
+    return result
 
 ```
 
@@ -3100,32 +3100,32 @@ https://leetcode.com/problems/word-break/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str, wordDict: List[str]) -> bool:
-            # Dynamic programming solution with O(n^2) time complexity
-            dp = [False] * (len(s) + 1)
-            dp[0] = True
-            for i in range(1, len(s) + 1):
-                for j in range(i):
-                    if dp[j] and s[j:i] in wordDict:
-                        dp[i] = True
-                        break
-            return dp[len(s)]
+def easy_solution(s: str, wordDict: List[str]) -> bool:
+    # Dynamic programming solution with O(n^2) time complexity
+    dp = [False] * (len(s) + 1)
+    dp[0] = True
+    for i in range(1, len(s) + 1):
+        for j in range(i):
+            if dp[j] and s[j:i] in wordDict:
+                dp[i] = True
+                break
+    return dp[len(s)]
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str, wordDict: List[str]) -> bool:
-            # Optimized dynamic programming solution using a set for wordDict
-            word_set = set(wordDict)
-            dp = [False] * (len(s) + 1)
-            dp[0] = True
-            for i in range(1, len(s) + 1):
-                for j in range(i):
-                    if dp[j] and s[j:i] in word_set:
-                        dp[i] = True
-                        break
-            return dp[len(s)]
+def optimized_solution(s: str, wordDict: List[str]) -> bool:
+    # Optimized dynamic programming solution using a set for wordDict
+    word_set = set(wordDict)
+    dp = [False] * (len(s) + 1)
+    dp[0] = True
+    for i in range(1, len(s) + 1):
+        for j in range(i):
+            if dp[j] and s[j:i] in word_set:
+                dp[i] = True
+                break
+    return dp[len(s)]
 
 ```
 
@@ -3172,25 +3172,25 @@ https://leetcode.com/problems/unique-paths/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(m: int, n: int) -> int:
-            # Dynamic programming solution with O(m * n) space complexity
-            dp = [[1] * n for _ in range(m)]
-            for i in range(1, m):
-                for j in range(1, n):
-                    dp[i][j] = dp[i-1][j] + dp[i][j-1]
-            return dp[m-1][n-1]
+def easy_solution(m: int, n: int) -> int:
+    # Dynamic programming solution with O(m * n) space complexity
+    dp = [[1] * n for _ in range(m)]
+    for i in range(1, m):
+        for j in range(1, n):
+            dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    return dp[m-1][n-1]
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(m: int, n: int) -> int:
-            # Optimized solution with O(n) space complexity
-            row = [1] * n
-            for _ in range(1, m):
-                for j in range(1, n):
-                    row[j] += row[j-1]
-            return row[-1]
+def optimized_solution(m: int, n: int) -> int:
+    # Optimized solution with O(n) space complexity
+    row = [1] * n
+    for _ in range(1, m):
+        for j in range(1, n):
+            row[j] += row[j-1]
+    return row[-1]
 
 ```
 
@@ -3242,36 +3242,36 @@ https://leetcode.com/problems/longest-increasing-subsequence/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> int:
-            # Dynamic programming solution with O(n^2) time complexity
-            if not nums:
-                return 0
-            dp = [1] * len(nums)
-            for i in range(1, len(nums)):
-                for j in range(i):
-                    if nums[i] > nums[j]:
-                        dp[i] = max(dp[i], dp[j] + 1)
-            return max(dp)
+def easy_solution(nums: List[int]) -> int:
+    # Dynamic programming solution with O(n^2) time complexity
+    if not nums:
+        return 0
+    dp = [1] * len(nums)
+    for i in range(1, len(nums)):
+        for j in range(i):
+            if nums[i] > nums[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    return max(dp)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> int:
-            # Optimized solution using binary search with O(n log n) time complexity
-            tails = [0] * len(nums)
-            size = 0
-            for num in nums:
-                i, j = 0, size
-                while i != j:
-                    m = (i + j) // 2
-                    if tails[m] < num:
-                        i = m + 1
-                    else:
-                        j = m
-                tails[i] = num
-                size = max(i + 1, size)
-            return size
+def optimized_solution(nums: List[int]) -> int:
+    # Optimized solution using binary search with O(n log n) time complexity
+    tails = [0] * len(nums)
+    size = 0
+    for num in nums:
+        i, j = 0, size
+        while i != j:
+            m = (i + j) // 2
+            if tails[m] < num:
+                i = m + 1
+            else:
+                j = m
+        tails[i] = num
+        size = max(i + 1, size)
+    return size
 
 ```
 
@@ -3317,26 +3317,26 @@ https://leetcode.com/problems/jump-game/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> bool:
-            # Greedy solution with O(n) time complexity
-            max_reach = 0
-            for i, jump in enumerate(nums):
-                if i > max_reach:
-                    return False
-                max_reach = max(max_reach, i + jump)
-            return True
+def easy_solution(nums: List[int]) -> bool:
+    # Greedy solution with O(n) time complexity
+    max_reach = 0
+    for i, jump in enumerate(nums):
+        if i > max_reach:
+            return False
+        max_reach = max(max_reach, i + jump)
+    return True
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> bool:
-            # Optimized greedy solution
-            last_pos = len(nums) - 1
-            for i in range(len(nums) - 1, -1, -1):
-                if i + nums[i] >= last_pos:
-                    last_pos = i
-            return last_pos == 0
+def optimized_solution(nums: List[int]) -> bool:
+    # Optimized greedy solution
+    last_pos = len(nums) - 1
+    for i in range(len(nums) - 1, -1, -1):
+        if i + nums[i] >= last_pos:
+            last_pos = i
+    return last_pos == 0
 
 ```
 
@@ -3386,15 +3386,15 @@ https://leetcode.com/problems/house-robber-ii/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> int:
-            return rob(nums)
+def easy_solution(nums: List[int]) -> int:
+    return rob(nums)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> int:
-            return rob(nums)
+def optimized_solution(nums: List[int]) -> int:
+    return rob(nums)
 
 ```
 
@@ -3444,31 +3444,31 @@ https://leetcode.com/problems/house-robber/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> int:
-            # Dynamic programming solution with O(n) space complexity
-            if not nums:
-                return 0
-            if len(nums) <= 2:
-                return max(nums)
-            dp = [0] * len(nums)
-            dp[0] = nums[0]
-            dp[1] = max(nums[0], nums[1])
-            for i in range(2, len(nums)):
-                dp[i] = max(dp[i-1], dp[i-2] + nums[i])
-            return dp[-1]
+def easy_solution(nums: List[int]) -> int:
+    # Dynamic programming solution with O(n) space complexity
+    if not nums:
+        return 0
+    if len(nums) <= 2:
+        return max(nums)
+    dp = [0] * len(nums)
+    dp[0] = nums[0]
+    dp[1] = max(nums[0], nums[1])
+    for i in range(2, len(nums)):
+        dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+    return dp[-1]
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> int:
-            # Optimized solution with O(1) space complexity
-            if not nums:
-                return 0
-            prev, curr = 0, 0
-            for num in nums:
-                prev, curr = curr, max(curr, prev + num)
-            return curr
+def optimized_solution(nums: List[int]) -> int:
+    # Optimized solution with O(1) space complexity
+    if not nums:
+        return 0
+    prev, curr = 0, 0
+    for num in nums:
+        prev, curr = curr, max(curr, prev + num)
+    return curr
 
 ```
 
@@ -3538,37 +3538,37 @@ https://leetcode.com/problems/decode-ways/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(s: str) -> int:
-            # Dynamic programming solution with O(n) space complexity
-            if not s or s[0] == '0':
-                return 0
-            dp = [0] * (len(s) + 1)
-            dp[0] = 1
-            dp[1] = 1
-            for i in range(2, len(s) + 1):
-                if s[i-1] != '0':
-                    dp[i] += dp[i-1]
-                if s[i-2] == '1' or (s[i-2] == '2' and s[i-1] <= '6'):
-                    dp[i] += dp[i-2]
-            return dp[-1]
+def easy_solution(s: str) -> int:
+    # Dynamic programming solution with O(n) space complexity
+    if not s or s[0] == '0':
+        return 0
+    dp = [0] * (len(s) + 1)
+    dp[0] = 1
+    dp[1] = 1
+    for i in range(2, len(s) + 1):
+        if s[i-1] != '0':
+            dp[i] += dp[i-1]
+        if s[i-2] == '1' or (s[i-2] == '2' and s[i-1] <= '6'):
+            dp[i] += dp[i-2]
+    return dp[-1]
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(s: str) -> int:
-            # Optimized solution with O(1) space complexity
-            if not s or s[0] == '0':
-                return 0
-            prev, curr = 1, 1
-            for i in range(1, len(s)):
-                temp = 0
-                if s[i] != '0':
-                    temp = curr
-                if s[i-1] == '1' or (s[i-1] == '2' and s[i] <= '6'):
-                    temp += prev
-                prev, curr = curr, temp
-            return curr
+def optimized_solution(s: str) -> int:
+    # Optimized solution with O(1) space complexity
+    if not s or s[0] == '0':
+        return 0
+    prev, curr = 1, 1
+    for i in range(1, len(s)):
+        temp = 0
+        if s[i] != '0':
+            temp = curr
+        if s[i-1] == '1' or (s[i-1] == '2' and s[i] <= '6'):
+            temp += prev
+        prev, curr = curr, temp
+    return curr
 
 ```
 
@@ -3623,38 +3623,38 @@ https://leetcode.com/problems/combination-sum/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(candidates: List[int], target: int) -> List[List[int]]:
-            # Backtracking solution
-            def backtrack(start: int, target: int, path: List[int]) -> None:
-                if target == 0:
-                    result.append(path[:])
-                    return
-                for i in range(start, len(candidates)):
-                    if candidates[i] > target:
-                        break
-                    path.append(candidates[i])
-                    backtrack(i, target - candidates[i], path)
-                    path.pop()
+def easy_solution(candidates: List[int], target: int) -> List[List[int]]:
+    # Backtracking solution
+    def backtrack(start: int, target: int, path: List[int]) -> None:
+        if target == 0:
+            result.append(path[:])
+            return
+        for i in range(start, len(candidates)):
+            if candidates[i] > target:
+                break
+            path.append(candidates[i])
+            backtrack(i, target - candidates[i], path)
+            path.pop()
 
-            result: List[List[int]] = []
-            candidates.sort()
-            backtrack(0, target, [])
-            return result
+    result: List[List[int]] = []
+    candidates.sort()
+    backtrack(0, target, [])
+    return result
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(candidates: List[int], target: int) -> List[List[int]]:
-            # Dynamic programming solution
-            dp: List[List[List[int]]] = [[] for _ in range(target + 1)]
-            dp[0] = [[]]
-            
-            for c in candidates:
-                for i in range(c, target + 1):
-                    dp[i].extend([comb + [c] for comb in dp[i - c]])
-            
-            return dp[target]
+def optimized_solution(candidates: List[int], target: int) -> List[List[int]]:
+    # Dynamic programming solution
+    dp: List[List[List[int]]] = [[] for _ in range(target + 1)]
+    dp[0] = [[]]
+
+    for c in candidates:
+        for i in range(c, target + 1):
+            dp[i].extend([comb + [c] for comb in dp[i - c]])
+
+    return dp[target]
 
 ```
 
@@ -3710,26 +3710,26 @@ https://leetcode.com/problems/coin-change/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(coins: List[int], amount: int) -> int:
-            # Dynamic programming solution with O(amount * len(coins)) time complexity
-            dp = [float('inf')] * (amount + 1)
-            dp[0] = 0
-            for coin in coins:
-                for x in range(coin, amount + 1):
-                    dp[x] = min(dp[x], dp[x - coin] + 1)
-            return dp[amount] if dp[amount] != float('inf') else -1
+def easy_solution(coins: List[int], amount: int) -> int:
+    # Dynamic programming solution with O(amount * len(coins)) time complexity
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0
+    for coin in coins:
+        for x in range(coin, amount + 1):
+            dp[x] = min(dp[x], dp[x - coin] + 1)
+    return dp[amount] if dp[amount] != float('inf') else -1
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(coins: List[int], amount: int) -> int:
-            # Optimized dynamic programming solution
-            dp = [float('inf')] * (amount + 1)
-            dp[0] = 0
-            for i in range(1, amount + 1):
-                dp[i] = min(dp[i - c] if i - c >= 0 else float('inf') for c in coins) + 1
-            return dp[amount] if dp[amount] != float('inf') else -1
+def optimized_solution(coins: List[int], amount: int) -> int:
+    # Optimized dynamic programming solution
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0
+    for i in range(1, amount + 1):
+        dp[i] = min(dp[i - c] if i - c >= 0 else float('inf') for c in coins) + 1
+    return dp[amount] if dp[amount] != float('inf') else -1
 
 ```
 
@@ -3777,29 +3777,29 @@ https://leetcode.com/problems/climbing-stairs/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(n: int) -> int:
-            # Dynamic programming solution with O(n) space complexity
-            if n <= 2:
-                return n
-            dp = [0] * (n + 1)
-            dp[1] = 1
-            dp[2] = 2
-            for i in range(3, n + 1):
-                dp[i] = dp[i - 1] + dp[i - 2]
-            return dp[n]
+def easy_solution(n: int) -> int:
+    # Dynamic programming solution with O(n) space complexity
+    if n <= 2:
+        return n
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    dp[2] = 2
+    for i in range(3, n + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+    return dp[n]
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(n: int) -> int:
-            # Optimized solution with O(1) space complexity
-            if n <= 2:
-                return n
-            a, b = 1, 2
-            for _ in range(3, n + 1):
-                a, b = b, a + b
-            return b
+def optimized_solution(n: int) -> int:
+    # Optimized solution with O(1) space complexity
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+    return b
 
 ```
 
@@ -3865,61 +3865,61 @@ https://leetcode.com/problems/pacific-atlantic-water-flow/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(heights: List[List[int]]) -> List[List[int]]:
-            # Easy solution: DFS from both oceans to find reachable cells
-            if not heights or not heights[0]:
-                return []
+def easy_solution(heights: List[List[int]]) -> List[List[int]]:
+    # Easy solution: DFS from both oceans to find reachable cells
+    if not heights or not heights[0]:
+        return []
 
-            m, n = len(heights), len(heights[0])
-            pacific = set()
-            atlantic = set()
+    m, n = len(heights), len(heights[0])
+    pacific = set()
+    atlantic = set()
 
-            def dfs(i: int, j: int, reachable: set) -> None:
-                reachable.add((i, j))
-                for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-                    ni, nj = i + di, j + dj
-                    if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in reachable and heights[ni][nj] >= heights[i][j]:
-                        dfs(ni, nj, reachable)
+    def dfs(i: int, j: int, reachable: set) -> None:
+        reachable.add((i, j))
+        for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            ni, nj = i + di, j + dj
+            if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in reachable and heights[ni][nj] >= heights[i][j]:
+                dfs(ni, nj, reachable)
 
-            for i in range(m):
-                dfs(i, 0, pacific)
-                dfs(i, n - 1, atlantic)
+    for i in range(m):
+        dfs(i, 0, pacific)
+        dfs(i, n - 1, atlantic)
 
-            for j in range(n):
-                dfs(0, j, pacific)
-                dfs(m - 1, j, atlantic)
+    for j in range(n):
+        dfs(0, j, pacific)
+        dfs(m - 1, j, atlantic)
 
-            return list(pacific & atlantic)
+    return list(pacific & atlantic)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(heights: List[List[int]]) -> List[List[int]]:
-            # Optimized solution: Use boolean arrays to track reachable cells
-            if not heights or not heights[0]:
-                return []
+def optimized_solution(heights: List[List[int]]) -> List[List[int]]:
+    # Optimized solution: Use boolean arrays to track reachable cells
+    if not heights or not heights[0]:
+        return []
 
-            m, n = len(heights), len(heights[0])
-            pacific = [[False] * n for _ in range(m)]
-            atlantic = [[False] * n for _ in range(m)]
+    m, n = len(heights), len(heights[0])
+    pacific = [[False] * n for _ in range(m)]
+    atlantic = [[False] * n for _ in range(m)]
 
-            def dfs(i: int, j: int, reachable: List[List[bool]]) -> None:
-                reachable[i][j] = True
-                for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-                    ni, nj = i + di, j + dj
-                    if 0 <= ni < m and 0 <= nj < n and not reachable[ni][nj] and heights[ni][nj] >= heights[i][j]:
-                        dfs(ni, nj, reachable)
+    def dfs(i: int, j: int, reachable: List[List[bool]]) -> None:
+        reachable[i][j] = True
+        for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            ni, nj = i + di, j + dj
+            if 0 <= ni < m and 0 <= nj < n and not reachable[ni][nj] and heights[ni][nj] >= heights[i][j]:
+                dfs(ni, nj, reachable)
 
-            for i in range(m):
-                dfs(i, 0, pacific)
-                dfs(i, n - 1, atlantic)
+    for i in range(m):
+        dfs(i, 0, pacific)
+        dfs(i, n - 1, atlantic)
 
-            for j in range(n):
-                dfs(0, j, pacific)
-                dfs(m - 1, j, atlantic)
+    for j in range(n):
+        dfs(0, j, pacific)
+        dfs(m - 1, j, atlantic)
 
-            return [[i, j] for i in range(m) for j in range(n) if pacific[i][j] and atlantic[i][j]]
+    return [[i, j] for i in range(m) for j in range(n) if pacific[i][j] and atlantic[i][j]]
 
 ```
 
@@ -3974,61 +3974,61 @@ https://leetcode.com/problems/number-of-islands/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(grid: List[List[str]]) -> int:
-            # Easy solution: DFS to count islands
-            if not grid or not grid[0]:
-                return 0
+def easy_solution(grid: List[List[str]]) -> int:
+    # Easy solution: DFS to count islands
+    if not grid or not grid[0]:
+        return 0
 
-            m, n = len(grid), len(grid[0])
-            islands = 0
+    m, n = len(grid), len(grid[0])
+    islands = 0
 
-            def dfs(i: int, j: int) -> None:
-                if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] == '0':
-                    return
-                grid[i][j] = '0'
-                dfs(i + 1, j)
-                dfs(i - 1, j)
-                dfs(i, j + 1)
-                dfs(i, j - 1)
+    def dfs(i: int, j: int) -> None:
+        if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] == '0':
+            return
+        grid[i][j] = '0'
+        dfs(i + 1, j)
+        dfs(i - 1, j)
+        dfs(i, j + 1)
+        dfs(i, j - 1)
 
-            for i in range(m):
-                for j in range(n):
-                    if grid[i][j] == '1':
-                        islands += 1
-                        dfs(i, j)
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == '1':
+                islands += 1
+                dfs(i, j)
 
-            return islands
+    return islands
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(grid: List[List[str]]) -> int:
-            # Optimized solution: BFS to count islands
-            if not grid or not grid[0]:
-                return 0
+def optimized_solution(grid: List[List[str]]) -> int:
+    # Optimized solution: BFS to count islands
+    if not grid or not grid[0]:
+        return 0
 
-            m, n = len(grid), len(grid[0])
-            islands = 0
+    m, n = len(grid), len(grid[0])
+    islands = 0
 
-            def bfs(i: int, j: int) -> None:
-                queue = deque([(i, j)])
-                while queue:
-                    i, j = queue.popleft()
-                    for di, dj in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-                        ni, nj = i + di, j + dj
-                        if 0 <= ni < m and 0 <= nj < n and grid[ni][nj] == '1':
-                            grid[ni][nj] = '0'
-                            queue.append((ni, nj))
+    def bfs(i: int, j: int) -> None:
+        queue = deque([(i, j)])
+        while queue:
+            i, j = queue.popleft()
+            for di, dj in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                ni, nj = i + di, j + dj
+                if 0 <= ni < m and 0 <= nj < n and grid[ni][nj] == '1':
+                    grid[ni][nj] = '0'
+                    queue.append((ni, nj))
 
-            for i in range(m):
-                for j in range(n):
-                    if grid[i][j] == '1':
-                        islands += 1
-                        grid[i][j] = '0'
-                        bfs(i, j)
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == '1':
+                islands += 1
+                grid[i][j] = '0'
+                bfs(i, j)
 
-            return islands
+    return islands
 
 ```
 
@@ -4078,61 +4078,61 @@ https://leetcode.com/problems/number-of-connected-components-in-an-undirected-gr
 
 ## Easy Solution
 ```python
-        def easy_solution(n: int, edges: List[List[int]]) -> int:
-            # Easy solution: DFS to count connected components
-            graph = [[] for _ in range(n)]
-            for u, v in edges:
-                graph[u].append(v)
-                graph[v].append(u)
+def easy_solution(n: int, edges: List[List[int]]) -> int:
+    # Easy solution: DFS to count connected components
+    graph = [[] for _ in range(n)]
+    for u, v in edges:
+        graph[u].append(v)
+        graph[v].append(u)
 
-            visited = set()
-            components = 0
+    visited = set()
+    components = 0
 
-            def dfs(node: int) -> None:
-                visited.add(node)
-                for neighbor in graph[node]:
-                    if neighbor not in visited:
-                        dfs(neighbor)
+    def dfs(node: int) -> None:
+        visited.add(node)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                dfs(neighbor)
 
-            for node in range(n):
-                if node not in visited:
-                    dfs(node)
-                    components += 1
+    for node in range(n):
+        if node not in visited:
+            dfs(node)
+            components += 1
 
-            return components
+    return components
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(n: int, edges: List[List[int]]) -> int:
-            # Optimized solution: Union-Find to count connected components
-            parent = list(range(n))
-            rank = [0] * n
-            components = n
+def optimized_solution(n: int, edges: List[List[int]]) -> int:
+    # Optimized solution: Union-Find to count connected components
+    parent = list(range(n))
+    rank = [0] * n
+    components = n
 
-            def find(x: int) -> int:
-                if parent[x] != x:
-                    parent[x] = find(parent[x])
-                return parent[x]
+    def find(x: int) -> int:
+        if parent[x] != x:
+            parent[x] = find(parent[x])
+        return parent[x]
 
-            def union(x: int, y: int) -> None:
-                nonlocal components
-                root_x, root_y = find(x), find(y)
-                if root_x != root_y:
-                    if rank[root_x] < rank[root_y]:
-                        parent[root_x] = root_y
-                    elif rank[root_x] > rank[root_y]:
-                        parent[root_y] = root_x
-                    else:
-                        parent[root_y] = root_x
-                        rank[root_x] += 1
-                    components -= 1
+    def union(x: int, y: int) -> None:
+        nonlocal components
+        root_x, root_y = find(x), find(y)
+        if root_x != root_y:
+            if rank[root_x] < rank[root_y]:
+                parent[root_x] = root_y
+            elif rank[root_x] > rank[root_y]:
+                parent[root_y] = root_x
+            else:
+                parent[root_y] = root_x
+                rank[root_x] += 1
+            components -= 1
 
-            for u, v in edges:
-                union(u, v)
+    for u, v in edges:
+        union(u, v)
 
-            return components
+    return components
 
 ```
 
@@ -4177,48 +4177,48 @@ https://leetcode.com/problems/longest-consecutive-sequence/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int]) -> int:
-            # Easy solution: Use a set to find the longest consecutive sequence
-            if not nums:
-                return 0
+def easy_solution(nums: List[int]) -> int:
+    # Easy solution: Use a set to find the longest consecutive sequence
+    if not nums:
+        return 0
 
-            num_set = set(nums)
-            longest = 0
+    num_set = set(nums)
+    longest = 0
 
-            for num in num_set:
-                if num - 1 not in num_set:
-                    current = num
-                    streak = 1
+    for num in num_set:
+        if num - 1 not in num_set:
+            current = num
+            streak = 1
 
-                    while current + 1 in num_set:
-                        current += 1
-                        streak += 1
+            while current + 1 in num_set:
+                current += 1
+                streak += 1
 
-                    longest = max(longest, streak)
+            longest = max(longest, streak)
 
-            return longest
+    return longest
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int]) -> int:
-            # Optimized solution: Similar approach but streamlined
-            num_set = set(nums)
-            longest = 0
+def optimized_solution(nums: List[int]) -> int:
+    # Optimized solution: Similar approach but streamlined
+    num_set = set(nums)
+    longest = 0
 
-            for num in nums:
-                if num - 1 not in num_set:
-                    current = num
-                    streak = 1
+    for num in nums:
+        if num - 1 not in num_set:
+            current = num
+            streak = 1
 
-                    while current + 1 in num_set:
-                        current += 1
-                        streak += 1
+            while current + 1 in num_set:
+                current += 1
+                streak += 1
 
-                    longest = max(longest, streak)
+            longest = max(longest, streak)
 
-            return longest
+    return longest
 
 ```
 
@@ -4264,55 +4264,55 @@ https://leetcode.com/problems/graph-valid-tree/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(n: int, edges: List[List[int]]) -> bool:
-            # Easy solution: DFS to check for cycles and connectivity
-            if len(edges) != n - 1:
+def easy_solution(n: int, edges: List[List[int]]) -> bool:
+    # Easy solution: DFS to check for cycles and connectivity
+    if len(edges) != n - 1:
+        return False
+
+    graph = [[] for _ in range(n)]
+    for u, v in edges:
+        graph[u].append(v)
+        graph[v].append(u)
+
+    visited = set()
+
+    def dfs(node: int, parent: int) -> bool:
+        visited.add(node)
+        for neighbor in graph[node]:
+            if neighbor == parent:
+                continue
+            if neighbor in visited:
                 return False
+            if not dfs(neighbor, node):
+                return False
+        return True
 
-            graph = [[] for _ in range(n)]
-            for u, v in edges:
-                graph[u].append(v)
-                graph[v].append(u)
-
-            visited = set()
-
-            def dfs(node: int, parent: int) -> bool:
-                visited.add(node)
-                for neighbor in graph[node]:
-                    if neighbor == parent:
-                        continue
-                    if neighbor in visited:
-                        return False
-                    if not dfs(neighbor, node):
-                        return False
-                return True
-
-            return dfs(0, -1) and len(visited) == n
+    return dfs(0, -1) and len(visited) == n
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(n: int, edges: List[List[int]]) -> bool:
-            # Optimized solution: Union-Find to check for cycles and connectivity
-            if len(edges) != n - 1:
-                return False
+def optimized_solution(n: int, edges: List[List[int]]) -> bool:
+    # Optimized solution: Union-Find to check for cycles and connectivity
+    if len(edges) != n - 1:
+        return False
 
-            parent = list(range(n))
+    parent = list(range(n))
 
-            def find(x: int) -> int:
-                if parent[x] != x:
-                    parent[x] = find(parent[x])
-                return parent[x]
+    def find(x: int) -> int:
+        if parent[x] != x:
+            parent[x] = find(parent[x])
+        return parent[x]
 
-            def union(x: int, y: int) -> bool:
-                root_x, root_y = find(x), find(y)
-                if root_x == root_y:
-                    return False
-                parent[root_x] = root_y
-                return True
+    def union(x: int, y: int) -> bool:
+        root_x, root_y = find(x), find(y)
+        if root_x == root_y:
+            return False
+        parent[root_x] = root_y
+        return True
 
-            return all(union(u, v) for u, v in edges)
+    return all(union(u, v) for u, v in edges)
 
 ```
 
@@ -4362,55 +4362,55 @@ https://leetcode.com/problems/course-schedule/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(numCourses: int, prerequisites: List[List[int]]) -> bool:
-            # Easy solution: DFS to detect cycles in the graph
-            graph = [[] for _ in range(numCourses)]
-            for course, prereq in prerequisites:
-                graph[course].append(prereq)
+def easy_solution(numCourses: int, prerequisites: List[List[int]]) -> bool:
+    # Easy solution: DFS to detect cycles in the graph
+    graph = [[] for _ in range(numCourses)]
+    for course, prereq in prerequisites:
+        graph[course].append(prereq)
 
-            def has_cycle(course: int, path: set) -> bool:
-                if course in path:
-                    return True
-                if not graph[course]:
-                    return False
-                path.add(course)
-                for prereq in graph[course]:
-                    if has_cycle(prereq, path):
-                        return True
-                path.remove(course)
-                graph[course] = []
-                return False
-
-            for course in range(numCourses):
-                if has_cycle(course, set()):
-                    return False
+    def has_cycle(course: int, path: set) -> bool:
+        if course in path:
             return True
+        if not graph[course]:
+            return False
+        path.add(course)
+        for prereq in graph[course]:
+            if has_cycle(prereq, path):
+                return True
+        path.remove(course)
+        graph[course] = []
+        return False
+
+    for course in range(numCourses):
+        if has_cycle(course, set()):
+            return False
+    return True
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(numCourses: int, prerequisites: List[List[int]]) -> bool:
-            # Optimized solution: Topological sort using Kahn's algorithm
-            graph = [[] for _ in range(numCourses)]
-            in_degree = [0] * numCourses
+def optimized_solution(numCourses: int, prerequisites: List[List[int]]) -> bool:
+    # Optimized solution: Topological sort using Kahn's algorithm
+    graph = [[] for _ in range(numCourses)]
+    in_degree = [0] * numCourses
 
-            for course, prereq in prerequisites:
-                graph[prereq].append(course)
-                in_degree[course] += 1
+    for course, prereq in prerequisites:
+        graph[prereq].append(course)
+        in_degree[course] += 1
 
-            queue = deque([course for course in range(numCourses) if in_degree[course] == 0])
-            taken = 0
+    queue = deque([course for course in range(numCourses) if in_degree[course] == 0])
+    taken = 0
 
-            while queue:
-                course = queue.popleft()
-                taken += 1
-                for next_course in graph[course]:
-                    in_degree[next_course] -= 1
-                    if in_degree[next_course] == 0:
-                        queue.append(next_course)
+    while queue:
+        course = queue.popleft()
+        taken += 1
+        for next_course in graph[course]:
+            in_degree[next_course] -= 1
+            if in_degree[next_course] == 0:
+                queue.append(next_course)
 
-            return taken == numCourses
+    return taken == numCourses
 
 ```
 
@@ -4487,49 +4487,49 @@ https://leetcode.com/problems/clone-graph/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(node: Optional[Node]) -> Optional[Node]:
-            # Easy solution: DFS with recursion to clone the graph
-            if not node:
-                return None
+def easy_solution(node: Optional[Node]) -> Optional[Node]:
+    # Easy solution: DFS with recursion to clone the graph
+    if not node:
+        return None
 
-            visited = {}
+    visited = {}
 
-            def dfs(node: Node) -> Node:
-                if node in visited:
-                    return visited[node]
+    def dfs(node: Node) -> Node:
+        if node in visited:
+            return visited[node]
 
-                clone = Node(node.val)
-                visited[node] = clone
+        clone = Node(node.val)
+        visited[node] = clone
 
-                for neighbor in node.neighbors:
-                    clone.neighbors.append(dfs(neighbor))
+        for neighbor in node.neighbors:
+            clone.neighbors.append(dfs(neighbor))
 
-                return clone
+        return clone
 
-            return dfs(node)
+    return dfs(node)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(node: Optional[Node]) -> Optional[Node]:
-            # Optimized solution: BFS with queue to clone the graph
-            if not node:
-                return None
+def optimized_solution(node: Optional[Node]) -> Optional[Node]:
+    # Optimized solution: BFS with queue to clone the graph
+    if not node:
+        return None
 
-            visited = {}
-            queue = deque([node])
-            visited[node] = Node(node.val)
+    visited = {}
+    queue = deque([node])
+    visited[node] = Node(node.val)
 
-            while queue:
-                current = queue.popleft()
-                for neighbor in current.neighbors:
-                    if neighbor not in visited:
-                        visited[neighbor] = Node(neighbor.val)
-                        queue.append(neighbor)
-                    visited[current].neighbors.append(visited[neighbor])
+    while queue:
+        current = queue.popleft()
+        for neighbor in current.neighbors:
+            if neighbor not in visited:
+                visited[neighbor] = Node(neighbor.val)
+                queue.append(neighbor)
+            visited[current].neighbors.append(visited[neighbor])
 
-            return visited[node]
+    return visited[node]
 
 ```
 
@@ -4584,75 +4584,75 @@ https://leetcode.com/problems/alien-dictionary/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(words: List[str]) -> str:
-            # Easy solution: DFS to build the order
-            graph: Dict[str, set] = {c: set() for word in words for c in word}
+def easy_solution(words: List[str]) -> str:
+    # Easy solution: DFS to build the order
+    graph: Dict[str, set] = {c: set() for word in words for c in word}
 
-            for i in range(len(words) - 1):
-                w1, w2 = words[i], words[i + 1]
-                min_len = min(len(w1), len(w2))
-                if len(w1) > len(w2) and w1[:min_len] == w2[:min_len]:
-                    return ""
-                for j in range(min_len):
-                    if w1[j] != w2[j]:
-                        graph[w1[j]].add(w2[j])
-                        break
+    for i in range(len(words) - 1):
+        w1, w2 = words[i], words[i + 1]
+        min_len = min(len(w1), len(w2))
+        if len(w1) > len(w2) and w1[:min_len] == w2[:min_len]:
+            return ""
+        for j in range(min_len):
+            if w1[j] != w2[j]:
+                graph[w1[j]].add(w2[j])
+                break
 
-            visited = {}
-            result = []
+    visited = {}
+    result = []
 
-            def dfs(c: str) -> bool:
-                if c in visited:
-                    return visited[c]
-                visited[c] = True
-                for nei in graph[c]:
-                    if dfs(nei):
-                        return True
-                visited[c] = False
-                result.append(c)
-                return False
+    def dfs(c: str) -> bool:
+        if c in visited:
+            return visited[c]
+        visited[c] = True
+        for nei in graph[c]:
+            if dfs(nei):
+                return True
+        visited[c] = False
+        result.append(c)
+        return False
 
-            for c in graph:
-                if dfs(c):
-                    return ""
+    for c in graph:
+        if dfs(c):
+            return ""
 
-            return "".join(result[::-1])
+    return "".join(result[::-1])
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(words: List[str]) -> str:
-            # Optimized solution: BFS with in-degree tracking
-            graph: Dict[str, set] = {c: set() for word in words for c in word}
-            in_degree: Dict[str, int] = {c: 0 for word in words for c in word}
+def optimized_solution(words: List[str]) -> str:
+    # Optimized solution: BFS with in-degree tracking
+    graph: Dict[str, set] = {c: set() for word in words for c in word}
+    in_degree: Dict[str, int] = {c: 0 for word in words for c in word}
 
-            for i in range(len(words) - 1):
-                w1, w2 = words[i], words[i + 1]
-                min_len = min(len(w1), len(w2))
-                if len(w1) > len(w2) and w1[:min_len] == w2[:min_len]:
-                    return ""
-                for j in range(min_len):
-                    if w1[j] != w2[j]:
-                        if w2[j] not in graph[w1[j]]:
-                            graph[w1[j]].add(w2[j])
-                            in_degree[w2[j]] += 1
-                        break
+    for i in range(len(words) - 1):
+        w1, w2 = words[i], words[i + 1]
+        min_len = min(len(w1), len(w2))
+        if len(w1) > len(w2) and w1[:min_len] == w2[:min_len]:
+            return ""
+        for j in range(min_len):
+            if w1[j] != w2[j]:
+                if w2[j] not in graph[w1[j]]:
+                    graph[w1[j]].add(w2[j])
+                    in_degree[w2[j]] += 1
+                break
 
-            queue = deque([c for c in in_degree if in_degree[c] == 0])
-            result = []
+    queue = deque([c for c in in_degree if in_degree[c] == 0])
+    result = []
 
-            while queue:
-                c = queue.popleft()
-                result.append(c)
-                for nei in graph[c]:
-                    in_degree[nei] -= 1
-                    if in_degree[nei] == 0:
-                        queue.append(nei)
+    while queue:
+        c = queue.popleft()
+        result.append(c)
+        for nei in graph[c]:
+            in_degree[nei] -= 1
+            if in_degree[nei] == 0:
+                queue.append(nei)
 
-            if len(result) != len(graph):
-                return ""
-            return "".join(result)
+    if len(result) != len(graph):
+        return ""
+    return "".join(result)
 
 ```
 
@@ -4698,43 +4698,43 @@ https://leetcode.com/problems/non-overlapping-intervals/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(intervals: List[List[int]]) -> int:
-            # Easy solution: Sort by end time and count overlaps
-            if not intervals:
-                return 0
+def easy_solution(intervals: List[List[int]]) -> int:
+    # Easy solution: Sort by end time and count overlaps
+    if not intervals:
+        return 0
 
-            intervals.sort(key=lambda x: x[1])
-            count = 0
-            end = float('-inf')
+    intervals.sort(key=lambda x: x[1])
+    count = 0
+    end = float('-inf')
 
-            for interval in intervals:
-                if interval[0] >= end:
-                    end = interval[1]
-                else:
-                    count += 1
+    for interval in intervals:
+        if interval[0] >= end:
+            end = interval[1]
+        else:
+            count += 1
 
-            return count
+    return count
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(intervals: List[List[int]]) -> int:
-            # Optimized solution: Similar to easy solution but starts with the first interval
-            if not intervals:
-                return 0
+def optimized_solution(intervals: List[List[int]]) -> int:
+    # Optimized solution: Similar to easy solution but starts with the first interval
+    if not intervals:
+        return 0
 
-            intervals.sort(key=lambda x: x[1])
-            count = 0
-            end = intervals[0][1]
+    intervals.sort(key=lambda x: x[1])
+    count = 0
+    end = intervals[0][1]
 
-            for i in range(1, len(intervals)):
-                if intervals[i][0] < end:
-                    count += 1
-                else:
-                    end = intervals[i][1]
+    for i in range(1, len(intervals)):
+        if intervals[i][0] < end:
+            count += 1
+        else:
+            end = intervals[i][1]
 
-            return count
+    return count
 
 ```
 
@@ -4773,41 +4773,41 @@ https://leetcode.com/problems/merge-intervals/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(intervals: List[List[int]]) -> List[List[int]]:
-            # Easy solution: Sort intervals and merge sequentially
-            if not intervals:
-                return []
+def easy_solution(intervals: List[List[int]]) -> List[List[int]]:
+    # Easy solution: Sort intervals and merge sequentially
+    if not intervals:
+        return []
 
-            intervals.sort(key=lambda x: x[0])
-            merged = [intervals[0]]
+    intervals.sort(key=lambda x: x[0])
+    merged = [intervals[0]]
 
-            for interval in intervals[1:]:
-                if interval[0] <= merged[-1][1]:
-                    merged[-1][1] = max(merged[-1][1], interval[1])
-                else:
-                    merged.append(interval)
+    for interval in intervals[1:]:
+        if interval[0] <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], interval[1])
+        else:
+            merged.append(interval)
 
-            return merged
+    return merged
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(intervals: List[List[int]]) -> List[List[int]]:
-            # Optimized solution: Similar to easy solution but checks if merged list is empty
-            if not intervals:
-                return []
+def optimized_solution(intervals: List[List[int]]) -> List[List[int]]:
+    # Optimized solution: Similar to easy solution but checks if merged list is empty
+    if not intervals:
+        return []
 
-            intervals.sort(key=lambda x: x[0])
-            merged = []
+    intervals.sort(key=lambda x: x[0])
+    merged = []
 
-            for interval in intervals:
-                if not merged or merged[-1][1] < interval[0]:
-                    merged.append(interval)
-                else:
-                    merged[-1][1] = max(merged[-1][1], interval[1])
+    for interval in intervals:
+        if not merged or merged[-1][1] < interval[0]:
+            merged.append(interval)
+        else:
+            merged[-1][1] = max(merged[-1][1], interval[1])
 
-            return merged
+    return merged
 
 ```
 
@@ -4851,43 +4851,43 @@ https://leetcode.com/problems/meeting-rooms-ii/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(intervals: List[List[int]]) -> int:
-            # Easy solution: Sort start and end times and use two pointers
-            start_times = sorted(interval[0] for interval in intervals)
-            end_times = sorted(interval[1] for interval in intervals)
+def easy_solution(intervals: List[List[int]]) -> int:
+    # Easy solution: Sort start and end times and use two pointers
+    start_times = sorted(interval[0] for interval in intervals)
+    end_times = sorted(interval[1] for interval in intervals)
 
-            rooms = 0
-            end_ptr = 0
+    rooms = 0
+    end_ptr = 0
 
-            for start in start_times:
-                if start < end_times[end_ptr]:
-                    rooms += 1
-                else:
-                    end_ptr += 1
+    for start in start_times:
+        if start < end_times[end_ptr]:
+            rooms += 1
+        else:
+            end_ptr += 1
 
-            return rooms
+    return rooms
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(intervals: List[List[int]]) -> int:
-            # Optimized solution: Use a list of events and sort them
-            events = []
-            for start, end in intervals:
-                events.append((start, 1))
-                events.append((end, -1))
+def optimized_solution(intervals: List[List[int]]) -> int:
+    # Optimized solution: Use a list of events and sort them
+    events = []
+    for start, end in intervals:
+        events.append((start, 1))
+        events.append((end, -1))
 
-            events.sort(key=lambda x: (x[0], -x[1]))
+    events.sort(key=lambda x: (x[0], -x[1]))
 
-            rooms = 0
-            max_rooms = 0
+    rooms = 0
+    max_rooms = 0
 
-            for _, event_type in events:
-                rooms += event_type
-                max_rooms = max(max_rooms, rooms)
+    for _, event_type in events:
+        rooms += event_type
+        max_rooms = max(max_rooms, rooms)
 
-            return max_rooms
+    return max_rooms
 
 ```
 
@@ -4927,30 +4927,30 @@ https://leetcode.com/problems/meeting-rooms/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(intervals: List[List[int]]) -> bool:
-            # Easy solution: Sort intervals by start time and check for overlaps
-            intervals.sort(key=lambda x: x[0])
+def easy_solution(intervals: List[List[int]]) -> bool:
+    # Easy solution: Sort intervals by start time and check for overlaps
+    intervals.sort(key=lambda x: x[0])
 
-            for i in range(1, len(intervals)):
-                if intervals[i][0] < intervals[i-1][1]:
-                    return False
+    for i in range(1, len(intervals)):
+        if intervals[i][0] < intervals[i-1][1]:
+            return False
 
-            return True
+    return True
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(intervals: List[List[int]]) -> bool:
-            # Optimized solution: Sort start and end times separately and compare
-            start_times = sorted(interval[0] for interval in intervals)
-            end_times = sorted(interval[1] for interval in intervals)
+def optimized_solution(intervals: List[List[int]]) -> bool:
+    # Optimized solution: Sort start and end times separately and compare
+    start_times = sorted(interval[0] for interval in intervals)
+    end_times = sorted(interval[1] for interval in intervals)
 
-            for i in range(1, len(intervals)):
-                if start_times[i] < end_times[i-1]:
-                    return False
+    for i in range(1, len(intervals)):
+        if start_times[i] < end_times[i-1]:
+            return False
 
-            return True
+    return True
 
 ```
 
@@ -4996,50 +4996,50 @@ https://leetcode.com/problems/insert-interval/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-            # Easy solution: Iterate through intervals, merge if overlapping, otherwise append directly
-            result = []
-            i = 0
-            n = len(intervals)
+def easy_solution(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    # Easy solution: Iterate through intervals, merge if overlapping, otherwise append directly
+    result = []
+    i = 0
+    n = len(intervals)
 
-            # Add intervals before newInterval
-            while i < n and intervals[i][1] < newInterval[0]:
-                result.append(intervals[i])
-                i += 1
+    # Add intervals before newInterval
+    while i < n and intervals[i][1] < newInterval[0]:
+        result.append(intervals[i])
+        i += 1
 
-            # Merge overlapping intervals
-            while i < n and intervals[i][0] <= newInterval[1]:
-                newInterval[0] = min(newInterval[0], intervals[i][0])
-                newInterval[1] = max(newInterval[1], intervals[i][1])
-                i += 1
+    # Merge overlapping intervals
+    while i < n and intervals[i][0] <= newInterval[1]:
+        newInterval[0] = min(newInterval[0], intervals[i][0])
+        newInterval[1] = max(newInterval[1], intervals[i][1])
+        i += 1
 
-            result.append(newInterval)
+    result.append(newInterval)
 
-            # Add remaining intervals
-            while i < n:
-                result.append(intervals[i])
-                i += 1
+    # Add remaining intervals
+    while i < n:
+        result.append(intervals[i])
+        i += 1
 
-            return result
+    return result
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-            # Optimized solution: Iterate through intervals and merge on the go
-            result = []
-            for interval in intervals:
-                if interval[1] < newInterval[0]:
-                    result.append(interval)
-                elif interval[0] > newInterval[1]:
-                    result.append(newInterval)
-                    newInterval = interval
-                else:
-                    newInterval[0] = min(newInterval[0], interval[0])
-                    newInterval[1] = max(newInterval[1], interval[1])
+def optimized_solution(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    # Optimized solution: Iterate through intervals and merge on the go
+    result = []
+    for interval in intervals:
+        if interval[1] < newInterval[0]:
+            result.append(interval)
+        elif interval[0] > newInterval[1]:
             result.append(newInterval)
-            return result
+            newInterval = interval
+        else:
+            newInterval[0] = min(newInterval[0], interval[0])
+            newInterval[1] = max(newInterval[1], interval[1])
+    result.append(newInterval)
+    return result
 
 ```
 
@@ -5090,58 +5090,58 @@ https://leetcode.com/problems/word-search/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(board: List[List[str]], word: str) -> bool:
-            # Brute-force solution: Use DFS to check for the word
-            def dfs(i: int, j: int, k: int) -> bool:
-                if k == len(word):
-                    return True
-                if (i < 0 or i >= len(board) or
-                    j < 0 or j >= len(board[0]) or
-                    board[i][j] != word[k]):
-                    return False
-                
-                temp, board[i][j] = board[i][j], '#'
-                result = (dfs(i+1, j, k+1) or
-                          dfs(i-1, j, k+1) or
-                          dfs(i, j+1, k+1) or
-                          dfs(i, j-1, k+1))
-                board[i][j] = temp
-                return result
-
-            for i in range(len(board)):
-                for j in range(len(board[0])):
-                    if dfs(i, j, 0):
-                        return True
+def easy_solution(board: List[List[str]], word: str) -> bool:
+    # Brute-force solution: Use DFS to check for the word
+    def dfs(i: int, j: int, k: int) -> bool:
+        if k == len(word):
+            return True
+        if (i < 0 or i >= len(board) or
+            j < 0 or j >= len(board[0]) or
+            board[i][j] != word[k]):
             return False
+
+        temp, board[i][j] = board[i][j], '#'
+        result = (dfs(i+1, j, k+1) or
+                  dfs(i-1, j, k+1) or
+                  dfs(i, j+1, k+1) or
+                  dfs(i, j-1, k+1))
+        board[i][j] = temp
+        return result
+
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            if dfs(i, j, 0):
+                return True
+    return False
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(board: List[List[str]], word: str) -> bool:
-            # Optimized solution: Use DFS with visited array
-            def dfs(i: int, j: int, k: int) -> bool:
-                if k == len(word):
-                    return True
-                if (i < 0 or i >= m or j < 0 or j >= n or
-                    visited[i][j] or board[i][j] != word[k]):
-                    return False
-                
-                visited[i][j] = True
-                for di, dj in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
-                    if dfs(i + di, j + dj, k + 1):
-                        return True
-                visited[i][j] = False
-                return False
-
-            m, n = len(board), len(board[0])
-            visited = [[False] * n for _ in range(m)]
-            
-            for i in range(m):
-                for j in range(n):
-                    if board[i][j] == word[0] and dfs(i, j, 0):
-                        return True
+def optimized_solution(board: List[List[str]], word: str) -> bool:
+    # Optimized solution: Use DFS with visited array
+    def dfs(i: int, j: int, k: int) -> bool:
+        if k == len(word):
+            return True
+        if (i < 0 or i >= m or j < 0 or j >= n or
+            visited[i][j] or board[i][j] != word[k]):
             return False
+
+        visited[i][j] = True
+        for di, dj in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+            if dfs(i + di, j + dj, k + 1):
+                return True
+        visited[i][j] = False
+        return False
+
+    m, n = len(board), len(board[0])
+    visited = [[False] * n for _ in range(m)]
+
+    for i in range(m):
+        for j in range(n):
+            if board[i][j] == word[0] and dfs(i, j, 0):
+                return True
+    return False
 
 ```
 
@@ -5183,66 +5183,66 @@ https://leetcode.com/problems/spiral-matrix/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(matrix: List[List[int]]) -> List[int]:
-            # Brute-force solution: Traverse the matrix in spiral order
-            if not matrix:
-                return []
+def easy_solution(matrix: List[List[int]]) -> List[int]:
+    # Brute-force solution: Traverse the matrix in spiral order
+    if not matrix:
+        return []
 
-            result = []
-            top, bottom, left, right = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
+    result = []
+    top, bottom, left, right = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
 
-            while top <= bottom and left <= right:
-                for j in range(left, right + 1):
-                    result.append(matrix[top][j])
-                top += 1
+    while top <= bottom and left <= right:
+        for j in range(left, right + 1):
+            result.append(matrix[top][j])
+        top += 1
 
-                for i in range(top, bottom + 1):
-                    result.append(matrix[i][right])
-                right -= 1
+        for i in range(top, bottom + 1):
+            result.append(matrix[i][right])
+        right -= 1
 
-                if top <= bottom:
-                    for j in range(right, left - 1, -1):
-                        result.append(matrix[bottom][j])
-                    bottom -= 1
+        if top <= bottom:
+            for j in range(right, left - 1, -1):
+                result.append(matrix[bottom][j])
+            bottom -= 1
 
-                if left <= right:
-                    for i in range(bottom, top - 1, -1):
-                        result.append(matrix[i][left])
-                    left += 1
+        if left <= right:
+            for i in range(bottom, top - 1, -1):
+                result.append(matrix[i][left])
+            left += 1
 
-            return result
+    return result
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(matrix: List[List[int]]) -> List[int]:
-            # Optimized solution: Use direction vectors to traverse the matrix
-            if not matrix:
-                return []
+def optimized_solution(matrix: List[List[int]]) -> List[int]:
+    # Optimized solution: Use direction vectors to traverse the matrix
+    if not matrix:
+        return []
 
-            result = []
-            m, n = len(matrix), len(matrix[0])
-            directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-            d = 0
-            row, col = 0, 0
-            visited = set()
+    result = []
+    m, n = len(matrix), len(matrix[0])
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    d = 0
+    row, col = 0, 0
+    visited = set()
 
-            for _ in range(m * n):
-                result.append(matrix[row][col])
-                visited.add((row, col))
+    for _ in range(m * n):
+        result.append(matrix[row][col])
+        visited.add((row, col))
 
-                next_row, next_col = row + directions[d][0], col + directions[d][1]
+        next_row, next_col = row + directions[d][0], col + directions[d][1]
 
-                if (next_row < 0 or next_row >= m or
-                    next_col < 0 or next_col >= n or
-                    (next_row, next_col) in visited):
-                    d = (d + 1) % 4
-                    next_row, next_col = row + directions[d][0], col + directions[d][1]
+        if (next_row < 0 or next_row >= m or
+            next_col < 0 or next_col >= n or
+            (next_row, next_col) in visited):
+            d = (d + 1) % 4
+            next_row, next_col = row + directions[d][0], col + directions[d][1]
 
-                row, col = next_row, next_col
+        row, col = next_row, next_col
 
-            return result
+    return result
 
 ```
 
@@ -5287,66 +5287,66 @@ https://leetcode.com/problems/set-matrix-zeroes/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(matrix: List[List[int]]) -> None:
-            # Brute-force solution: Use sets to track zero rows and columns
-            m, n = len(matrix), len(matrix[0])
-            zero_rows, zero_cols = set(), set()
+def easy_solution(matrix: List[List[int]]) -> None:
+    # Brute-force solution: Use sets to track zero rows and columns
+    m, n = len(matrix), len(matrix[0])
+    zero_rows, zero_cols = set(), set()
 
-            for i in range(m):
-                for j in range(n):
-                    if matrix[i][j] == 0:
-                        zero_rows.add(i)
-                        zero_cols.add(j)
+    for i in range(m):
+        for j in range(n):
+            if matrix[i][j] == 0:
+                zero_rows.add(i)
+                zero_cols.add(j)
 
-            for i in range(m):
-                for j in range(n):
-                    if i in zero_rows or j in zero_cols:
-                        matrix[i][j] = 0
+    for i in range(m):
+        for j in range(n):
+            if i in zero_rows or j in zero_cols:
+                matrix[i][j] = 0
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(matrix: List[List[int]]) -> None:
-            # Optimized solution: Use first row and column as markers
-            m, n = len(matrix), len(matrix[0])
-            first_row_zero = False
-            first_col_zero = False
+def optimized_solution(matrix: List[List[int]]) -> None:
+    # Optimized solution: Use first row and column as markers
+    m, n = len(matrix), len(matrix[0])
+    first_row_zero = False
+    first_col_zero = False
 
-            # Check if the first row has any zeros
-            for j in range(n):
-                if matrix[0][j] == 0:
-                    first_row_zero = True
-                    break
+    # Check if the first row has any zeros
+    for j in range(n):
+        if matrix[0][j] == 0:
+            first_row_zero = True
+            break
 
-            # Check if the first column has any zeros
-            for i in range(m):
-                if matrix[i][0] == 0:
-                    first_col_zero = True
-                    break
+    # Check if the first column has any zeros
+    for i in range(m):
+        if matrix[i][0] == 0:
+            first_col_zero = True
+            break
 
-            # Use first row and column to mark zeros
-            for i in range(1, m):
-                for j in range(1, n):
-                    if matrix[i][j] == 0:
-                        matrix[i][0] = 0
-                        matrix[0][j] = 0
+    # Use first row and column to mark zeros
+    for i in range(1, m):
+        for j in range(1, n):
+            if matrix[i][j] == 0:
+                matrix[i][0] = 0
+                matrix[0][j] = 0
 
-            # Set matrix elements to zero based on markers
-            for i in range(1, m):
-                for j in range(1, n):
-                    if matrix[i][0] == 0 or matrix[0][j] == 0:
-                        matrix[i][j] = 0
+    # Set matrix elements to zero based on markers
+    for i in range(1, m):
+        for j in range(1, n):
+            if matrix[i][0] == 0 or matrix[0][j] == 0:
+                matrix[i][j] = 0
 
-            # Set the first row to zero if needed
-            if first_row_zero:
-                for j in range(n):
-                    matrix[0][j] = 0
+    # Set the first row to zero if needed
+    if first_row_zero:
+        for j in range(n):
+            matrix[0][j] = 0
 
-            # Set the first column to zero if needed
-            if first_col_zero:
-                for i in range(m):
-                    matrix[i][0] = 0
+    # Set the first column to zero if needed
+    if first_col_zero:
+        for i in range(m):
+            matrix[i][0] = 0
 
 ```
 
@@ -5389,35 +5389,35 @@ https://leetcode.com/problems/rotate-image/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(matrix: List[List[int]]) -> None:
-            # Brute-force solution: Transpose the matrix, then reverse each row
-            n = len(matrix)
-            
-            # Transpose the matrix
-            for i in range(n):
-                for j in range(i, n):
-                    matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-            
-            # Reverse each row
-            for i in range(n):
-                matrix[i].reverse()
+def easy_solution(matrix: List[List[int]]) -> None:
+    # Brute-force solution: Transpose the matrix, then reverse each row
+    n = len(matrix)
+
+    # Transpose the matrix
+    for i in range(n):
+        for j in range(i, n):
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+    # Reverse each row
+    for i in range(n):
+        matrix[i].reverse()
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(matrix: List[List[int]]) -> None:
-            # Optimized solution: Rotate four rectangles
-            n = len(matrix)
-            
-            # Rotate four rectangles
-            for i in range(n // 2 + n % 2):
-                for j in range(n // 2):
-                    tmp = matrix[n - 1 - j][i]
-                    matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1]
-                    matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 - i]
-                    matrix[j][n - 1 - i] = matrix[i][j]
-                    matrix[i][j] = tmp
+def optimized_solution(matrix: List[List[int]]) -> None:
+    # Optimized solution: Rotate four rectangles
+    n = len(matrix)
+
+    # Rotate four rectangles
+    for i in range(n // 2 + n % 2):
+        for j in range(n // 2):
+            tmp = matrix[n - 1 - j][i]
+            matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1]
+            matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 - i]
+            matrix[j][n - 1 - i] = matrix[i][j]
+            matrix[i][j] = tmp
 
 ```
 
@@ -5455,34 +5455,34 @@ https://leetcode.com/problems/top-k-frequent-elements/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(nums: List[int], k: int) -> List[int]:
-            # Brute-force solution: Use a heap to find the k most frequent elements
-            count = {}
-            for num in nums:
-                count[num] = count.get(num, 0) + 1
-            
-            return heapq.nlargest(k, count.keys(), key=count.get)
+def easy_solution(nums: List[int], k: int) -> List[int]:
+    # Brute-force solution: Use a heap to find the k most frequent elements
+    count = {}
+    for num in nums:
+        count[num] = count.get(num, 0) + 1
+
+    return heapq.nlargest(k, count.keys(), key=count.get)
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(nums: List[int], k: int) -> List[int]:
-            # Optimized solution: Use bucket sort to find the k most frequent elements
-            count = {}
-            freq = [[] for _ in range(len(nums) + 1)]
-            
-            for num in nums:
-                count[num] = count.get(num, 0) + 1
-            for num, c in count.items():
-                freq[c].append(num)
-            
-            res = []
-            for i in range(len(freq) - 1, 0, -1):
-                for num in freq[i]:
-                    res.append(num)
-                    if len(res) == k:
-                        return res
+def optimized_solution(nums: List[int], k: int) -> List[int]:
+    # Optimized solution: Use bucket sort to find the k most frequent elements
+    count = {}
+    freq = [[] for _ in range(len(nums) + 1)]
+
+    for num in nums:
+        count[num] = count.get(num, 0) + 1
+    for num, c in count.items():
+        freq[c].append(num)
+
+    res = []
+    for i in range(len(freq) - 1, 0, -1):
+        for num in freq[i]:
+            res.append(num)
+            if len(res) == k:
+                return res
 
 ```
 
@@ -5538,40 +5538,40 @@ https://leetcode.com/problems/merge-k-sorted-lists/description/
 
 ## Easy Solution
 ```python
-        def easy_solution(lists: List[ListNode]) -> ListNode:
-            # Brute-force solution: Collect all nodes and sort them
-            nodes = []
-            head = point = ListNode(0)
-            for l in lists:
-                while l:
-                    nodes.append(l.val)
-                    l = l.next
-            for x in sorted(nodes):
-                point.next = ListNode(x)
-                point = point.next
-            return head.next
+def easy_solution(lists: List[ListNode]) -> ListNode:
+    # Brute-force solution: Collect all nodes and sort them
+    nodes = []
+    head = point = ListNode(0)
+    for l in lists:
+        while l:
+            nodes.append(l.val)
+            l = l.next
+    for x in sorted(nodes):
+        point.next = ListNode(x)
+        point = point.next
+    return head.next
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution(lists: List[ListNode]) -> ListNode:
-            # Optimized solution: Use a heap to merge lists
-            heap = []
-            for i, l in enumerate(lists):
-                if l:
-                    heapq.heappush(heap, (l.val, i, l))
-            
-            dummy = ListNode(0)
-            curr = dummy
-            while heap:
-                val, i, node = heapq.heappop(heap)
-                curr.next = ListNode(val)
-                curr = curr.next
-                if node.next:
-                    heapq.heappush(heap, (node.next.val, i, node.next))
-            
-            return dummy.next
+def optimized_solution(lists: List[ListNode]) -> ListNode:
+    # Optimized solution: Use a heap to merge lists
+    heap = []
+    for i, l in enumerate(lists):
+        if l:
+            heapq.heappush(heap, (l.val, i, l))
+
+    dummy = ListNode(0)
+    curr = dummy
+    while heap:
+        val, i, node = heapq.heappop(heap)
+        curr.next = ListNode(val)
+        curr = curr.next
+        if node.next:
+            heapq.heappush(heap, (node.next.val, i, node.next))
+
+    return dummy.next
 
 ```
 
@@ -5623,15 +5623,15 @@ https://leetcode.com/problems/find-median-from-data-stream/description/
 
 ## Easy Solution
 ```python
-        def easy_solution() -> MedianFinder:
-            return MedianFinder()
+def easy_solution() -> MedianFinder:
+    return MedianFinder()
 
 ```
 
 ## Optimized Solution
 ```python
-        def optimized_solution() -> MedianFinder:
-            return MedianFinder()
+def optimized_solution() -> MedianFinder:
+    return MedianFinder()
 
 ```
 

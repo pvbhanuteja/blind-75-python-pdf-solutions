@@ -18,13 +18,14 @@ class GraphSolutions:
         Returns:
             Solution: A Solution object containing details of the Clone Graph problem.
         """
+
         class Node:
-            def __init__(self, val: int = 0, neighbors: Optional[List['Node']] = None):
+            def __init__(self, val: int = 0, neighbors: Optional[List["Node"]] = None):
                 self.val = val
                 self.neighbors = neighbors if neighbors is not None else []
 
         def problem_statement() -> str:
-            return '''Given a reference of a node in a connected undirected graph.
+            return """Given a reference of a node in a connected undirected graph.
 
 Return a deep copy (clone) of the graph.
 
@@ -80,7 +81,7 @@ Constraints:
     The Graph is connected and all nodes can be visited starting from the given node.
 
 https://leetcode.com/problems/clone-graph/description/
-'''
+"""
 
         def easy_solution(node: Optional[Node]) -> Optional[Node]:
             # Easy solution: DFS with recursion to clone the graph
@@ -128,8 +129,12 @@ https://leetcode.com/problems/clone-graph/description/
             optimized_solution=optimized_solution,
             time_complexity="O(N + E)",
             space_complexity="O(N)",
-            similar_questions=["Copy List with Random Pointer", "Clone Binary Tree With Random Pointer", "Clone N-ary Tree"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Copy List with Random Pointer",
+                "Clone Binary Tree With Random Pointer",
+                "Clone N-ary Tree",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -142,7 +147,7 @@ https://leetcode.com/problems/clone-graph/description/
         """
 
         def problem_statement() -> str:
-            return '''There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+            return """There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
 
     For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
 
@@ -173,7 +178,7 @@ Constraints:
     All the pairs prerequisites[i] are unique.
 
 https://leetcode.com/problems/course-schedule/description/
-'''
+"""
 
         def easy_solution(numCourses: int, prerequisites: List[List[int]]) -> bool:
             # Easy solution: DFS to detect cycles in the graph
@@ -208,7 +213,9 @@ https://leetcode.com/problems/course-schedule/description/
                 graph[prereq].append(course)
                 in_degree[course] += 1
 
-            queue = deque([course for course in range(numCourses) if in_degree[course] == 0])
+            queue = deque(
+                [course for course in range(numCourses) if in_degree[course] == 0]
+            )
             taken = 0
 
             while queue:
@@ -227,8 +234,13 @@ https://leetcode.com/problems/course-schedule/description/
             optimized_solution=optimized_solution,
             time_complexity="O(V + E)",
             space_complexity="O(V + E)",
-            similar_questions=["Course Schedule II", "Graph Valid Tree", "Minimum Height Trees", "Course Schedule III"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Course Schedule II",
+                "Graph Valid Tree",
+                "Minimum Height Trees",
+                "Course Schedule III",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -241,7 +253,7 @@ https://leetcode.com/problems/course-schedule/description/
         """
 
         def problem_statement() -> str:
-            return '''There is an m x n rectangular island that borders both the Pacific Ocean and Atlantic Ocean. The Pacific Ocean touches the island's left and top edges, and the Atlantic Ocean touches the island's right and bottom edges.
+            return """There is an m x n rectangular island that borders both the Pacific Ocean and Atlantic Ocean. The Pacific Ocean touches the island's left and top edges, and the Atlantic Ocean touches the island's right and bottom edges.
 
 The island is partitioned into a grid of square cells. You are given an m x n integer matrix heights where heights[r][c] represents the height above sea level of the cell at coordinate (r, c).
 
@@ -287,7 +299,7 @@ Constraints:
     0 <= heights[i][j] <= 105
 
 https://leetcode.com/problems/pacific-atlantic-water-flow/description/
-'''
+"""
 
         def easy_solution(heights: List[List[int]]) -> List[List[int]]:
             # Easy solution: DFS from both oceans to find reachable cells
@@ -302,7 +314,12 @@ https://leetcode.com/problems/pacific-atlantic-water-flow/description/
                 reachable.add((i, j))
                 for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
                     ni, nj = i + di, j + dj
-                    if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in reachable and heights[ni][nj] >= heights[i][j]:
+                    if (
+                        0 <= ni < m
+                        and 0 <= nj < n
+                        and (ni, nj) not in reachable
+                        and heights[ni][nj] >= heights[i][j]
+                    ):
                         dfs(ni, nj, reachable)
 
             for i in range(m):
@@ -328,7 +345,12 @@ https://leetcode.com/problems/pacific-atlantic-water-flow/description/
                 reachable[i][j] = True
                 for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
                     ni, nj = i + di, j + dj
-                    if 0 <= ni < m and 0 <= nj < n and not reachable[ni][nj] and heights[ni][nj] >= heights[i][j]:
+                    if (
+                        0 <= ni < m
+                        and 0 <= nj < n
+                        and not reachable[ni][nj]
+                        and heights[ni][nj] >= heights[i][j]
+                    ):
                         dfs(ni, nj, reachable)
 
             for i in range(m):
@@ -339,7 +361,12 @@ https://leetcode.com/problems/pacific-atlantic-water-flow/description/
                 dfs(0, j, pacific)
                 dfs(m - 1, j, atlantic)
 
-            return [[i, j] for i in range(m) for j in range(n) if pacific[i][j] and atlantic[i][j]]
+            return [
+                [i, j]
+                for i in range(m)
+                for j in range(n)
+                if pacific[i][j] and atlantic[i][j]
+            ]
 
         return Solution(
             question="Pacific Atlantic Water Flow",
@@ -348,7 +375,7 @@ https://leetcode.com/problems/pacific-atlantic-water-flow/description/
             time_complexity="O(m * n)",
             space_complexity="O(m * n)",
             similar_questions=["Number of Islands", "Surrounded Regions"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -361,7 +388,7 @@ https://leetcode.com/problems/pacific-atlantic-water-flow/description/
         """
 
         def problem_statement() -> str:
-            return '''Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+            return """Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
 
 An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
 
@@ -397,7 +424,7 @@ Constraints:
     grid[i][j] is '0' or '1'.
 
 https://leetcode.com/problems/number-of-islands/description/
-'''
+"""
 
         def easy_solution(grid: List[List[str]]) -> int:
             # Easy solution: DFS to count islands
@@ -408,9 +435,9 @@ https://leetcode.com/problems/number-of-islands/description/
             islands = 0
 
             def dfs(i: int, j: int) -> None:
-                if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] == '0':
+                if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] == "0":
                     return
-                grid[i][j] = '0'
+                grid[i][j] = "0"
                 dfs(i + 1, j)
                 dfs(i - 1, j)
                 dfs(i, j + 1)
@@ -418,7 +445,7 @@ https://leetcode.com/problems/number-of-islands/description/
 
             for i in range(m):
                 for j in range(n):
-                    if grid[i][j] == '1':
+                    if grid[i][j] == "1":
                         islands += 1
                         dfs(i, j)
 
@@ -438,15 +465,15 @@ https://leetcode.com/problems/number-of-islands/description/
                     i, j = queue.popleft()
                     for di, dj in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
                         ni, nj = i + di, j + dj
-                        if 0 <= ni < m and 0 <= nj < n and grid[ni][nj] == '1':
-                            grid[ni][nj] = '0'
+                        if 0 <= ni < m and 0 <= nj < n and grid[ni][nj] == "1":
+                            grid[ni][nj] = "0"
                             queue.append((ni, nj))
 
             for i in range(m):
                 for j in range(n):
-                    if grid[i][j] == '1':
+                    if grid[i][j] == "1":
                         islands += 1
-                        grid[i][j] = '0'
+                        grid[i][j] = "0"
                         bfs(i, j)
 
             return islands
@@ -457,8 +484,14 @@ https://leetcode.com/problems/number-of-islands/description/
             optimized_solution=optimized_solution,
             time_complexity="O(m * n)",
             space_complexity="O(min(m, n))",
-            similar_questions=["Surrounded Regions", "Walls and Gates", "Number of Islands II", "Number of Distinct Islands", "Max Area of Island"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Surrounded Regions",
+                "Walls and Gates",
+                "Number of Islands II",
+                "Number of Distinct Islands",
+                "Max Area of Island",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -471,7 +504,7 @@ https://leetcode.com/problems/number-of-islands/description/
         """
 
         def problem_statement() -> str:
-            return '''Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+            return """Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
 
 You must write an algorithm that runs in O(n) time.
 
@@ -496,7 +529,7 @@ Constraints:
     -109 <= nums[i] <= 109
 
 https://leetcode.com/problems/longest-consecutive-sequence/description/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> int:
             # Easy solution: Use a set to find the longest consecutive sequence
@@ -544,7 +577,7 @@ https://leetcode.com/problems/longest-consecutive-sequence/description/
             time_complexity="O(n)",
             space_complexity="O(n)",
             similar_questions=["Binary Tree Longest Consecutive Sequence"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -557,7 +590,7 @@ https://leetcode.com/problems/longest-consecutive-sequence/description/
         """
 
         def problem_statement() -> str:
-            return '''There is a new alien language that uses the English alphabet. However, the order among letters are unknown to you.
+            return """There is a new alien language that uses the English alphabet. However, the order among letters are unknown to you.
 
 You are given a list of strings words from the alien language's dictionary, where the strings in words are sorted lexicographically by the rules of this new language.
 
@@ -592,7 +625,7 @@ Constraints:
     words[i] consists of only lowercase English letters.
 
 https://leetcode.com/problems/alien-dictionary/description/
-'''
+"""
 
         def easy_solution(words: List[str]) -> str:
             # Easy solution: DFS to build the order
@@ -667,7 +700,7 @@ https://leetcode.com/problems/alien-dictionary/description/
             time_complexity="O(C)",
             space_complexity="O(1)",
             similar_questions=["Course Schedule II", "Sequence Reconstruction"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -680,7 +713,7 @@ https://leetcode.com/problems/alien-dictionary/description/
         """
 
         def problem_statement() -> str:
-            return '''You have a graph of n nodes labeled from 0 to n - 1. You are given an integer n and a list of edges where edges[i] = [ai, bi] indicates that there is an undirected edge between nodes ai and bi in the graph.
+            return """You have a graph of n nodes labeled from 0 to n - 1. You are given an integer n and a list of edges where edges[i] = [ai, bi] indicates that there is an undirected edge between nodes ai and bi in the graph.
 
 Return true if the edges of the given graph make up a valid tree, and false otherwise.
 
@@ -708,7 +741,7 @@ Constraints:
     There are no self-loops or repeated edges.
 
 https://leetcode.com/problems/graph-valid-tree/description/
-'''
+"""
 
         def easy_solution(n: int, edges: List[List[int]]) -> bool:
             # Easy solution: DFS to check for cycles and connectivity
@@ -762,8 +795,11 @@ https://leetcode.com/problems/graph-valid-tree/description/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(n)",
-            similar_questions=["Number of Connected Components in an Undirected Graph", "Redundant Connection"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Number of Connected Components in an Undirected Graph",
+                "Redundant Connection",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -776,7 +812,7 @@ https://leetcode.com/problems/graph-valid-tree/description/
         """
 
         def problem_statement() -> str:
-            return '''You have a graph of n nodes. You are given an integer n and an array edges where edges[i] = [ai, bi] indicates that there is an edge between ai and bi in the graph.
+            return """You have a graph of n nodes. You are given an integer n and an array edges where edges[i] = [ai, bi] indicates that there is an edge between ai and bi in the graph.
 
 Return the number of connected components in the graph.
 
@@ -804,7 +840,7 @@ Constraints:
     There are no repeated edges.
 
 https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/
-'''
+"""
 
         def easy_solution(n: int, edges: List[List[int]]) -> int:
             # Easy solution: DFS to count connected components
@@ -864,6 +900,10 @@ https://leetcode.com/problems/number-of-connected-components-in-an-undirected-gr
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(n)",
-            similar_questions=["Number of Islands", "Graph Valid Tree", "Friend Circles"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Number of Islands",
+                "Graph Valid Tree",
+                "Friend Circles",
+            ],
+            problem_statement=problem_statement,
         )

@@ -19,8 +19,9 @@ class BinarySolutions:
         Returns:
             Solution: A Solution object containing details of the Sum of Two Integers problem.
         """
+
         def problem_statement() -> str:
-            return '''Given two integers a and b, return the sum of the two integers without using the operators + and -.
+            return """Given two integers a and b, return the sum of the two integers without using the operators + and -.
 
 Example 1:
 
@@ -37,7 +38,7 @@ Constraints:
     -1000 <= a, b <= 1000
 
 https://leetcode.com/problems/sum-of-two-integers/
-'''
+"""
 
         def easy_solution(a: int, b: int) -> int:
             # Iterative solution: Use bit manipulation to add without + or -
@@ -58,7 +59,7 @@ https://leetcode.com/problems/sum-of-two-integers/
             time_complexity="O(1)",
             space_complexity="O(1)",
             similar_questions=["Add Binary"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -69,8 +70,9 @@ https://leetcode.com/problems/sum-of-two-integers/
         Returns:
             Solution: A Solution object containing details of the Number of 1 Bits problem.
         """
+
         def problem_statement() -> str:
-            return '''Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
+            return """Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
 
 Example 1:
 
@@ -95,7 +97,7 @@ Constraints:
     The input must be a binary string of length 32.
 
 https://leetcode.com/problems/number-of-1-bits/
-'''
+"""
 
         def easy_solution(n: int) -> int:
             # Iterative solution: Count bits by shifting
@@ -120,7 +122,7 @@ https://leetcode.com/problems/number-of-1-bits/
             time_complexity="O(1)",
             space_complexity="O(1)",
             similar_questions=["Hamming Distance", "Reverse Bits"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -131,8 +133,9 @@ https://leetcode.com/problems/number-of-1-bits/
         Returns:
             Solution: A Solution object containing details of the Counting Bits problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+            return """Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
 
 Example 1:
 
@@ -160,7 +163,7 @@ Constraints:
     0 <= n <= 105
 
 https://leetcode.com/problems/counting-bits/
-'''
+"""
 
         def easy_solution(n: int) -> List[int]:
             # Iterative solution: Count bits for each number
@@ -170,7 +173,7 @@ https://leetcode.com/problems/counting-bits/
                     count += x & 1
                     x >>= 1
                 return count
-            
+
             return [count_bits(i) for i in range(n + 1)]
 
         def optimized_solution(n: int) -> List[int]:
@@ -187,7 +190,7 @@ https://leetcode.com/problems/counting-bits/
             time_complexity="O(n)",
             space_complexity="O(n)",
             similar_questions=["Number of 1 Bits", "Binary Watch"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -198,8 +201,9 @@ https://leetcode.com/problems/counting-bits/
         Returns:
             Solution: A Solution object containing details of the Missing Number problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+            return """Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
 
 Example 1:
 
@@ -227,7 +231,7 @@ Constraints:
     All the numbers of nums are unique.
 
 https://leetcode.com/problems/missing-number/
-'''
+"""
 
         def easy_solution(nums: List[int]) -> int:
             # Iterative solution: Use summation formula
@@ -248,8 +252,11 @@ https://leetcode.com/problems/missing-number/
             optimized_solution=optimized_solution,
             time_complexity="O(n)",
             space_complexity="O(1)",
-            similar_questions=["Find the Duplicate Number", "Find All Numbers Disappeared in an Array"],
-            problem_statement=problem_statement
+            similar_questions=[
+                "Find the Duplicate Number",
+                "Find All Numbers Disappeared in an Array",
+            ],
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -260,8 +267,9 @@ https://leetcode.com/problems/missing-number/
         Returns:
             Solution: A Solution object containing details of the Reverse Bits problem.
         """
+
         def problem_statement() -> str:
-            return '''Reverse bits of a given 32 bits unsigned integer.
+            return """Reverse bits of a given 32 bits unsigned integer.
 
 Note:
 
@@ -285,7 +293,7 @@ Constraints:
     The input must be a binary string of length 32
 
 https://leetcode.com/problems/reverse-bits/
-'''
+"""
 
         def easy_solution(n: int) -> int:
             # Iterative solution: Reverse bits by shifting
@@ -307,5 +315,5 @@ https://leetcode.com/problems/reverse-bits/
             time_complexity="O(1)",
             space_complexity="O(1)",
             similar_questions=["Number of 1 Bits"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )

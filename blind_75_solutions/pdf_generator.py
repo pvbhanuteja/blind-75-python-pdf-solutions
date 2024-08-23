@@ -5,6 +5,27 @@ Module for generating PDF content for Blind 75 solutions.
 from typing import List
 from markdown_pdf import MarkdownPdf, Section
 from blind_75_solutions import Solution
+from mistletoe import markdown, Document
+from mistletoe.html_renderer import HTMLRenderer
+from fpdf import FPDF, HTMLMixin
+import html
+
+
+class CodeHTMLRenderer(HTMLRenderer):
+    def escape_html(self, text):
+        return html.escape(text)
+
+    def render_block_code(self, token):
+        code = self.escape_html(token.children[0].content)
+        lines = code.split("\n")
+        formatted_code = "<br>".join(
+            f"&nbsp;&nbsp;&nbsp;&nbsp;{line}" for line in lines
+        )
+        return f'<pre style="background-color: #f0f0f0; padding: 10px; font-family: Courier, monospace; font-size: 10px; white-space: pre-wrap; word-wrap: break-word;">{formatted_code}</pre>'
+
+
+class MyFPDF(FPDF, HTMLMixin):
+    pass
 
 
 class PdfGenerator:
@@ -44,7 +65,7 @@ class PdfGenerator:
             output_file (str): The path to save the output PDF file.
         """
         pdf = MarkdownPdf(toc_level=2)
-        
+
         # Add title and table of contents
         pdf.add_section(Section("# Blind 75 LeetCode Solutions\n\n", toc=False))
         pdf.add_section(Section(self.generate_table_of_contents()))
@@ -61,3 +82,27 @@ class PdfGenerator:
 
         # Save the PDF
         pdf.save(output_file)
+
+    def generate_full_pdf_fpdf(self, output_file: str) -> None:
+        pdf = MyFPDF(orientation="P", unit="mm", format="A4")
+        pdf.add_page()
+        pdf.add_font("DejaVuSans", fname="./fonts/DejaVuSans.ttf", uni=True)
+        pdf.add_font(
+            "DejaVuSans", fname="./fonts/DejaVuSans-Bold.ttf", style="B", uni=True
+        )
+        pdf.set_font("DejaVuSans", size=12)
+
+        renderer = CodeHTMLRenderer()
+
+        # Title and Table of Contents
+        content = (
+            f"# Blind 75 LeetCode Solutions\n\n{self.generate_table_of_contents()}"
+        )
+        pdf.write_html(renderer.render(Document(content)))
+
+        # Add each solution
+        for solution in self.solutions:
+            pdf.add_page()
+            pdf.write_html(renderer.render(Document(solution.generate_markdown())))
+
+        pdf.output(output_file)

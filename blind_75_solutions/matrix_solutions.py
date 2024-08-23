@@ -17,8 +17,9 @@ class MatrixSolutions:
         Returns:
             Solution: A Solution object containing details of the Set Matrix Zeroes problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
+            return """Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
 
 You must do it in place.
 
@@ -44,7 +45,7 @@ Constraints:
     -231 <= matrix[i][j] <= 231 - 1
 
 https://leetcode.com/problems/set-matrix-zeroes/description/
-'''
+"""
 
         def easy_solution(matrix: List[List[int]]) -> None:
             # Brute-force solution: Use sets to track zero rows and columns
@@ -110,7 +111,7 @@ https://leetcode.com/problems/set-matrix-zeroes/description/
             time_complexity="O(m * n)",
             space_complexity="O(1)",
             similar_questions=["Game of Life"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -121,8 +122,9 @@ https://leetcode.com/problems/set-matrix-zeroes/description/
         Returns:
             Solution: A Solution object containing details of the Spiral Matrix problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an m x n matrix, return all elements of the matrix in spiral order.
+            return """Given an m x n matrix, return all elements of the matrix in spiral order.
 
  
 
@@ -146,7 +148,7 @@ Constraints:
     -100 <= matrix[i][j] <= 100
 
 https://leetcode.com/problems/spiral-matrix/description/
-'''
+"""
 
         def easy_solution(matrix: List[List[int]]) -> List[int]:
             # Brute-force solution: Traverse the matrix in spiral order
@@ -195,9 +197,13 @@ https://leetcode.com/problems/spiral-matrix/description/
 
                 next_row, next_col = row + directions[d][0], col + directions[d][1]
 
-                if (next_row < 0 or next_row >= m or
-                    next_col < 0 or next_col >= n or
-                    (next_row, next_col) in visited):
+                if (
+                    next_row < 0
+                    or next_row >= m
+                    or next_col < 0
+                    or next_col >= n
+                    or (next_row, next_col) in visited
+                ):
                     d = (d + 1) % 4
                     next_row, next_col = row + directions[d][0], col + directions[d][1]
 
@@ -212,7 +218,7 @@ https://leetcode.com/problems/spiral-matrix/description/
             time_complexity="O(m * n)",
             space_complexity="O(1)",
             similar_questions=["Spiral Matrix II", "Spiral Matrix III"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -223,8 +229,9 @@ https://leetcode.com/problems/spiral-matrix/description/
         Returns:
             Solution: A Solution object containing details of the Rotate Image problem.
         """
+
         def problem_statement() -> str:
-            return '''You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
+            return """You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
 
 You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.
 
@@ -249,17 +256,17 @@ Constraints:
     -1000 <= matrix[i][j] <= 1000
 
 https://leetcode.com/problems/rotate-image/description/
-'''
+"""
 
         def easy_solution(matrix: List[List[int]]) -> None:
             # Brute-force solution: Transpose the matrix, then reverse each row
             n = len(matrix)
-            
+
             # Transpose the matrix
             for i in range(n):
                 for j in range(i, n):
                     matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-            
+
             # Reverse each row
             for i in range(n):
                 matrix[i].reverse()
@@ -267,7 +274,7 @@ https://leetcode.com/problems/rotate-image/description/
         def optimized_solution(matrix: List[List[int]]) -> None:
             # Optimized solution: Rotate four rectangles
             n = len(matrix)
-            
+
             # Rotate four rectangles
             for i in range(n // 2 + n % 2):
                 for j in range(n // 2):
@@ -284,7 +291,7 @@ https://leetcode.com/problems/rotate-image/description/
             time_complexity="O(n^2)",
             space_complexity="O(1)",
             similar_questions=["Determine Whether Matrix Can Be Obtained By Rotation"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
 
     @staticmethod
@@ -295,8 +302,9 @@ https://leetcode.com/problems/rotate-image/description/
         Returns:
             Solution: A Solution object containing details of the Word Search problem.
         """
+
         def problem_statement() -> str:
-            return '''Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+            return """Given an m x n grid of characters board and a string word, return true if word exists in the grid.
 
 The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
 
@@ -328,23 +336,29 @@ Constraints:
     board and word consists of only lowercase and uppercase English letters.
 
 https://leetcode.com/problems/word-search/description/
-'''
+"""
 
         def easy_solution(board: List[List[str]], word: str) -> bool:
             # Brute-force solution: Use DFS to check for the word
             def dfs(i: int, j: int, k: int) -> bool:
                 if k == len(word):
                     return True
-                if (i < 0 or i >= len(board) or
-                    j < 0 or j >= len(board[0]) or
-                    board[i][j] != word[k]):
+                if (
+                    i < 0
+                    or i >= len(board)
+                    or j < 0
+                    or j >= len(board[0])
+                    or board[i][j] != word[k]
+                ):
                     return False
-                
-                temp, board[i][j] = board[i][j], '#'
-                result = (dfs(i+1, j, k+1) or
-                          dfs(i-1, j, k+1) or
-                          dfs(i, j+1, k+1) or
-                          dfs(i, j-1, k+1))
+
+                temp, board[i][j] = board[i][j], "#"
+                result = (
+                    dfs(i + 1, j, k + 1)
+                    or dfs(i - 1, j, k + 1)
+                    or dfs(i, j + 1, k + 1)
+                    or dfs(i, j - 1, k + 1)
+                )
                 board[i][j] = temp
                 return result
 
@@ -359,10 +373,16 @@ https://leetcode.com/problems/word-search/description/
             def dfs(i: int, j: int, k: int) -> bool:
                 if k == len(word):
                     return True
-                if (i < 0 or i >= m or j < 0 or j >= n or
-                    visited[i][j] or board[i][j] != word[k]):
+                if (
+                    i < 0
+                    or i >= m
+                    or j < 0
+                    or j >= n
+                    or visited[i][j]
+                    or board[i][j] != word[k]
+                ):
                     return False
-                
+
                 visited[i][j] = True
                 for di, dj in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
                     if dfs(i + di, j + dj, k + 1):
@@ -372,7 +392,7 @@ https://leetcode.com/problems/word-search/description/
 
             m, n = len(board), len(board[0])
             visited = [[False] * n for _ in range(m)]
-            
+
             for i in range(m):
                 for j in range(n):
                     if board[i][j] == word[0] and dfs(i, j, 0):
@@ -386,5 +406,5 @@ https://leetcode.com/problems/word-search/description/
             time_complexity="O(m * n * 4^L)",
             space_complexity="O(m * n)",
             similar_questions=["Word Search II"],
-            problem_statement=problem_statement
+            problem_statement=problem_statement,
         )
